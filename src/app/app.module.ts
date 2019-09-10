@@ -7,15 +7,16 @@ import {
   MatButtonModule,
   MatCheckboxModule,
   MatFormFieldModule,
-  MatIconModule,
-  MatListModule,
-  MatSidenavModule,
+  MatIconModule, MatInputModule,
+  MatListModule, MatPaginatorModule,
+  MatSidenavModule, MatSortModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AutomateComponent } from './modules/automate/automate.component';
 import { SensorComponent } from './modules/sensor/sensor.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { SensorComponent } from './modules/sensor/sensor.component';
 
   ],
   imports: [
+    HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -37,7 +39,11 @@ import { SensorComponent } from './modules/sensor/sensor.component';
     MatCheckboxModule,
     MatFormFieldModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

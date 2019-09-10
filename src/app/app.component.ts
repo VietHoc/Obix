@@ -1,5 +1,6 @@
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
+import {FillerNav} from './constant/router';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent  {
   }
   mobileQuery: MediaQueryList;
 
-  fillerNav = [{name: 'Automates', icon: 'dns', link: 'automates'}, {name: 'Sensor', icon: 'swap_calls', link: 'sensors'}];
+  fillerNav = FillerNav;
 
   shouldRun = true;
 }

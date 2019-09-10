@@ -32,3 +32,29 @@ h1.app-name {
      `<body>` to be our scrolling element for mobile layouts. */
   flex: 1 0 auto;
 }
+
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 64px);
+}
+
+.content {
+  flex: 1; // child will set to an equal size inside the container
+}
+
+main {
+
+  display: flex;
+  flex-direction: column;
+  padding: 15px 15px 0 15px;
+  // Select all direct descendants only of the <main> element
+  // that are not <router-outlet> elements:
+  > *:not(router-outlet) {
+
+    flex: 1; // child will set to an equal size inside the container
+    display: block;
+
+  }
+
+}
