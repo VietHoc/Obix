@@ -5,18 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   MatButtonModule,
-  MatCheckboxModule,
+  MatCheckboxModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule, MatInputModule,
-  MatListModule, MatPaginatorModule,
-  MatSidenavModule, MatSortModule, MatTableModule,
+  MatListModule, MatPaginatorModule, MatRadioModule,
+  MatSidenavModule, MatSnackBarModule, MatSortModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AutomateComponent } from './modules/automate/automate.component';
 import { SensorComponent } from './modules/sensor/sensor.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { AutomateDialogComponent } from './modules/automate/components/automate-dialog/automate-dialog.component';
+import { SnackBarComponent } from './shared/components/snack-bar/snack-bar.component';
+import {HttpErrorInterceptor} from './core/interceptor/error-handler.interceptor';
 
 
 @NgModule({
@@ -24,6 +27,8 @@ import {HttpClientModule} from '@angular/common/http';
     AppComponent,
     AutomateComponent,
     SensorComponent,
+    AutomateDialogComponent,
+    SnackBarComponent,
 
   ],
   imports: [
@@ -43,9 +48,18 @@ import {HttpClientModule} from '@angular/common/http';
     MatTableModule,
     MatInputModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule,
+    MatRadioModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+  ],
+  entryComponents: [
+    AutomateDialogComponent,
+    SnackBarComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
