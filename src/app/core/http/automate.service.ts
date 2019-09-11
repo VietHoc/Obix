@@ -22,7 +22,13 @@ export class AutomateService {
     return this.apiService.post(this.uri, automate);
   }
 
+  updateAutomate(id: number, automate: Automate): Observable<Automate> {
+    const uriUpdate = this.uri + `/${id}`
+    return this.apiService.put(uriUpdate, automate);
+  }
+
   deleteAutomate(id: number): Observable<null> {
+    console.log(id);
     const uriDelete = this.uri + `/${id}`
     return this.apiService.delete(uriDelete);
   }

@@ -1,6 +1,6 @@
 import {Time} from '@angular/common';
 
-export interface Sensor {
+export class Sensor {
   id: number;
   automateId: string;
   sensortypeId: string;

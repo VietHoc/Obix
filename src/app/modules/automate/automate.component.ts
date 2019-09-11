@@ -3,7 +3,7 @@ import {AutomateService} from '../../core/http/automate.service';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {AutomateDialogComponent} from './components/automate-dialog/automate-dialog.component';
 import {Automate} from '../../shared/models/Automate';
-import remove from 'lodash-es/remove';
+import {remove, assign} from 'lodash-es';
 
 @Component({
   selector: 'app-automate',
@@ -45,8 +45,11 @@ export class AutomateComponent implements OnInit {
   }
 
   public openDialogAddServer() {
+    const automate = new Automate();
+    automate.active = true;
     const dialogRef = this.dialog.open(AutomateDialogComponent, {
       width: '500px',
+      data: automate
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -74,5 +77,27 @@ export class AutomateComponent implements OnInit {
 
   private setDataTable() {
     this.dataSource.data = this.automates;
+  }
+
+  public openDialogUpdateServer(automate: Automate) {
+    const dialogRef = this.dialog.open(AutomateDialogComponent, {
+      width: '500px',
+      data: automate
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.updateServer(automate.id, result);
+      } else {
+        console.log('Cancel');
+      }
+    });
+  }
+
+  private updateServer(id: number, automate: Automate) {
+      this.automateHttp.updateAutomate(id, automate).subscribe(res => {
+        assign(this.automates.find(item => item.id === id), res);
+        this.setDataTable();
+      });
   }
 }

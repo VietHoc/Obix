@@ -32,12 +32,15 @@ import {HttpErrorInterceptor} from './core/interceptor/error-handler.interceptor
 
   ],
   imports: [
+    // Core
     HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
     BrowserModule,
     AppRoutingModule,
+
+    // Material
+    MatButtonModule,
+    MatCheckboxModule,
     MatToolbarModule,
     MatSidenavModule,
     ReactiveFormsModule,

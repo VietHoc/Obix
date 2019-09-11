@@ -23,8 +23,10 @@ export class ApiService {
   }
 
   put(path: string, body: Object = {}): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.set('content-type', 'application/json')
     return this.http
-      .put(`${environment.api_url}${path}`, JSON.stringify(body))
+      .put(`${environment.api_url}${path}`, JSON.stringify(body), {headers})
       .pipe(
         map((response: any) => {
           this.customSnackbarService.success(Message.successful);

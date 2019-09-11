@@ -1,4 +1,4 @@
-export interface Automate {
+export class Automate {
   id: number;
   name: string;
   ip: string;
