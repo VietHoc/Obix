@@ -8,7 +8,7 @@ export class Sensor {
   name: string;
   locationName: string;
   locationIdentifier: string;
-  status: boolean;
+  status: number;
   creationDate: Time;
   modificationDate: Time;
 }

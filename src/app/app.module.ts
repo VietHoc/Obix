@@ -20,6 +20,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AutomateDialogComponent } from './modules/automate/components/automate-dialog/automate-dialog.component';
 import { SnackBarComponent } from './shared/components/snack-bar/snack-bar.component';
 import {HttpErrorInterceptor} from './core/interceptor/error-handler.interceptor';
+import { SensorDialogComponent } from './modules/sensor/sensor-dialog/sensor-dialog.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {HttpErrorInterceptor} from './core/interceptor/error-handler.interceptor
     SensorComponent,
     AutomateDialogComponent,
     SnackBarComponent,
+    SensorDialogComponent,
 
   ],
   imports: [
@@ -61,6 +63,7 @@ import {HttpErrorInterceptor} from './core/interceptor/error-handler.interceptor
   ],
   entryComponents: [
     AutomateDialogComponent,
+    SensorDialogComponent,
     SnackBarComponent
   ],
   bootstrap: [AppComponent]

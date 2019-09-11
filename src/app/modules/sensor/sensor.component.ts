@@ -1,7 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SensorService} from '../../core/http/sensor.service';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Sensor} from '../../shared/models/Sensor';
+import {SensorDialogComponent} from './sensor-dialog/sensor-dialog.component';
+import {remove, assign} from 'lodash-es';
 
 @Component({
   selector: 'app-sensor',
@@ -9,14 +11,16 @@ import {Sensor} from '../../shared/models/Sensor';
   styleUrls: ['./sensor.component.scss']
 })
 export class SensorComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'automateId', 'sensortypeId', 'uri', 'sensorName', 'locationName', 'locationIdentifier', 'status'];
+  sensors: Sensor[];
+  displayedColumns: string[] = ['id', 'automateId', 'sensortypeId', 'uri', 'sensorName', 'locationName', 'locationIdentifier', 'status', 'action'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
-    private sensorHttp: SensorService
+    private sensorHttp: SensorService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -27,7 +31,8 @@ export class SensorComponent implements OnInit {
 
   public getListSensor() {
       this.sensorHttp.getListSensors().subscribe(res => {
-          this.dataSource.data = res;
+          this.sensors = res;
+          this.setDataTable();
       });
   }
 
@@ -37,5 +42,47 @@ export class SensorComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  deleteSensor(id: number) {
+    this.sensorHttp.deleteSensor(id).subscribe(_ => {
+      remove(this.sensors, item  => item.id === id);
+      this.setDataTable();
+    });
+  }
+
+
+  openDialogUpdateSensor(sensor: Sensor) {
+    const dialogRef = this.dialog.open(SensorDialogComponent, {
+      width: '500px',
+      data: sensor
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.updateSensor(sensor.id, result);
+      } else {
+        console.log('Cancel');
+      }
+    });
+  }
+
+  public changeStatusSensor(sensor: Sensor, status: number) {
+    sensor.status = status
+    this.sensorHttp.updateSensor(sensor.id, sensor).subscribe(res => {
+        assign(this.sensors.find(item => item.id === sensor.id), res);
+        this.setDataTable();
+      });
+  }
+
+  private updateSensor(id: number, sensor: Sensor) {
+      this.sensorHttp.updateSensor(id, sensor).subscribe(res => {
+        assign(this.sensors.find(item => item.id === id), res);
+        this.setDataTable();
+      });
+  }
+
+  private setDataTable() {
+      this.dataSource.data = this.sensors;
   }
 }

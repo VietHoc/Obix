@@ -17,4 +17,14 @@ export class SensorService {
   getListSensors(): Observable<Sensor[]> {
     return this.apiService.get(this.uri);
   }
+
+  updateSensor(id: number, sensor: Sensor): Observable<Sensor> {
+    const uriUpdate = this.uri + `/${id}`
+    return this.apiService.put(uriUpdate, sensor);
+  }
+
+  deleteSensor(id: number): Observable<null> {
+    const uriDelete = this.uri + `/${id}`
+    return this.apiService.delete(uriDelete);
+  }
 }
