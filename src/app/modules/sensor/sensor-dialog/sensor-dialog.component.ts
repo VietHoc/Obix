@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {AutomateDialogComponent} from '../../automate/components/automate-dialog/automate-dialog.component';
 import {Sensor} from '../../../shared/models/Sensor';
@@ -27,9 +27,11 @@ export class SensorDialogComponent implements OnInit {
       sensortypeId: [this.sensor.sensortypeId],
       uri: [this.sensor.uri],
       name: [this.sensor.name],
-      locationName: [this.sensor.locationName],
-      locationIdentifier: [this.sensor.locationIdentifier],
-      status: [this.sensor.status],
+      locationName: [this.sensor.locationName, [Validators.required]],
+      locationIdentifier: [this.sensor.locationIdentifier, [Validators.required]],
+      status: [this.sensor.status,  [Validators.required]],
+      creationDate: [this.sensor.creationDate],
+      modificationDate: [this.sensor.modificationDate],
     });
   }
 

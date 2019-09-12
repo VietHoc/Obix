@@ -7,10 +7,16 @@
   <form class="form" [formGroup]="formSensor">
     <mat-form-field class="full-width">
       <input matInput placeholder="Location Name" formControlName="locationName">
+       <mat-error *ngIf="formSensor.get('locationName').hasError('required')">
+        Location Name is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <input matInput placeholder="Location Identifier" formControlName="locationIdentifier">
+      <mat-error *ngIf="formSensor.get('locationIdentifier').hasError('required')">
+        Location Identifier is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
 
     <mat-radio-group aria-label="Select an option" formControlName="status">
@@ -22,5 +28,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button  (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="this.formSensor.value" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="formSensor.value" cdkFocusInitial [disabled]="formSensor.invalid">Save</button>
 </div>

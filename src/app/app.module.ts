@@ -4,13 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
+  ErrorStateMatcher,
   MatButtonModule,
   MatCheckboxModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule, MatInputModule,
   MatListModule, MatPaginatorModule, MatRadioModule,
   MatSidenavModule, MatSnackBarModule, MatSortModule, MatTableModule,
-  MatToolbarModule
+  MatToolbarModule, ShowOnDirtyErrorStateMatcher
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -60,6 +61,7 @@ import { SensorDialogComponent } from './modules/sensor/sensor-dialog/sensor-dia
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
   ],
   entryComponents: [
     AutomateDialogComponent,
