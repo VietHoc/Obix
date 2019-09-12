@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SensorService} from '../../core/http/sensor.service';
-import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource, PageEvent} from '@angular/material';
 import {Sensor} from '../../shared/models/Sensor';
 import {SensorDialogComponent} from './sensor-dialog/sensor-dialog.component';
 import {remove, assign} from 'lodash-es';
@@ -12,6 +12,7 @@ import {remove, assign} from 'lodash-es';
 })
 export class SensorComponent implements OnInit {
   sensors: Sensor[];
+  pageEvent: PageEvent;
   displayedColumns: string[] = ['id', 'automateId', 'sensortypeId', 'uri', 'sensorName', 'locationName', 'locationIdentifier', 'status', 'action'];
   dataSource = new MatTableDataSource();
 
@@ -30,6 +31,7 @@ export class SensorComponent implements OnInit {
   }
 
   public getListSensor() {
+      console.log(this.paginator);
       this.sensorHttp.getListSensors().subscribe(res => {
           this.sensors = res;
           this.setDataTable();
