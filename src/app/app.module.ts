@@ -9,7 +9,7 @@ import {
   MatCheckboxModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule, MatInputModule,
-  MatListModule, MatPaginatorModule, MatRadioModule,
+  MatListModule, MatPaginatorModule, MatProgressSpinnerModule, MatRadioModule,
   MatSidenavModule, MatSnackBarModule, MatSortModule, MatTableModule,
   MatToolbarModule, ShowOnDirtyErrorStateMatcher
 } from '@angular/material';
@@ -57,7 +57,8 @@ import { SensorDialogComponent } from './modules/sensor/sensor-dialog/sensor-dia
     MatSortModule,
     MatDialogModule,
     MatRadioModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },

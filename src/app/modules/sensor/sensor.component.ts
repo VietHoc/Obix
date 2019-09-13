@@ -1,46 +1,71 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {SensorService} from '../../core/http/sensor.service';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource, PageEvent} from '@angular/material';
 import {Sensor} from '../../shared/models/Sensor';
 import {SensorDialogComponent} from './sensor-dialog/sensor-dialog.component';
 import {remove, assign} from 'lodash-es';
+import {merge, of as observableOf} from 'rxjs';
+import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-sensor',
   templateUrl: './sensor.component.html',
   styleUrls: ['./sensor.component.scss']
 })
-export class SensorComponent implements OnInit {
+export class SensorComponent implements OnInit, AfterViewInit {
   sensors: Sensor[];
-  pageEvent: PageEvent;
   displayedColumns: string[] = ['id', 'automateId', 'sensortypeId', 'uri', 'sensorName', 'locationName', 'locationIdentifier', 'status', 'action'];
   dataSource = new MatTableDataSource();
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
     private sensorHttp: SensorService,
     public dialog: MatDialog
   ) { }
 
+  ngAfterViewInit() {
+    // If the user changes the sort order, reset back to the first page.
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.sensorHttp.getListSensors(
+                this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
+        }),
+        map(data => {
+          // Flip flag to show that loading has finished.
+          this.isLoadingResults = false;
+          this.isRateLimitReached = false;
+          this.resultsLength = data.totalCount;
+
+          return data.items;
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          // Catch if the GitHub API has reached its rate limit. Return empty data.
+          this.isRateLimitReached = true;
+          return observableOf([]);
+        })
+      ).subscribe(data => this.sensors = data as Sensor[]);
+  }
+
   ngOnInit() {
-    this.getListSensor();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  public getListSensor() {
-      console.log(this.paginator);
-      this.sensorHttp.getListSensors().subscribe(res => {
-          this.sensors = res;
-          this.setDataTable();
-      });
-  }
-
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
+    console.log(filterValue);
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from './api.service';
 import {Observable} from 'rxjs';
-import {Sensor} from '../../shared/models/Sensor';
+import {Sensor, SensorResponse} from '../../shared/models/Sensor';
 
 
 @Injectable({
@@ -14,8 +14,8 @@ export class SensorService {
     private apiService: ApiService,
   ) {}
 
-  getListSensors(): Observable<Sensor[]> {
-    return this.apiService.get(this.uri);
+  getListSensors(sort: string, order: string, page: number, pageSize: number): Observable<SensorResponse> {
+    return this.apiService.get(`${this.uri}?sort=${sort}&order=${order}&page=${page}&pageSize=${pageSize}`);
   }
 
   updateSensor(id: number, sensor: Sensor): Observable<Sensor> {

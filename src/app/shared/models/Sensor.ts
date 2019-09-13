@@ -12,3 +12,8 @@ export class Sensor {
   creationDate: Time;
   modificationDate: Time;
 }
+
+export class SensorResponse {
+  items: Sensor[];
+  totalCount: number;
+}
