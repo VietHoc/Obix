@@ -1,1 +1,1 @@
-export const FillerNav = [{name: 'Automates', icon: 'dns', link: 'automates'}, {name: 'Sensor', icon: 'swap_calls', link: 'sensors'}];
+export const FillerNav = [{name: 'Server', icon: 'dns', link: 'automates'}, {name: 'Sensor', icon: 'swap_calls', link: 'sensors'}];

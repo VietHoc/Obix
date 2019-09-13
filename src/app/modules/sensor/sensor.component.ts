@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {SensorService} from '../../core/http/sensor.service';
-import {MatDialog, MatPaginator, MatSort, MatTableDataSource, PageEvent} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Sensor} from '../../shared/models/Sensor';
 import {SensorDialogComponent} from './sensor-dialog/sensor-dialog.component';
 import {remove, assign} from 'lodash-es';
-import {merge, of as observableOf} from 'rxjs';
-import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import {BehaviorSubject, merge, of as observableOf} from 'rxjs';
+import {catchError, debounceTime, map, startWith, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-sensor',
@@ -16,6 +16,7 @@ export class SensorComponent implements OnInit, AfterViewInit {
   sensors: Sensor[];
   displayedColumns: string[] = ['id', 'automateId', 'sensortypeId', 'uri', 'sensorName', 'locationName', 'locationIdentifier', 'status', 'action'];
   dataSource = new MatTableDataSource();
+  searchChange$ = new BehaviorSubject<string>('');
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -33,14 +34,16 @@ export class SensorComponent implements OnInit, AfterViewInit {
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page)
+    merge(this.sort.sortChange, this.paginator.page, this.searchChange$)
       .pipe(
         startWith({}),
+        debounceTime(500),
         switchMap(() => {
           this.isLoadingResults = true;
           return this.sensorHttp.getListSensors(
-                this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
+                this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize, this.searchChange$.getValue());
         }),
+
         map(data => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
@@ -64,11 +67,7 @@ export class SensorComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(filterValue);
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.searchChange$.next(filterValue);
   }
 
   deleteSensor(id: number) {
