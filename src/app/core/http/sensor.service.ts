@@ -14,8 +14,8 @@ export class SensorService {
     private apiService: ApiService,
   ) {}
 
-  getListSensors(sort: string, order: string, page: number, pageSize: number): Observable<SensorResponse> {
-    return this.apiService.get(`${this.uri}?sort=${sort}&order=${order}&page=${page}&pageSize=${pageSize}`);
+  getListSensors(sort: string, order: string, page: number, pageSize: number, search: string): Observable<SensorResponse> {
+    return this.apiService.get(`${this.uri}?sort=${sort}&order=${order}&page=${page}&pageSize=${pageSize}&search=${search}`);
   }
 
   updateSensor(id: number, sensor: Sensor): Observable<Sensor> {
