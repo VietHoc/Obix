@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Automate} from '../../../../shared/models/Automate';
+import {Automate} from '../../../../shared/models/automate';
 
 @Component({
   selector: 'app-automate-dialog',
@@ -22,7 +22,7 @@ export class AutomateDialogComponent implements OnInit {
 
   private buildForm() {
     this.formServer = this.formBuilder.group({
-      name: [this.automate.name, [Validators.required]],
+      NAME: [this.automate.name, [Validators.required]],
       ip: [this.automate.ip, [Validators.required]],
       uri: [this.automate.uri, [Validators.required]],
       active: [this.automate.active, [Validators.required]]

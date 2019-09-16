@@ -1,11 +1,14 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {SensorService} from '../../core/http/sensor.service';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {Sensor} from '../../shared/models/Sensor';
+import {Sensor} from '../../shared/models/sensor';
 import {SensorDialogComponent} from './sensor-dialog/sensor-dialog.component';
 import {remove, assign} from 'lodash-es';
 import {BehaviorSubject, merge, of as observableOf} from 'rxjs';
 import {catchError, debounceTime, map, startWith, switchMap} from 'rxjs/operators';
+import {STYLE} from '../../constant/style';
+import {ConfirmationDialog} from '../../core/service/confirmation-dialog';
+import {DIALOG} from '../../constant/string';
 
 @Component({
   selector: 'app-sensor',
@@ -14,7 +17,7 @@ import {catchError, debounceTime, map, startWith, switchMap} from 'rxjs/operator
 })
 export class SensorComponent implements OnInit, AfterViewInit {
   sensors: Sensor[];
-  displayedColumns: string[] = ['id', 'automateId', 'sensortypeId', 'uri', 'sensorName', 'locationName', 'locationIdentifier', 'status', 'action'];
+  displayedColumns: string[] = ['id', 'automateId', 'sensortypeId', 'uri', 'name', 'locationName', 'locationIdentifier', 'status', 'action'];
   dataSource = new MatTableDataSource();
   searchChange$ = new BehaviorSubject<string>('');
 
@@ -70,17 +73,21 @@ export class SensorComponent implements OnInit, AfterViewInit {
     this.searchChange$.next(filterValue);
   }
 
-  deleteSensor(id: number) {
-    this.sensorHttp.deleteSensor(id).subscribe(_ => {
-      remove(this.sensors, item  => item.id === id);
-      this.setDataTable();
-    });
+  deleteSensor(sensor: Sensor) {
+     ConfirmationDialog.show(this.dialog, `${DIALOG.MESSAGE_DELETE} ${sensor.name}?` , DIALOG.TITLE_DELETE_SENSOR)
+      .subscribe(result => {
+        if (result) {
+          this.sensorHttp.deleteSensor(sensor.id).subscribe(_ => {
+            remove(this.sensors, item => item.id === sensor.id);
+            this.setDataTable();
+           });
+        }
+      });
   }
-
 
   openDialogUpdateSensor(sensor: Sensor) {
     const dialogRef = this.dialog.open(SensorDialogComponent, {
-      width: '500px',
+      width: STYLE.WIDTH_DIALOG_UPDATE,
       data: sensor
     });
 
