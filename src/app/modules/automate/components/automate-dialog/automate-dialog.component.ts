@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Automate} from '../../../../shared/models/Automate';
+import {Automate} from '../../../../shared/models/automate';
 
 @Component({
   selector: 'app-automate-dialog',

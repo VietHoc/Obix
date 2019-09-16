@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from './api.service';
 import {Observable} from 'rxjs';
-import {Sensor, SensorResponse} from '../../shared/models/Sensor';
+import {Sensor, SensorResponse} from '../../shared/models/sensor';
 
 
 @Injectable({

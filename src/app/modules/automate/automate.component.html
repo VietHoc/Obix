@@ -46,9 +46,9 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let element">
-            <mat-icon class="mouse-hover icon-action" (click)="deleteServer(element.id)">delete</mat-icon>
+          <mat-icon class="mouse-hover icon-action" (click)="openDialogUpdateServer(element)">edit</mat-icon>
 
-            <mat-icon class="mouse-hover icon-action" (click)="openDialogUpdateServer(element)">edit</mat-icon>
+          <mat-icon class="mouse-hover icon-action" (click)="deleteServer(element)">delete</mat-icon>
         </td>
       </ng-container>
 

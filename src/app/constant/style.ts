@@ -1,0 +1,4 @@
+export const STYLE = {
+  WIDTH_DIALOG_DELETE: '500px',
+  WIDTH_DIALOG_UPDATE: '500PX'
+}

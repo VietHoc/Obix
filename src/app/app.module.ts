@@ -22,6 +22,7 @@ import { AutomateDialogComponent } from './modules/automate/components/automate-
 import { SnackBarComponent } from './shared/components/snack-bar/snack-bar.component';
 import {HttpErrorInterceptor} from './core/interceptor/error-handler.interceptor';
 import { SensorDialogComponent } from './modules/sensor/sensor-dialog/sensor-dialog.component';
+import { ConfirmationDialogComponent } from './shared/components/comfirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { SensorDialogComponent } from './modules/sensor/sensor-dialog/sensor-dia
     AutomateDialogComponent,
     SnackBarComponent,
     SensorDialogComponent,
+    ConfirmationDialogComponent,
 
   ],
   imports: [
@@ -67,7 +69,8 @@ import { SensorDialogComponent } from './modules/sensor/sensor-dialog/sensor-dia
   entryComponents: [
     AutomateDialogComponent,
     SensorDialogComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    ConfirmationDialogComponent
   ],
   bootstrap: [AppComponent]
 })

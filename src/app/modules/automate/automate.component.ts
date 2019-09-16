@@ -2,8 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AutomateService} from '../../core/http/automate.service';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {AutomateDialogComponent} from './components/automate-dialog/automate-dialog.component';
-import {Automate} from '../../shared/models/Automate';
+import {Automate} from '../../shared/models/automate';
 import {remove, assign} from 'lodash-es';
+import {ConfirmationDialog} from '../../core/service/confirmation-dialog';
+import {DIALOG} from '../../constant/string';
+import {STYLE} from '../../constant/style';
 
 @Component({
   selector: 'app-automate',
@@ -68,11 +71,16 @@ export class AutomateComponent implements OnInit {
     });
   }
 
-  public deleteServer(id: number) {
-    this.automateHttp.deleteAutomate(id).subscribe(_ => {
-      remove(this.automates, item  => item.id === id);
-      this.setDataTable();
-    });
+  public deleteServer(automate: Automate) {
+    ConfirmationDialog.show(this.dialog, `${DIALOG.MESSAGE_DELETE} ${automate.name}?` , DIALOG.TITLE_DELETE_SENSOR)
+      .subscribe(result => {
+        if (result) {
+          this.automateHttp.deleteAutomate(automate.id).subscribe(_ => {
+            remove(this.automates, item  => item.id === automate.id);
+            this.setDataTable();
+          });
+        }
+      });
   }
 
   private setDataTable() {
@@ -81,7 +89,7 @@ export class AutomateComponent implements OnInit {
 
   public openDialogUpdateServer(automate: Automate) {
     const dialogRef = this.dialog.open(AutomateDialogComponent, {
-      width: '500px',
+      width: STYLE.WIDTH_DIALOG_UPDATE,
       data: automate
     });
 
