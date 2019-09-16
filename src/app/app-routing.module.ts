@@ -7,8 +7,8 @@ import {SensorComponent} from './modules/sensor/sensor.component';
 const routes: Routes = [
   {
     path: '',
-    component: AutomateComponent,
-    data: {title: 'Server List'}
+    redirectTo: '/automates',
+    pathMatch: 'full',
   },
   {
     path: 'automates',
