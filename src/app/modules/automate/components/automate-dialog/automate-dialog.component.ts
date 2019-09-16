@@ -22,7 +22,7 @@ export class AutomateDialogComponent implements OnInit {
 
   private buildForm() {
     this.formServer = this.formBuilder.group({
-      NAME: [this.automate.name, [Validators.required]],
+      name: [this.automate.name, [Validators.required]],
       ip: [this.automate.ip, [Validators.required]],
       uri: [this.automate.uri, [Validators.required]],
       active: [this.automate.active, [Validators.required]]
