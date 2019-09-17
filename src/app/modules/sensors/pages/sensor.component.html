@@ -1,5 +1,5 @@
 <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter(Name or Automate Name)">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
 
  <div class="loading-shade"
@@ -54,7 +54,7 @@
 
      <!-- Status Column -->
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let row">
         <mat-icon *ngIf="row.status == 1" style="color: #2196F3" (click)="changeStatusSensor(row, 0)" class="mouse-hover">visibility</mat-icon>
         <mat-icon *ngIf="row.status == 0" (click)="changeStatusSensor(row, 1)" class="mouse-hover">visibility_off</mat-icon>
