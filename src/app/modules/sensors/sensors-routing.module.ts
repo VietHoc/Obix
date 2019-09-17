@@ -5,8 +5,7 @@ import {SensorComponent} from './pages/sensor.component';
 const routes: Routes = [
   {
     path: '',
-    component: SensorComponent,
-    data: { title: 'Sensor List' }
+    component: SensorComponent
   }
 ];
 

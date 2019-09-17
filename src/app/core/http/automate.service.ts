@@ -22,12 +22,12 @@ export class AutomateService {
   }
 
   updateAutomate(id: number, automate: Automate): Observable<Automate> {
-    const uriUpdate = this.uri + `/${id}`
-    return this.apiService.put(uriUpdate, automate);
+    const uriUpdate = this.uri + `/update/${id}`
+    return this.apiService.post(uriUpdate, automate);
   }
 
   deleteAutomate(id: number): Observable<null> {
-    const uriDelete = this.uri + `/${id}`
-    return this.apiService.delete(uriDelete);
+    const uriDelete = this.uri + `/delete/${id}`
+    return this.apiService.post(uriDelete);
   }
 }

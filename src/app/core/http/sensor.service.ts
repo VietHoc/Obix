@@ -19,12 +19,12 @@ export class SensorService {
   }
 
   updateSensor(id: number, sensor: Sensor): Observable<Sensor> {
-    const uriUpdate = this.uri + `/${id}`
-    return this.apiService.put(uriUpdate, sensor);
+    const uriUpdate = this.uri + `/update/${id}`
+    return this.apiService.post(uriUpdate, sensor);
   }
 
   deleteSensor(id: number): Observable<null> {
-    const uriDelete = this.uri + `/${id}`
-    return this.apiService.delete(uriDelete);
+    const uriDelete = this.uri + `/delete/${id}`
+    return this.apiService.post(uriDelete);
   }
 }

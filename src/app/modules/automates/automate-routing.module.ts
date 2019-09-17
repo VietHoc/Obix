@@ -6,8 +6,7 @@ import {RouterModule, Routes} from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component: AutomateComponent,
-    data: { title: 'Server List' }
+    component: AutomateComponent
   },
 ];
 

@@ -11,11 +11,13 @@ const routes: Routes = [
   },
   {
     path: 'automates',
-    loadChildren: () => import('./modules/automates/automate.module').then(mod => mod.AutomateModule)
+    loadChildren: () => import('./modules/automates/automate.module').then(mod => mod.AutomateModule),
+    data: { title: 'Server List' }
   },
   {
     path: 'sensors',
-    loadChildren: () => import('./modules/sensors/sensors.module').then(mod => mod.SensorsModule)
+    loadChildren: () => import('./modules/sensors/sensors.module').then(mod => mod.SensorsModule),
+    data: { title: 'Sensor List' }
   }
 ];
 
