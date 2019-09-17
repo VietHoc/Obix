@@ -26,6 +26,7 @@ export class AutomateDialogComponent implements OnInit {
       name: [this.automate.name, [Validators.required]],
       ip: [this.automate.ip, [Validators.required, CustomValidators.ip]],
       uri: [this.automate.uri, [Validators.required]],
+      floor: [this.automate.floor, [Validators.required]],
       active: [this.automate.active, [Validators.required]]
     });
   }

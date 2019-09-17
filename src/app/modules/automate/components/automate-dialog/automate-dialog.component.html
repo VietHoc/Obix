@@ -25,6 +25,13 @@
       </mat-error>
     </mat-form-field>
 
+     <mat-form-field class="full-width">
+      <input matInput placeholder="Floor" formControlName="floor">
+      <mat-error *ngIf="formServer.get('uri').hasError('required')">
+        Floor is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
     <mat-radio-group aria-label="Select an option" formControlName="active">
       Status:
       <mat-radio-button value="true" [checked]="automate.active == true">Active</mat-radio-button>

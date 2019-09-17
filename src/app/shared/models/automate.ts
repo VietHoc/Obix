@@ -3,5 +3,6 @@ export class Automate {
   name: string;
   ip: string;
   uri: string;
+  floor?: number;
   active: boolean;
 }

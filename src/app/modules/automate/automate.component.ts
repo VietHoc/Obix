@@ -14,7 +14,7 @@ import {STYLE} from '../../constant/style';
   styleUrls: ['./automate.component.scss']
 })
 export class AutomateComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'ip', 'uri', 'active', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'ip', 'uri', 'floor', 'active', 'action'];
   dataSource = new MatTableDataSource();
   automates: Automate[];
 

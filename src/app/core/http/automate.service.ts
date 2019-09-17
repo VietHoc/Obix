@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Automate} from '../../shared/models/automate';
 import {ApiService} from './api.service';
-import {map} from 'rxjs/operators';
 
 
 @Injectable({
