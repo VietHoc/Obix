@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Detail sensor</h1>
-<div>Automate Id: {{sensor.automateId}}</div>
-<div>Sensor Type Id: {{sensor.sensortypeId}}</div>
+<div>Automate Name: {{sensor.automateName}}</div>
+<div>Sensor Type: {{sensor.sensorTypeName}}</div>
 <div>Name: {{sensor.name}}</div>
 <br>
 <div mat-dialog-content>
@@ -20,7 +20,7 @@
     </mat-form-field>
 
     <mat-radio-group aria-label="Select an option" formControlName="status">
-      Status:
+      <span>Status:</span>
       <mat-radio-button value="1" [checked]="sensor.status == 1">Active</mat-radio-button>
       <mat-radio-button value="0" [checked]="sensor.status == 0">Disable</mat-radio-button>
     </mat-radio-group>

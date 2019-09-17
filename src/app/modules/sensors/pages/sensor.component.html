@@ -1,5 +1,5 @@
 <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter(Name or Uri)">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter(Name or Automate Name)">
 </mat-form-field>
 
  <div class="loading-shade"
@@ -16,16 +16,16 @@
       <td mat-cell *matCellDef="let row"> {{row.id}} </td>
     </ng-container>
 
-    <!-- AutomateId Column -->
-    <ng-container matColumnDef="automateId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Automate Id </th>
-      <td mat-cell *matCellDef="let row"> {{row.automateId}}</td>
+    <!-- AutomateName Column -->
+    <ng-container matColumnDef="automateName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Automate Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.automateName}}</td>
     </ng-container>
 
-    <!-- SensortypeId Column -->
-    <ng-container matColumnDef="sensortypeId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Sensortype Id </th>
-      <td mat-cell *matCellDef="let row"> {{row.sensortypeId}} </td>
+    <!-- Sensortype Column -->
+    <ng-container matColumnDef="sensorTypeName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Sensor Type </th>
+      <td mat-cell *matCellDef="let row"> {{row.sensorTypeName}} </td>
     </ng-container>
 
     <!-- Uri Column -->

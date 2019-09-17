@@ -4,6 +4,8 @@ export class Sensor {
   id: number;
   automateId: string;
   sensortypeId: string;
+  automateName: string;
+  sensorTypeName: string;
   uri: string;
   name: string;
   locationName: string;
