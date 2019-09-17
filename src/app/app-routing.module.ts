@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AutomateComponent} from './modules/automate/automate.component';
-import {SensorComponent} from './modules/sensor/sensor.component';
+import {SensorComponent} from './modules/sensors/pages/sensor.component';
 
 
 const routes: Routes = [
@@ -12,13 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'automates',
-    component: AutomateComponent,
-    data: { title: 'Server List' }
+    loadChildren: () => import('./modules/automates/automate.module').then(mod => mod.AutomateModule)
   },
   {
     path: 'sensors',
-    component: SensorComponent,
-    data: { title: 'Sensor List' }
+    loadChildren: () => import('./modules/sensors/sensors.module').then(mod => mod.SensorsModule)
   }
 ];
 

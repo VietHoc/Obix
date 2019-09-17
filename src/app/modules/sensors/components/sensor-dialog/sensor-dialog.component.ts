@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {AutomateDialogComponent} from '../../automate/components/automate-dialog/automate-dialog.component';
-import {Sensor} from '../../../shared/models/sensor';
+import {AutomateDialogComponent} from '../../../automates/components/automate-dialog/automate-dialog.component';
+import {Sensor} from '../../../../shared/models/sensor';
 
 @Component({
   selector: 'app-sensor-dialog',

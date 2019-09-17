@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AutomateService} from '../../core/http/automate.service';
+import {AutomateService} from '../../../core/http/automate.service';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {AutomateDialogComponent} from './components/automate-dialog/automate-dialog.component';
-import {Automate} from '../../shared/models/automate';
+import {AutomateDialogComponent} from '../components/automate-dialog/automate-dialog.component';
+import {Automate} from '../../../shared/models/automate';
 import {remove, assign} from 'lodash-es';
-import {ConfirmationDialog} from '../../core/service/confirmation-dialog';
-import {DIALOG} from '../../constant/string';
-import {STYLE} from '../../constant/style';
+import {ConfirmationDialog} from '../../../core/service/confirmation-dialog';
+import {DIALOG} from '../../../constant/string';
+import {STYLE} from '../../../constant/style';
 
 @Component({
   selector: 'app-automate',
