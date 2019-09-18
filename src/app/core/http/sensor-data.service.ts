@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {AutomateDetail} from '../../shared/models/automate';
 import {map} from 'rxjs/operators';
 import {SensorData} from '../../shared/models/sensorData';
-import {HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'

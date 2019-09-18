@@ -10,7 +10,7 @@ const routes: Routes = [
     component: AutomateListComponent
   },
   {
-    path: ':automate_id',
+    path: ':automate_id/sensors',
     component: AutomateDetailComponent
   }
 ];
