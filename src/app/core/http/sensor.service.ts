@@ -9,7 +9,7 @@ import {Sensor, SensorResponse} from '../../shared/models/sensor';
 })
 export class SensorService {
 
-  uri = 'sensors';
+  readonly uri = 'sensors';
   constructor(
     private apiService: ApiService,
   ) {}

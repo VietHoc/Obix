@@ -3,4 +3,5 @@ export class SensorData {
   sensorId: number;
   name: string;
   value: string;
+  locationIdentifier: string;
 }

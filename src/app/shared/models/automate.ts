@@ -11,6 +11,6 @@ export class Automate {
 }
 
 export class AutomateDetail {
-  locationName: string;
+  locationIdentifier: string;
   sensorsData: SensorData[];
 }
