@@ -1,0 +1,9 @@
+<h3>List sensors of server: TMCR900</h3>
+<mat-grid-list cols="3" rowHeight="200px">
+  <mat-grid-tile
+    *ngFor="let element of automateDetails"
+    [colspan]="1"
+    [rowspan]="3">
+    <app-table-automate-room [automateDetail]="element"></app-table-automate-room>
+  </mat-grid-tile>
+</mat-grid-list>

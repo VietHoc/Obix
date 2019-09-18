@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Automate} from '../../shared/models/automate';
+import {Automate, AutomateDetail} from '../../shared/models/automate';
 import {ApiService} from './api.service';
+import {Sensor} from '../../shared/models/sensor';
+import {map} from 'rxjs/operators';
+import {SensorData} from '../../shared/models/sensorData';
 
 
 @Injectable({
@@ -29,5 +32,32 @@ export class AutomateService {
   deleteAutomate(id: number): Observable<null> {
     const uriDelete = this.uri + `/delete/${id}`
     return this.apiService.post(uriDelete);
+  }
+
+  detailAutomate(id: number): Observable<AutomateDetail[]> {
+    return this.apiService.get(`${this.uri}/${id}`).pipe(
+      map(
+        res => {
+          return this.transform(res, 'locationName');
+        }
+      )
+    );
+  }
+
+  private transform(collection: SensorData[], property: string): AutomateDetail[] {
+    if (!collection) {
+            return null;
+    }
+    const groupedCollection = collection.reduce((previous, current) => {
+            if (!previous[current[property]]) {
+                previous[current[property]] = [current];
+            } else {
+                previous[current[property]].push(current);
+            }
+
+            return previous;
+        }, {});
+
+    return Object.keys(groupedCollection).map(key => ({ locationName: key, sensorsData: groupedCollection[key] as SensorData[]}));
   }
 }
