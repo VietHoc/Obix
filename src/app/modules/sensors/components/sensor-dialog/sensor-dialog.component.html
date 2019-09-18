@@ -7,12 +7,7 @@
 <br>
 <div mat-dialog-content>
   <form class="form" [formGroup]="formSensor">
-    <mat-form-field class="full-width">
-      <input matInput placeholder="Location Identifier" formControlName="locationIdentifier">
-      <mat-error *ngIf="formSensor.get('locationIdentifier').hasError('required')">
-        Location Identifier is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+    <app-input-field placeholder="Location Identifier" [control]="formSensor.get('locationIdentifier')"></app-input-field>
 
     <mat-radio-group aria-label="Select an option" formControlName="status">
       <mat-radio-button value="1" [checked]="sensor.status == 1">Active</mat-radio-button>

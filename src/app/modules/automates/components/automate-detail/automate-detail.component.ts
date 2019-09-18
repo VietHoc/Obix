@@ -38,7 +38,7 @@ export class AutomateDetailComponent implements OnInit {
   }
 
   private updateSensorsValue(automateId: number) {
-    this.automateHttp.detailAutomate(automateId).subscribe(res => {
+    this.automateHttp.updateDetailAutomate(automateId).subscribe(res => {
         console.log('update: ', res);
         if (res.length > 0) {
           this.updateAutomateDetails(res);

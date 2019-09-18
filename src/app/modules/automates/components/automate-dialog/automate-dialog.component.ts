@@ -23,10 +23,10 @@ export class AutomateDialogComponent implements OnInit {
 
   private buildForm() {
     this.formServer = this.formBuilder.group({
-      name: [this.automate.name, [Validators.required]],
-      ip: [this.automate.ip, [Validators.required, CustomValidators.ip]],
-      uri: [this.automate.uri, [Validators.required]],
-      floor: [this.automate.floor, [Validators.required]],
+      name: [this.automate.name, [Validators.required, Validators.maxLength(50)]],
+      ip: [this.automate.ip, [Validators.required, CustomValidators.ip, Validators.maxLength(50)]],
+      uri: [this.automate.uri, [Validators.required, Validators.maxLength(50)]],
+      floor: [this.automate.floor, [Validators.required, Validators.max(50)]],
       active: [this.automate.active, [Validators.required]]
     });
   }

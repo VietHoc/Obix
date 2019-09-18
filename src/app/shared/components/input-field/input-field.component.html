@@ -1,0 +1,8 @@
+<ng-container [ngSwitch]="type">
+  <ng-container *ngSwitchDefault>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="{{placeholder}}" [formControl]="control">
+    </mat-form-field>
+  </ng-container>
+  <app-error-label [control]="control" [label]="placeholder"></app-error-label>
+</ng-container>

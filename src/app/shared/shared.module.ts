@@ -6,12 +6,18 @@ import {ConfirmationDialogComponent} from './components/comfirmation-dialog/conf
 import {ReactiveFormsModule} from '@angular/forms';
 import { TableAutomateRoomComponent } from './components/table-automate-room/table-automate-room.component';
 import {MatCardModule} from '@angular/material';
+import { InputFieldComponent } from './components/input-field/input-field.component';
+import { ErrorLabelComponent } from './components/error-label/error-label.component';
+import { ErrorMessagesPipe } from './pipes/error-messages.pipe';
 
 @NgModule({
   declarations: [
     SnackBarComponent,
     ConfirmationDialogComponent,
     TableAutomateRoomComponent,
+    InputFieldComponent,
+    ErrorLabelComponent,
+    ErrorMessagesPipe,
   ],
   imports: [
     CommonModule,
@@ -22,7 +28,8 @@ import {MatCardModule} from '@angular/material';
   exports: [
     MaterialModule,
     ReactiveFormsModule,
-    TableAutomateRoomComponent
+    TableAutomateRoomComponent,
+    InputFieldComponent
   ],
   entryComponents: [
     SnackBarComponent,

@@ -1,37 +1,10 @@
 <h1 mat-dialog-title>Detail server</h1>
 <div mat-dialog-content>
   <form class="form" [formGroup]="formServer">
-    <mat-form-field class="full-width">
-      <input matInput placeholder="Name" formControlName="name">
-      <mat-error *ngIf="formServer.get('name').hasError('required')">
-        Name is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="full-width">
-      <input matInput placeholder="Ip Address" formControlName="ip">
-      <mat-error *ngIf="formServer.get('ip').hasError('required')">
-        Ip is <strong>required</strong>
-      </mat-error>
-      <mat-error *ngIf="formServer.get('ip').hasError('ip')">
-        Wrong format <strong>Ip Address</strong>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="full-width">
-      <input matInput placeholder="Uri" formControlName="uri">
-      <mat-error *ngIf="formServer.get('uri').hasError('required')">
-        Uri is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-
-     <mat-form-field class="full-width">
-      <input matInput placeholder="Floor" formControlName="floor">
-      <mat-error *ngIf="formServer.get('uri').hasError('required')">
-        Floor is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-
+    <app-input-field placeholder="Name" [control]="formServer.get('name')"></app-input-field>
+    <app-input-field placeholder="Ip Address" [control]="formServer.get('ip')"></app-input-field>
+    <app-input-field placeholder="Uri" [control]="formServer.get('uri')"></app-input-field>
+    <app-input-field placeholder="Floor" [control]="formServer.get('floor')"></app-input-field>
     <mat-radio-group aria-label="Select an option" formControlName="active">
       <mat-radio-button value="true" [checked]="automate.active == true">Active</mat-radio-button>
       <mat-radio-button value="false" [checked]="automate.active == false">Disable</mat-radio-button>

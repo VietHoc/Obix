@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Automate, AutomateDetail} from '../../shared/models/automate';
 import {ApiService} from './api.service';
-import {Sensor} from '../../shared/models/sensor';
 import {map} from 'rxjs/operators';
 import {SensorData} from '../../shared/models/sensorData';
 
@@ -35,6 +34,17 @@ export class AutomateService {
   }
 
   detailAutomate(id: number): Observable<AutomateDetail[]> {
+    return this.apiService.get(`${this.uri}/${id}`).pipe(
+      map(
+        res => {
+          return this.transform(res, 'locationName');
+        }
+      )
+    );
+  }
+
+  updateDetailAutomate(id: number): Observable<AutomateDetail[]> {
+    // change later
     return this.apiService.get(`${this.uri}/${id}`).pipe(
       map(
         res => {
