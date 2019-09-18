@@ -17,7 +17,7 @@ import {DIALOG} from '../../../constant/string';
 })
 export class SensorListComponent implements OnInit, AfterViewInit {
   sensors: Sensor[];
-  displayedColumns: string[] = ['id' , 'name' , 'automateName', 'sensorTypeName', 'locationName', 'locationIdentifier', 'uri' , 'status', 'action'];
+  displayedColumns: string[] = ['id' , 'name', 'sensorTypeName' , 'automateName', 'locationName', 'locationIdentifier', 'uri' , 'status', 'action'];
   dataSource = new MatTableDataSource();
   searchChange$ = new BehaviorSubject<string>('');
 

@@ -27,7 +27,7 @@ export class SensorDialogComponent implements OnInit {
       sensortypeId: [this.sensor.sensortypeId],
       uri: [this.sensor.uri],
       name: [this.sensor.name],
-      locationName: [this.sensor.locationName, [Validators.required]],
+      locationName: [this.sensor.locationName],
       locationIdentifier: [this.sensor.locationIdentifier, [Validators.required]],
       status: [this.sensor.status,  [Validators.required]],
       creationDate: [this.sensor.creationDate],

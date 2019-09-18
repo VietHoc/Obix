@@ -1,17 +1,12 @@
 <h1 mat-dialog-title>Detail sensor</h1>
-<div>Automate Name: {{sensor.automateName}}</div>
-<div>Sensor Type: {{sensor.sensorTypeName}}</div>
 <div>Name: {{sensor.name}}</div>
+<div>Sensor Type: {{sensor.sensorTypeName}}</div>
+<div>Automate Name: {{sensor.automateName}}</div>
+<div>Location Name: {{sensor.locationName}}</div>
+
 <br>
 <div mat-dialog-content>
   <form class="form" [formGroup]="formSensor">
-    <mat-form-field class="full-width">
-      <input matInput placeholder="Location Name" formControlName="locationName">
-       <mat-error *ngIf="formSensor.get('locationName').hasError('required')">
-        Location Name is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-
     <mat-form-field class="full-width">
       <input matInput placeholder="Location Identifier" formControlName="locationIdentifier">
       <mat-error *ngIf="formSensor.get('locationIdentifier').hasError('required')">

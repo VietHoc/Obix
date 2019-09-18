@@ -4,6 +4,7 @@ import {SensorListComponent} from './pages/sensor-list.component';
 import {SensorDialogComponent} from './components/sensor-dialog/sensor-dialog.component';
 import {SensorsRoutingModule} from './sensors-routing.module';
 import {SharedModule} from '../../shared/shared.module';
+import {MatCardModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {SharedModule} from '../../shared/shared.module';
   imports: [
     CommonModule,
     SensorsRoutingModule,
-    SharedModule
+    SharedModule,
+    MatCardModule
   ],
   entryComponents: [
     SensorDialogComponent
