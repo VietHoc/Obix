@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
-import {AutomateComponent} from './pages/automate.component';
+import {AutomateListComponent} from './pages/automate-list.component';
 import {RouterModule, Routes} from '@angular/router';
+import {AutomateDetailComponent} from './components/automate-detail/automate-detail.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: AutomateComponent
+    component: AutomateListComponent
   },
+  {
+    path: ':automate_id',
+    component: AutomateDetailComponent
+  }
 ];
 
 @NgModule({

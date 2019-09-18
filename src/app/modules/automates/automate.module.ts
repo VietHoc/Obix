@@ -1,19 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {AutomateComponent} from './pages/automate.component';
+import {AutomateListComponent} from './pages/automate-list.component';
 import {AutomateDialogComponent} from './components/automate-dialog/automate-dialog.component';
 import {AutomateRoutingModule} from './automate-routing.module';
 import {SharedModule} from '../../shared/shared.module';
+import { AutomateDetailComponent } from './components/automate-detail/automate-detail.component';
+import {MatGridListModule} from '@angular/material';
 
 @NgModule({
   declarations: [
-    AutomateComponent,
+    AutomateListComponent,
     AutomateDialogComponent,
+    AutomateDetailComponent,
   ],
   imports: [
     CommonModule,
     AutomateRoutingModule,
-    SharedModule
+    SharedModule,
+    MatGridListModule
   ],
   entryComponents: [
     AutomateDialogComponent

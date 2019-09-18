@@ -7,13 +7,14 @@ import {remove, assign} from 'lodash-es';
 import {ConfirmationDialog} from '../../../core/service/confirmation-dialog';
 import {DIALOG} from '../../../constant/string';
 import {STYLE} from '../../../constant/style';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-automate',
-  templateUrl: './automate.component.html',
-  styleUrls: ['./automate.component.scss']
+  templateUrl: './automate-list.component.html',
+  styleUrls: ['./automate-list.component.scss']
 })
-export class AutomateComponent implements OnInit {
+export class AutomateListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'ip', 'uri', 'floor', 'active', 'action'];
   dataSource = new MatTableDataSource();
   automates: Automate[];
@@ -23,7 +24,9 @@ export class AutomateComponent implements OnInit {
 
   constructor(
     private automateHttp: AutomateService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -107,5 +110,9 @@ export class AutomateComponent implements OnInit {
         assign(this.automates.find(item => item.id === id), res);
         this.setDataTable();
       });
+  }
+
+  public redirectToDetailAutomate(automate: Automate) {
+    this.router.navigate([automate.id], {relativeTo: this.route}).then(_ => {});
   }
 }

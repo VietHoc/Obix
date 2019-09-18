@@ -1,3 +1,6 @@
+import {SensorData} from './sensorData';
+
+
 export class Automate {
   id: number;
   name: string;
@@ -5,4 +8,9 @@ export class Automate {
   uri: string;
   floor: number;
   active: boolean;
+}
+
+export class AutomateDetail {
+  locationName: string;
+  sensorsData: SensorData[];
 }

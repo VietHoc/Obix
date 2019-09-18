@@ -12,10 +12,10 @@ import {DIALOG} from '../../../constant/string';
 
 @Component({
   selector: 'app-sensor',
-  templateUrl: './sensor.component.html',
-  styleUrls: ['./sensor.component.scss']
+  templateUrl: './sensor-list.component.html',
+  styleUrls: ['./sensor-list.component.scss']
 })
-export class SensorComponent implements OnInit, AfterViewInit {
+export class SensorListComponent implements OnInit, AfterViewInit {
   sensors: Sensor[];
   displayedColumns: string[] = ['id' , 'name' , 'automateName', 'sensorTypeName', 'locationName', 'locationIdentifier', 'uri' , 'status', 'action'];
   dataSource = new MatTableDataSource();

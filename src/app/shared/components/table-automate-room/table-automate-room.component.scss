@@ -1,0 +1,26 @@
+.card-container {
+  margin: 10px 10px 10px 10px;
+  height: 400px;
+  //height: auto;
+  //max-height: 500px;
+  overflow: auto;
+}
+
+table {
+  min-width: 300px;
+}
+
+
+th.mat-header-cell, td.mat-cell{
+  padding-left: 10px;
+  padding-right: 10px;
+  min-width: 20px;
+}
+
+.card {
+  width: auto;
+}
+
+.form-filter {
+  padding-left: 12px;
+}
