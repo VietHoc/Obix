@@ -10,8 +10,8 @@
     <app-input-field placeholder="Location Identifier" [control]="formSensor.get('locationIdentifier')"></app-input-field>
 
     <mat-radio-group aria-label="Select an option" formControlName="isActive">
-      <mat-radio-button value="1" [checked]="sensor.isActive == true">Active</mat-radio-button>
-      <mat-radio-button value="0" [checked]="sensor.isActive == false">Disable</mat-radio-button>
+      <mat-radio-button value="true" [checked]="sensor.isActive == true">Active</mat-radio-button>
+      <mat-radio-button value="false" [checked]="sensor.isActive == false">Disable</mat-radio-button>
     </mat-radio-group>
   </form>
 </div>
