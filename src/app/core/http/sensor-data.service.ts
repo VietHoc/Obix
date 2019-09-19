@@ -16,7 +16,7 @@ export class SensorDataService {
   ) {}
 
   detailAutomate(id: number): Observable<AutomateDetail[]> {
-    return this.apiService.get(`automates/${id}`).pipe(
+    return this.apiService.get(`${this.uri}&automateId=${id}`).pipe(
       map(
         res => {
           return this.transform(res, 'locationIdentifier');
