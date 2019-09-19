@@ -81,7 +81,7 @@ export class SensorListComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.updateSensor(sensor.id, result);
+        this.updateSensor(result);
       } else {
         console.log('Cancel');
       }
@@ -90,15 +90,15 @@ export class SensorListComponent implements OnInit, AfterViewInit {
 
   public changeStatusSensor(sensor: Sensor, isActive: boolean ) {
     sensor.isActive = isActive;
-    this.sensorHttp.updateSensor(sensor.id, sensor).subscribe(res => {
+    this.sensorHttp.updateSensor(sensor).subscribe(res => {
         assign(this.sensors.find(item => item.id === sensor.id), res);
         this.setDataTable();
       });
   }
 
-  private updateSensor(id: number, sensor: Sensor) {
-      this.sensorHttp.updateSensor(id, sensor).subscribe(res => {
-        assign(this.sensors.find(item => item.id === id), res);
+  private updateSensor(sensor: Sensor) {
+      this.sensorHttp.updateSensor(sensor).subscribe(res => {
+        assign(this.sensors.find(item => item.id === sensor.id), res);
         this.setDataTable();
       });
   }

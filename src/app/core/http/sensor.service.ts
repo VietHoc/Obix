@@ -18,8 +18,8 @@ export class SensorService {
     return this.apiService.get(`${this.uri}?sort=${sort}&order=${order}&page=${page}&pageSize=${pageSize}&search=${search}`);
   }
 
-  updateSensor(id: number, sensor: Sensor): Observable<Sensor> {
-    const uriUpdate = this.uri + `/update/${id}`
+  updateSensor(sensor: Sensor): Observable<Sensor> {
+    const uriUpdate = this.uri + `/update`;
     return this.apiService.post(uriUpdate, sensor);
   }
 }

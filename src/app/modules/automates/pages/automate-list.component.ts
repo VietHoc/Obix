@@ -98,16 +98,16 @@ export class AutomateListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.updateServer(automate.id, result);
+        this.updateServer(result);
       } else {
         console.log('Cancel');
       }
     });
   }
 
-  private updateServer(id: number, automate: Automate) {
-      this.automateHttp.updateAutomate(id, automate).subscribe(res => {
-        assign(this.automates.find(item => item.id === id), res);
+  private updateServer(automate: Automate) {
+      this.automateHttp.updateAutomate(automate).subscribe(res => {
+        assign(this.automates.find(item => item.id === automate.id), res);
         this.setDataTable();
       });
   }
