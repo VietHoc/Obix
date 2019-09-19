@@ -9,9 +9,9 @@
   <form class="form" [formGroup]="formSensor">
     <app-input-field placeholder="Location Identifier" [control]="formSensor.get('locationIdentifier')"></app-input-field>
 
-    <mat-radio-group aria-label="Select an option" formControlName="status">
-      <mat-radio-button value="1" [checked]="sensor.status == 1">Active</mat-radio-button>
-      <mat-radio-button value="0" [checked]="sensor.status == 0">Disable</mat-radio-button>
+    <mat-radio-group aria-label="Select an option" formControlName="isActive">
+      <mat-radio-button value="1" [checked]="sensor.isActive == true">Active</mat-radio-button>
+      <mat-radio-button value="0" [checked]="sensor.isActive == false">Disable</mat-radio-button>
     </mat-radio-group>
   </form>
 </div>
