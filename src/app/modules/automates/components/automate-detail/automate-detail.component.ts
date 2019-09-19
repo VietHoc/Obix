@@ -77,6 +77,8 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
         }
       );
     });
+
+    this.automateDetailsSensorData = [...this.automateDetails];
   }
 
   filterSensorsByType(sensorTypeId: number) {
