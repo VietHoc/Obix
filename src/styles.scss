@@ -3,6 +3,10 @@
 @import "assets/scss/setting";
 @import "./assets/scss/variable.scss";
 
+html, body {
+  font-family: 'Roboto',"Helvetica Neue",sans-serif;
+}
+
 .icon-action {
   color: #000000;
   opacity: .54;
