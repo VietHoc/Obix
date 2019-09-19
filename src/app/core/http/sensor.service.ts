@@ -22,9 +22,4 @@ export class SensorService {
     const uriUpdate = this.uri + `/update/${id}`
     return this.apiService.post(uriUpdate, sensor);
   }
-
-  deleteSensor(id: number): Observable<null> {
-    const uriDelete = this.uri + `/delete/${id}`
-    return this.apiService.post(uriDelete);
-  }
 }

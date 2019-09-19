@@ -17,7 +17,7 @@ import {DIALOG} from '../../../constant/string';
 })
 export class SensorListComponent implements OnInit, AfterViewInit {
   sensors: Sensor[];
-  displayedColumns: string[] = ['id' , 'name', 'sensorTypeName' , 'automateName', 'locationName', 'locationIdentifier', 'uri' , 'status', 'action'];
+  displayedColumns: string[] = ['id' , 'name', 'sensorTypeName' , 'automateName', 'locationName', 'locationIdentifier', 'uri' , 'active', 'action'];
   dataSource = new MatTableDataSource();
   searchChange$ = new BehaviorSubject<string>('');
 
@@ -73,18 +73,6 @@ export class SensorListComponent implements OnInit, AfterViewInit {
     this.searchChange$.next(filterValue);
   }
 
-  deleteSensor(sensor: Sensor) {
-     ConfirmationDialog.show(this.dialog, `${DIALOG.MESSAGE_DELETE} ${sensor.name}?` , DIALOG.TITLE_DELETE_SENSOR)
-      .subscribe(result => {
-        if (result) {
-          this.sensorHttp.deleteSensor(sensor.id).subscribe(_ => {
-            remove(this.sensors, item => item.id === sensor.id);
-            this.setDataTable();
-           });
-        }
-      });
-  }
-
   openDialogUpdateSensor(sensor: Sensor) {
     const dialogRef = this.dialog.open(SensorDialogComponent, {
       width: STYLE.WIDTH_DIALOG_UPDATE,
@@ -100,8 +88,8 @@ export class SensorListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public changeStatusSensor(sensor: Sensor, status: number) {
-    sensor.status = status
+  public changeStatusSensor(sensor: Sensor, isActive: boolean ) {
+    sensor.isActive = isActive;
     this.sensorHttp.updateSensor(sensor.id, sensor).subscribe(res => {
         assign(this.sensors.find(item => item.id === sensor.id), res);
         this.setDataTable();

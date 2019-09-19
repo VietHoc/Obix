@@ -10,7 +10,7 @@ export class Sensor {
   name: string;
   locationName: string;
   locationIdentifier: string;
-  status: number;
+  isActive: boolean;
   creationDate: Time;
   modificationDate: Time;
 }
