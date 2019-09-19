@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {Automate, AutomateDetail} from '../../shared/models/automate';
 import {ApiService} from './api.service';
 import {map} from 'rxjs/operators';
-import {SensorData} from '../../shared/models/sensorData';
+import {SensorData} from '../../shared/models/sensor-data';
 
 
 @Injectable({

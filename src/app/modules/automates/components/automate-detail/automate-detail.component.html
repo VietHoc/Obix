@@ -1,9 +1,19 @@
-<h3>List sensors of server: TMCR900</h3>
-<mat-grid-list cols="3" rowHeight="200px">
+<div>
+  <h3>List sensors of server: {{automateName}}</h3>
+  <mat-form-field class="sensor-type">
+    <mat-label>Sensor Type</mat-label>
+    <mat-select [(value)]="currentSensorTypeId" (valueChange)="filterSensorsByType(currentSensorTypeId)">
+      <mat-option *ngFor="let type of sensorTypes" [value]="type.id">
+        {{type.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<mat-grid-list cols="3" rowHeight="110px">
   <mat-grid-tile
-    *ngFor="let element of automateDetails"
+    *ngFor="let element of automateDetailsSensorData"
     [colspan]="1"
-    [rowspan]="3">
+    [rowspan]="4">
     <app-table-automate-room [automateDetail]="element"></app-table-automate-room>
   </mat-grid-tile>
 </mat-grid-list>

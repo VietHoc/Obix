@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AutomateDetail} from '../../../../shared/models/automate';
 import {interval} from 'rxjs';
 import {assign} from 'lodash-es';
 import {TIME_REQUEST_UPDATE_SENSORS_VALUE} from '../../../../constant/string';
 import {SensorDataService} from '../../../../core/http/sensor-data.service';
+import {SensorType} from '../../../../shared/models/sensor-type';
+import {SensorTypeService} from '../../../../core/http/sensor-type.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-automate-detail',
@@ -13,32 +16,44 @@ import {SensorDataService} from '../../../../core/http/sensor-data.service';
 })
 export class AutomateDetailComponent implements OnInit {
   currentAutomateId: number;
-  automateDetails: AutomateDetail[];
+  automateName: string;
+  automateDetails; automateDetailsSensorData: AutomateDetail[];
+  sensorTypes: SensorType[];
+  currentSensorTypeId = 0;
   constructor(
     private route: ActivatedRoute,
     private sensorDataHttp: SensorDataService,
+    private sensorTypeHttp: SensorTypeService,
   ) {}
 
-  secondsCounter = interval(TIME_REQUEST_UPDATE_SENSORS_VALUE);
+  secondsCounter = interval(TIME_REQUEST_UPDATE_SENSORS_VALUE * 1000);
 
   ngOnInit() {
     this.currentAutomateId = this.route.snapshot.params.automate_id;
+    this.automateName = this.route.snapshot.queryParamMap.get('automateName');
     this.getSensorListOfAutomate(this.currentAutomateId);
     this.secondsCounter.subscribe(_ => {
-      this.updateSensorsValue(this.currentAutomateId);
+      const valueDate = moment().subtract(TIME_REQUEST_UPDATE_SENSORS_VALUE, 'seconds').format('DD-MM-YYYY hh:mm:ss');
+      this.updateSensorsValue(this.currentAutomateId, valueDate);
     });
+    this.getSensorTypes();
   }
 
   private getSensorListOfAutomate(automateId: number) {
     this.sensorDataHttp.detailAutomate(automateId).subscribe(res => {
-        console.log(res);
         this.automateDetails = res;
+        this.automateDetailsSensorData = res;
     });
   }
 
-  private updateSensorsValue(automateId: number) {
-    this.sensorDataHttp.updateDetailAutomate(automateId).subscribe(res => {
-        console.log('update: ', res);
+  private getSensorTypes() {
+    this.sensorTypeHttp.getAllSensorType().subscribe(res => {
+      this.sensorTypes = res;
+    });
+  }
+
+  private updateSensorsValue(automateId: number, valueDate: any) {
+    this.sensorDataHttp.updateDetailAutomate(automateId, valueDate).subscribe(res => {
         if (res.length > 0) {
           this.updateAutomateDetails(res);
         }
@@ -46,7 +61,6 @@ export class AutomateDetailComponent implements OnInit {
   }
 
   private updateAutomateDetails(newDetail: AutomateDetail[]) {
-    // remove later
     this.automateDetails.forEach(element => {
       element.sensorsData.forEach(
         sensorData => {
@@ -58,5 +72,13 @@ export class AutomateDetailComponent implements OnInit {
         }
       );
     });
+  }
+
+  filterSensorsByType(sensorTypeId: number) {
+    let termAutomateDetail = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
+    termAutomateDetail = termAutomateDetail.map(element => {
+        return Object.assign(element, { sensorsData: element.sensorsData.filter(res => res.sensortypeId === sensorTypeId)});
+    });
+    this.automateDetailsSensorData = termAutomateDetail;
   }
 }

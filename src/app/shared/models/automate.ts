@@ -1,4 +1,4 @@
-import {SensorData} from './sensorData';
+import {SensorData} from './sensor-data';
 
 
 export class Automate {

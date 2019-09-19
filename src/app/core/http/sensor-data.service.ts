@@ -3,7 +3,7 @@ import {ApiService} from './api.service';
 import {Observable} from 'rxjs';
 import {AutomateDetail} from '../../shared/models/automate';
 import {map} from 'rxjs/operators';
-import {SensorData} from '../../shared/models/sensorData';
+import {SensorData} from '../../shared/models/sensor-data';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class SensorDataService {
   ) {}
 
   detailAutomate(id: number): Observable<AutomateDetail[]> {
-    return this.apiService.get(`${this.uri}&automateId=${id}`).pipe(
+    return this.apiService.get(`automates/${id}`).pipe(
       map(
         res => {
           return this.transform(res, 'locationIdentifier');
@@ -25,8 +25,8 @@ export class SensorDataService {
     );
   }
 
-  updateDetailAutomate(id: number): Observable<AutomateDetail[]> {
-    return this.apiService.get(`${this.uri}/update&automateId=${id}`).pipe(
+  updateDetailAutomate(id: number, valueDate: any): Observable<AutomateDetail[]> {
+    return this.apiService.get(`${this.uri}/update&automateId=${id}&valueDate=${valueDate}`).pipe(
       map(
         res => {
           return this.transform(res, 'locationIdentifier');

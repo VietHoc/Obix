@@ -113,6 +113,6 @@ export class AutomateListComponent implements OnInit {
   }
 
   public redirectToDetailAutomate(automate: Automate) {
-    this.router.navigate([`${automate.id}/sensors`], {relativeTo: this.route}).then(_ => {});
+    this.router.navigate([`${automate.id}/sensors`], {relativeTo: this.route, queryParams: {automateName: automate.name}}).then(_ => {});
   }
 }
