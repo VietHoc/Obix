@@ -79,12 +79,12 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     });
     this.automateDetailsSensorData = [...this.automateDetails];
     setTimeout(() => {
-      this.automateDetails.map(room => {
+      this.automateDetailsSensorData.map(room => {
           room.sensorsData.map(sensorData => {
             sensorData.isUpdate = false;
           });
        });
- }, TIME_CSS_UPDATE_SENSORS_VALUE);
+    }, TIME_CSS_UPDATE_SENSORS_VALUE);
   }
 
   filterSensorsByType(sensorTypeId: number) {
