@@ -6,6 +6,7 @@ export class SensorData {
   sensortypeType: string;
   name: string;
   value: string;
+  locationName: string;
   locationIdentifier: string;
   isUpdate = false;
 }

@@ -5,25 +5,6 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-table-automate-room',
-  animations: [
-    trigger('openClose', [
-      // ...
-      state('open', style({
-        opacity: 10,
-        backgroundColor: 'yellow'
-      })),
-      state('closed', style({
-        opacity: 1,
-        backgroundColor: 'green'
-      })),
-      transition('* => closed', [
-        animate('2s')
-      ]),
-      transition('* => open', [
-        animate('1s')
-      ]),
-    ]),
-  ],
   templateUrl: './table-automate-room.component.html',
   styleUrls: ['./table-automate-room.component.scss']
 })
