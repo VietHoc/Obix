@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-prod": "ng build --aot=false --buildOptimizer=false --base-href /appl_fws1/index.html",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -25,14 +25,8 @@ export class SensorDataService {
     );
   }
 
-  updateDetailAutomate(id: number, valueDate: any): Observable<AutomateDetail[]> {
-    return this.apiService.get(`${this.uri}/update?automateId=${id}&valueDate=${valueDate}`).pipe(
-      map(
-        res => {
-          return this.transform(res, 'locationIdentifier');
-        }
-      )
-    );
+  updateDetailAutomate(id: number, valueDate: any): Observable<SensorData[]> {
+    return this.apiService.get(`${this.uri}/update?automateId=${id}&valueDate=${valueDate}`);
   }
 
   private transform(collection: SensorData[], property: string): AutomateDetail[] {

@@ -1,3 +1,4 @@
+
 <mat-card class="card">
   <mat-card-header>
     <mat-card-title>{{automateDetail.locationIdentifier}}</mat-card-title>
@@ -22,8 +23,24 @@
       <!-- Value Column -->
       <ng-container matColumnDef="value">
         <th mat-header-cell *matHeaderCellDef> Value </th>
-<!--        <td mat-cell *matCellDef="let element"> 709.12 </td>-->
-        <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+<!--        <td mat-cell *matCellDef="let element" [ngClass]="{'value-change': true, 'default': !element.isUpdate, 'changed': element.isUpdate}">-->
+<!--          <span *ngIf="element.sensorTypes == 'bool'">-->
+<!--            <mat-icon *ngIf="element.value == '1'" color="primary" class="toggle">toggle_on</mat-icon>-->
+<!--            <mat-icon *ngIf="element.value == '0'" >toggle_off</mat-icon>-->
+<!--          </span>-->
+<!--           <span *ngIf="element.sensorTypes != 'bool'">-->
+<!--            1234-->
+<!--          </span>-->
+<!--        </td>-->
+        <td mat-cell *matCellDef="let element" [ngClass]="{'value-change': true, 'default': !element.isUpdate, 'changed': element.isUpdate}">
+          <span *ngIf="element.sensorTypes == 'bool'">
+            <mat-icon *ngIf="element.value == '1'" color="primary" class="toggle">toggle_on</mat-icon>
+            <mat-icon *ngIf="element.value == '0'" >toggle_off</mat-icon>
+          </span>
+           <span *ngIf="element.sensorTypes != 'bool'">
+            {{element.value}}
+          </span>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
