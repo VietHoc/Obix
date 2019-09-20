@@ -2,6 +2,7 @@
 <mat-card class="card">
   <mat-card-header>
     <mat-card-title>{{automateDetail.locationIdentifier}}</mat-card-title>
+    <mat-card-subtitle>{{automateDetail.locationName}}</mat-card-subtitle>
   </mat-card-header>
   <mat-form-field class="form-filter">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
