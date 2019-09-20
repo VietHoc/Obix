@@ -10,4 +10,5 @@ export const DIALOG = {
   TITLE_DELETE_SENSOR: 'Delete Sensor',
 }
 
-export const TIME_REQUEST_UPDATE_SENSORS_VALUE = 60;
+export const TIME_REQUEST_UPDATE_SENSORS_VALUE = 10;
+export const TIME_CSS_UPDATE_SENSORS_VALUE = 3 * 1000;
