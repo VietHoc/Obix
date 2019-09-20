@@ -11,4 +11,4 @@ export const DIALOG = {
 }
 
 export const TIME_REQUEST_UPDATE_SENSORS_VALUE = 10;
-export const TIME_CSS_UPDATE_SENSORS_VALUE = 3;
+export const TIME_CSS_UPDATE_SENSORS_VALUE = 3 * 1000;
