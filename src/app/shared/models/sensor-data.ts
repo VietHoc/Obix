@@ -5,4 +5,5 @@ export class SensorData {
   name: string;
   value: string;
   locationIdentifier: string;
+  isUpdate = false;
 }

@@ -3,11 +3,13 @@ import {ActivatedRoute} from '@angular/router';
 import {AutomateDetail} from '../../../../shared/models/automate';
 import {interval, Subscription} from 'rxjs';
 import {assign} from 'lodash-es';
-import {TIME_REQUEST_UPDATE_SENSORS_VALUE} from '../../../../constant/string';
+import {TIME_CSS_UPDATE_SENSORS_VALUE, TIME_REQUEST_UPDATE_SENSORS_VALUE} from '../../../../constant/string';
 import {SensorDataService} from '../../../../core/http/sensor-data.service';
 import {SensorType} from '../../../../shared/models/sensor-type';
 import {SensorTypeService} from '../../../../core/http/sensor-type.service';
 import * as moment from 'moment';
+import {SensorData} from '../../../../shared/models/sensor-data';
+import {timeout} from 'rxjs/operators';
 
 @Component({
   selector: 'app-automate-detail',
@@ -65,20 +67,24 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  private updateAutomateDetails(newDetail: AutomateDetail[]) {
-    this.automateDetails.forEach(element => {
-      element.sensorsData.forEach(
-        sensorData => {
-          newDetail.forEach(
-            term => {
-              assign(sensorData, term.sensorsData.find(res => res.sensorId === sensorData.sensorId));
-            }
-          );
+  private updateAutomateDetails(newDetail: SensorData[]) {
+    this.automateDetails.map(room => {
+      room.sensorsData.map(sensorData => {
+        const termNewSensorData = newDetail.find(res => res.id === sensorData.id);
+        if (termNewSensorData != null ) {
+          sensorData.value = termNewSensorData.value;
+          sensorData.isUpdate = true;
         }
-      );
+      });
     });
-
     this.automateDetailsSensorData = [...this.automateDetails];
+    setTimeout(() => {
+      this.automateDetails.map(room => {
+          room.sensorsData.map(sensorData => {
+            sensorData.isUpdate = false;
+          });
+       });
+ }, TIME_CSS_UPDATE_SENSORS_VALUE);
   }
 
   filterSensorsByType(sensorTypeId: number) {

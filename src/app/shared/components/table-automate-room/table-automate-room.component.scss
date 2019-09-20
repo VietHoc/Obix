@@ -26,3 +26,13 @@ th.mat-header-cell, td.mat-cell{
 tr.mat-footer-row, tr.mat-row {
     height: 30px;
 }
+
+.testClass {
+  &.default {
+    background-color: white;
+  }
+  &.changed {
+    background-color: greenyellow;
+  }
+  transition: all 1s ease-in-out;
+}
