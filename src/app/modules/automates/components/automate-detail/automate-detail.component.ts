@@ -2,14 +2,12 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AutomateDetail} from '../../../../shared/models/automate';
 import {interval, Subscription} from 'rxjs';
-import {assign} from 'lodash-es';
 import {TIME_CSS_UPDATE_SENSORS_VALUE, TIME_REQUEST_UPDATE_SENSORS_VALUE} from '../../../../constant/string';
 import {SensorDataService} from '../../../../core/http/sensor-data.service';
 import {SensorType} from '../../../../shared/models/sensor-type';
 import {SensorTypeService} from '../../../../core/http/sensor-type.service';
 import * as moment from 'moment';
 import {SensorData} from '../../../../shared/models/sensor-data';
-import {timeout} from 'rxjs/operators';
 
 @Component({
   selector: 'app-automate-detail',
@@ -75,7 +73,6 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
           sensorData.value = termNewSensorData.value;
           sensorData.isUpdate = true;
         }
-        return sensorData;
       });
     });
     this.automateDetailsSensorData = [...this.automateDetails];
