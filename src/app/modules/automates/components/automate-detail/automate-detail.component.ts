@@ -71,7 +71,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   private updateAutomateDetails(newDetail: SensorData[]) {
     this.automateDetails.map(room => {
       room.sensorsData.map(sensorData => {
-        const termNewSensorData = newDetail.find(res => res.sensorId === sensorData.sensorId);
+        const termNewSensorData = newDetail.find(res => res.id === sensorData.id);
         if (termNewSensorData != null) {
           sensorData.value = termNewSensorData.value;
           sensorData.isUpdate = true;
