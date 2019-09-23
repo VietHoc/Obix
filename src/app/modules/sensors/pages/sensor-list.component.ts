@@ -3,12 +3,11 @@ import {SensorService} from '../../../core/http/sensor.service';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Sensor} from '../../../shared/models/sensor';
 import {SensorDialogComponent} from '../components/sensor-dialog/sensor-dialog.component';
-import {remove, assign} from 'lodash-es';
+import {assign} from 'lodash-es';
 import {BehaviorSubject, merge, of as observableOf} from 'rxjs';
 import {catchError, debounceTime, map, startWith, switchMap} from 'rxjs/operators';
 import {STYLE} from '../../../constant/style';
-import {ConfirmationDialog} from '../../../core/service/confirmation-dialog';
-import {DIALOG} from '../../../constant/string';
+
 
 @Component({
   selector: 'app-sensor',
