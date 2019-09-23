@@ -24,7 +24,7 @@ export class AutomateService {
   }
 
   updateAutomate(automate: Automate): Observable<Automate> {
-    const uriUpdate = this.uri + `/update`;
+    const uriUpdate = `${this.uri}/update/${automate.id}`;
     return this.apiService.post(uriUpdate, automate);
   }
 }

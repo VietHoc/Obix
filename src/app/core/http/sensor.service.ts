@@ -19,7 +19,7 @@ export class SensorService {
   }
 
   updateSensor(sensor: Sensor): Observable<Sensor> {
-    const uriUpdate = this.uri + `/update`;
+    const uriUpdate = `${this.uri}/update/${sensor.id}`;
     return this.apiService.post(uriUpdate, sensor);
   }
 }
