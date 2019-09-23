@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api_url: '/appl_fws1'
+  api_url: 'http://webappin.hq.nestle.com/appl_fws1'
 };
