@@ -16,7 +16,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AutomateListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'ip', 'uri', 'floor', 'active', 'action'];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource<Automate>();
   automates: Automate[];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -38,7 +38,7 @@ export class AutomateListComponent implements OnInit {
 
   public getListAutomates() {
     this.automateHttp.getListAutomates().subscribe(res => {
-      this.automates = res;
+      this.automates = res.map(x => new Automate(x));
       this.setDataTable();
     });
   }
@@ -87,7 +87,7 @@ export class AutomateListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.updateServer(result);
+        this.updateServer(new Automate(result));
       } else {
         console.log('Cancel');
       }

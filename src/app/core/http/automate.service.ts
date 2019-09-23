@@ -16,15 +16,15 @@ export class AutomateService {
   ) {}
 
   getListAutomates(): Observable<Automate[]> {
-    return this.apiService.get(this.uri);
+    return this.apiService.getList(this.uri);
   }
 
   addAutomate(automate: Automate): Observable<Automate> {
-    return this.apiService.post(this.uri, automate);
+    return this.apiService.post<Automate>(this.uri, automate);
   }
 
   updateAutomate(automate: Automate): Observable<Automate> {
     const uriUpdate = `${this.uri}/update/${automate.id}`;
-    return this.apiService.post(uriUpdate, automate);
+    return this.apiService.post<Automate>(uriUpdate, automate);
   }
 }

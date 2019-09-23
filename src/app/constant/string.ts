@@ -1,5 +1,5 @@
 export const Message = {
-  successful: 'Successful',
+  successful: 'successful',
   errors: 'Errors'
 }
 

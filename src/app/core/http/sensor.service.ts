@@ -15,11 +15,12 @@ export class SensorService {
   ) {}
 
   getListSensors(sort: string, order: string, page: number, pageSize: number, search: string): Observable<SensorResponse> {
-    return this.apiService.get(`${this.uri}?sort=${sort}&order=${order}&page=${page}&pageSize=${pageSize}&search=${search}`);
+    // tslint:disable-next-line:max-line-length
+    return this.apiService.get<SensorResponse>(`${this.uri}?sort=${sort}&order=${order}&page=${page}&pageSize=${pageSize}&search=${search}`);
   }
 
   updateSensor(sensor: Sensor): Observable<Sensor> {
     const uriUpdate = `${this.uri}/update/${sensor.id}`;
-    return this.apiService.post(uriUpdate, sensor);
+    return this.apiService.post<Sensor>(uriUpdate, sensor);
   }
 }

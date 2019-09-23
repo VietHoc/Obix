@@ -19,11 +19,18 @@ export class ApiService {
 
   }
 
-  get(path: string, params: HttpParams = new HttpParams(), headers?: HttpHeaders): Observable<any> {
+  getList<T>(path: string, params: HttpParams = new HttpParams(), headers?: HttpHeaders): Observable<T[]> {
     return this.http
-      .get(`${this.appUrl}${path}`, { headers, params })
+      .get<T[]>(`${this.appUrl}${path}`, { headers, params })
       .pipe(map((response: any) => response));
   }
+
+  get<T>(path: string, params: HttpParams = new HttpParams(), headers?: HttpHeaders): Observable<T> {
+    return this.http
+      .get<T>(`${this.appUrl}${path}`, { headers, params })
+      .pipe(map((response: any) => response));
+  }
+
 
   put(path: string, body: Object = {}): Observable<any> {
     let headers = new HttpHeaders();
@@ -39,14 +46,16 @@ export class ApiService {
   }
 
   // tslint:disable-next-line:ban-types
-  post(path: string, body: Object = {}): Observable<any> {
+  post<T>(path: string, body: T): Observable<any> {
+    const instance = body.constructor.name;
     let headers = new HttpHeaders();
-    headers = headers.set('content-type', 'application/json')
+    headers = headers.set('content-type', 'application/json');
     return this.http
       .post(`${this.appUrl}${path}`, JSON.stringify(body), {headers})
       .pipe(
         map((response: any) => {
-          this.customSnackbarService.success(Message.successful);
+          const action = path.indexOf('update') === -1 ? 'Add' : 'Update';
+          this.customSnackbarService.success(`${action} ${instance} ${Message.successful}`);
           return response;
         })
       );

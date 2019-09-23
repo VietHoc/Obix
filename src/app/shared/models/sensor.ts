@@ -13,6 +13,10 @@ export class Sensor {
   isActive: boolean;
   creationDate: Time;
   modificationDate: Time;
+
+  constructor(init?: Partial<Sensor>) {
+    Object.assign(this, init);
+  }
 }
 
 export class SensorResponse {

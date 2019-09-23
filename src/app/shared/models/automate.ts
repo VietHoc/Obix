@@ -8,6 +8,9 @@ export class Automate {
   uri: string;
   floor: number;
   active: boolean;
+  constructor(init?: Partial<Automate>) {
+    Object.assign(this, init);
+  }
 }
 
 export class AutomateDetail {

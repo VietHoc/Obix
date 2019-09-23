@@ -17,7 +17,7 @@ import {STYLE} from '../../../constant/style';
 export class SensorListComponent implements OnInit, AfterViewInit {
   sensors: Sensor[];
   displayedColumns: string[] = ['id', 'name', 'sensorTypeName', 'automateName', 'locationName', 'locationIdentifier', 'uri', 'active', 'action'];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource<Sensor>();
   searchChange$ = new BehaviorSubject<string>('');
 
   resultsLength = 0;
@@ -53,7 +53,7 @@ export class SensorListComponent implements OnInit, AfterViewInit {
           this.isRateLimitReached = false;
           this.resultsLength = data.totalCount;
 
-          return data.items;
+          return data.items.map(x => new Sensor(x));
         }),
         catchError(() => {
           this.isLoadingResults = false;

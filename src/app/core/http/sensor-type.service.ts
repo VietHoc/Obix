@@ -14,6 +14,6 @@ export class SensorTypeService {
   ) {}
 
   getAllSensorType(): Observable<SensorType[]> {
-    return this.apiService.get(this.uri);
+    return this.apiService.getList<SensorType>(this.uri);
   }
 }
