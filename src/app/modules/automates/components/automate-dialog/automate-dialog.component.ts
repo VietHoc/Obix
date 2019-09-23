@@ -11,11 +11,13 @@ import {CustomValidators} from '../../../../shared/validators/custom-validators'
 })
 export class AutomateDialogComponent implements OnInit {
   formServer: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AutomateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public automate: Automate
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.buildForm();

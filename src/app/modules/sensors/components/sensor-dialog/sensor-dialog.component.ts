@@ -11,11 +11,13 @@ import {Sensor} from '../../../../shared/models/sensor';
 })
 export class SensorDialogComponent implements OnInit {
   formSensor: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AutomateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public sensor: Sensor
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -30,7 +32,7 @@ export class SensorDialogComponent implements OnInit {
       name: [this.sensor.name],
       locationName: [this.sensor.locationName],
       locationIdentifier: [this.sensor.locationIdentifier, [Validators.required, Validators.maxLength(50)]],
-      isActive: [this.sensor.isActive,  [Validators.required]],
+      isActive: [this.sensor.isActive, [Validators.required]],
       creationDate: [this.sensor.creationDate],
       modificationDate: [this.sensor.modificationDate],
     });

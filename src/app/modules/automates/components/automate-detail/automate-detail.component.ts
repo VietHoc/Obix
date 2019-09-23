@@ -17,15 +17,18 @@ import {SensorData} from '../../../../shared/models/sensor-data';
 export class AutomateDetailComponent implements OnInit, OnDestroy {
   currentAutomateId: number;
   automateName: string;
-  automateDetails; automateDetailsSensorData: AutomateDetail[];
+  automateDetails;
+  automateDetailsSensorData: AutomateDetail[];
   sensorTypes: SensorType[];
   currentSensorTypeId = 0;
   intervalUpdateDataSensor: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private sensorDataHttp: SensorDataService,
     private sensorTypeHttp: SensorTypeService,
-  ) {}
+  ) {
+  }
 
   secondsCounter = interval(TIME_REQUEST_UPDATE_SENSORS_VALUE * 1000);
 
@@ -46,8 +49,8 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
 
   private getSensorListOfAutomate(automateId: number) {
     this.sensorDataHttp.detailAutomate(automateId).subscribe(res => {
-        this.automateDetails = res;
-        this.automateDetailsSensorData = res;
+      this.automateDetails = res;
+      this.automateDetailsSensorData = res;
     });
   }
 
@@ -59,9 +62,9 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
 
   private updateSensorsValue(automateId: number, valueDate: any) {
     this.sensorDataHttp.updateDetailAutomate(automateId, valueDate).subscribe(res => {
-        if (res.length > 0) {
-          this.updateAutomateDetails(res);
-        }
+      if (res.length > 0) {
+        this.updateAutomateDetails(res);
+      }
     });
   }
 
@@ -69,7 +72,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     this.automateDetails.map(room => {
       room.sensorsData.map(sensorData => {
         const termNewSensorData = newDetail.find(res => res.sensorId === sensorData.sensorId);
-        if (termNewSensorData != null ) {
+        if (termNewSensorData != null) {
           sensorData.value = termNewSensorData.value;
           sensorData.isUpdate = true;
         }
@@ -78,17 +81,17 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     this.automateDetailsSensorData = [...this.automateDetails];
     setTimeout(() => {
       this.automateDetailsSensorData.map(room => {
-          room.sensorsData.map(sensorData => {
-            sensorData.isUpdate = false;
-          });
-       });
+        room.sensorsData.map(sensorData => {
+          sensorData.isUpdate = false;
+        });
+      });
     }, TIME_CSS_UPDATE_SENSORS_VALUE);
   }
 
   filterSensorsByType(sensorTypeId: number) {
     let termAutomateDetail = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
     termAutomateDetail = termAutomateDetail.map(element => {
-        return Object.assign(element, { sensorsData: element.sensorsData.filter(res => res.sensortypeId === sensorTypeId)});
+      return Object.assign(element, {sensorsData: element.sensorsData.filter(res => res.sensortypeId === sensorTypeId)});
     });
     this.automateDetailsSensorData = termAutomateDetail;
   }

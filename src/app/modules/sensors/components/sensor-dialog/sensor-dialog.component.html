@@ -7,7 +7,8 @@
 <br>
 <div mat-dialog-content>
   <form class="form" [formGroup]="formSensor">
-    <app-input-field placeholder="Location Identifier" [control]="formSensor.get('locationIdentifier')"></app-input-field>
+    <app-input-field placeholder="Location Identifier"
+                     [control]="formSensor.get('locationIdentifier')"></app-input-field>
 
     <mat-radio-group aria-label="Select an option" formControlName="isActive">
       <mat-radio-button value="true" [checked]="sensor.isActive == true">Active</mat-radio-button>
@@ -16,6 +17,8 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button  (click)="onNoClick()">Cancel</button>
-  <button mat-raised-button [mat-dialog-close]="formSensor.value" cdkFocusInitial [disabled]="formSensor.invalid" color="primary">Save</button>
+  <button mat-raised-button (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="formSensor.value" cdkFocusInitial [disabled]="formSensor.invalid"
+          color="primary">Save
+  </button>
 </div>

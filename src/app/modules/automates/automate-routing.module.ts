@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {AutomateListComponent} from './pages/automate-list.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AutomateDetailComponent} from './components/automate-detail/automate-detail.component';
@@ -19,4 +19,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AutomateRoutingModule { }
+export class AutomateRoutingModule {
+}

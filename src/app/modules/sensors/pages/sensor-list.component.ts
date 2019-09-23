@@ -16,7 +16,7 @@ import {STYLE} from '../../../constant/style';
 })
 export class SensorListComponent implements OnInit, AfterViewInit {
   sensors: Sensor[];
-  displayedColumns: string[] = ['id' , 'name', 'sensorTypeName' , 'automateName', 'locationName', 'locationIdentifier', 'uri' , 'active', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'sensorTypeName', 'automateName', 'locationName', 'locationIdentifier', 'uri', 'active', 'action'];
   dataSource = new MatTableDataSource();
   searchChange$ = new BehaviorSubject<string>('');
 
@@ -30,7 +30,8 @@ export class SensorListComponent implements OnInit, AfterViewInit {
   constructor(
     private sensorHttp: SensorService,
     public dialog: MatDialog
-  ) { }
+  ) {
+  }
 
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.
@@ -43,7 +44,7 @@ export class SensorListComponent implements OnInit, AfterViewInit {
         switchMap(() => {
           this.isLoadingResults = true;
           return this.sensorHttp.getListSensors(
-                this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize, this.searchChange$.getValue());
+            this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize, this.searchChange$.getValue());
         }),
 
         map(data => {
@@ -87,22 +88,22 @@ export class SensorListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public changeStatusSensor(sensor: Sensor, isActive: boolean ) {
+  public changeStatusSensor(sensor: Sensor, isActive: boolean) {
     sensor.isActive = isActive;
     this.sensorHttp.updateSensor(sensor).subscribe(res => {
-        assign(this.sensors.find(item => item.id === sensor.id), res);
-        this.setDataTable();
-      });
+      assign(this.sensors.find(item => item.id === sensor.id), res);
+      this.setDataTable();
+    });
   }
 
   private updateSensor(sensor: Sensor) {
-      this.sensorHttp.updateSensor(sensor).subscribe(res => {
-        assign(this.sensors.find(item => item.id === sensor.id), res);
-        this.setDataTable();
-      });
+    this.sensorHttp.updateSensor(sensor).subscribe(res => {
+      assign(this.sensors.find(item => item.id === sensor.id), res);
+      this.setDataTable();
+    });
   }
 
   private setDataTable() {
-      this.dataSource.data = this.sensors;
+    this.dataSource.data = this.sensors;
   }
 }

@@ -30,7 +30,7 @@ tr.mat-footer-row, tr.mat-row {
 .value-change {
   border-radius: 4px;
   &.default {
-    background-color: white;
+    background-color: transparent;
   }
   &.changed {
     background-color: greenyellow;

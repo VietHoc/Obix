@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {SensorListComponent} from './pages/sensor-list.component';
 
@@ -14,5 +14,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class SensorsRoutingModule { }
-
+export class SensorsRoutingModule {
+}

@@ -27,7 +27,8 @@ export class AutomateListComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.getListAutomates();
@@ -69,17 +70,17 @@ export class AutomateListComponent implements OnInit {
 
   private addServer(value: Automate) {
     this.automateHttp.addAutomate(value).subscribe(res => {
-        this.automates.push(res);
-        this.setDataTable();
+      this.automates.push(res);
+      this.setDataTable();
     });
   }
 
   public deleteServer(automate: Automate) {
-    ConfirmationDialog.show(this.dialog, `${DIALOG.MESSAGE_DELETE} ${automate.name}?` , DIALOG.TITLE_DELETE_SENSOR)
+    ConfirmationDialog.show(this.dialog, `${DIALOG.MESSAGE_DELETE} ${automate.name}?`, DIALOG.TITLE_DELETE_SENSOR)
       .subscribe(result => {
         if (result) {
           this.automateHttp.deleteAutomate(automate.id).subscribe(_ => {
-            remove(this.automates, item  => item.id === automate.id);
+            remove(this.automates, item => item.id === automate.id);
             this.setDataTable();
           });
         }
@@ -106,13 +107,14 @@ export class AutomateListComponent implements OnInit {
   }
 
   private updateServer(automate: Automate) {
-      this.automateHttp.updateAutomate(automate).subscribe(res => {
-        assign(this.automates.find(item => item.id === automate.id), res);
-        this.setDataTable();
-      });
+    this.automateHttp.updateAutomate(automate).subscribe(res => {
+      assign(this.automates.find(item => item.id === automate.id), res);
+      this.setDataTable();
+    });
   }
 
   public redirectToDetailAutomate(automate: Automate) {
-    this.router.navigate([`${automate.id}/sensors`], {relativeTo: this.route, queryParams: {automateName: automate.name}}).then(_ => {});
+    this.router.navigate([`${automate.id}/sensors`], {relativeTo: this.route, queryParams: {automateName: automate.name}}).then(_ => {
+    });
   }
 }
