@@ -75,18 +75,6 @@ export class AutomateListComponent implements OnInit {
     });
   }
 
-  public deleteServer(automate: Automate) {
-    ConfirmationDialog.show(this.dialog, `${DIALOG.MESSAGE_DELETE} ${automate.name}?`, DIALOG.TITLE_DELETE_SENSOR)
-      .subscribe(result => {
-        if (result) {
-          this.automateHttp.deleteAutomate(automate.id).subscribe(_ => {
-            remove(this.automates, item => item.id === automate.id);
-            this.setDataTable();
-          });
-        }
-      });
-  }
-
   private setDataTable() {
     this.dataSource.data = this.automates;
   }

@@ -27,9 +27,4 @@ export class AutomateService {
     const uriUpdate = this.uri + `/update`;
     return this.apiService.post(uriUpdate, automate);
   }
-
-  deleteAutomate(id: number): Observable<null> {
-    const uriDelete = this.uri + `/delete/${id}`;
-    return this.apiService.post(uriDelete);
-  }
 }
