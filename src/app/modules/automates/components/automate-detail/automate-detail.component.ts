@@ -37,7 +37,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     this.automateName = this.route.snapshot.queryParamMap.get('automateName');
     this.getSensorListOfAutomate(this.currentAutomateId);
     this.intervalUpdateDataSensor = this.secondsCounter.subscribe(_ => {
-      const valueDate = moment().subtract(TIME_REQUEST_UPDATE_SENSORS_VALUE, 'seconds').format('DD-MM-YYYY hh:mm:ss');
+      const valueDate = moment().subtract(TIME_REQUEST_UPDATE_SENSORS_VALUE, 'seconds').format('DD/MM/YYYY HH:mm:ss');
       this.updateSensorsValue(this.currentAutomateId, valueDate);
     });
     this.getSensorTypes();
@@ -79,6 +79,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
       });
     });
     this.automateDetailsSensorData = [...this.automateDetails];
+    this.filterSensorsByType(this.currentSensorTypeIds);
     setTimeout(() => {
       this.automateDetailsSensorData.map(room => {
         room.sensorsData.map(sensorData => {
@@ -89,10 +90,36 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   }
 
   filterSensorsByType(sensorTypeIds: number[]) {
+    this.currentSensorTypeIds = sensorTypeIds;
     let termAutomateDetail = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
     termAutomateDetail = termAutomateDetail.map(element => {
-      return Object.assign(element, {sensorsData: element.sensorsData.filter(res =>  sensorTypeIds.indexOf(res.sensortypeId) !== -1)});
+      return Object.assign(element, {
+        sensorsData: element.sensorsData.filter(res =>  sensorTypeIds.indexOf(res.sensortypeId) !== -1)
+      });
     });
+
+    termAutomateDetail = termAutomateDetail.filter(room => {
+      return room.sensorsData.length > 0;
+    })
+
     this.automateDetailsSensorData = termAutomateDetail;
+    if (sensorTypeIds.length === 0) {
+      this.automateDetailsSensorData = this.automateDetails;
+    }
+  }
+
+  getHeightMax(): string {
+    let maxLength = 0;
+    if (this.automateDetailsSensorData === undefined ) {
+      return '300px';
+    }
+    this.automateDetailsSensorData.forEach(room => {
+      if (room.sensorsData.length > maxLength) {
+        maxLength = room.sensorsData.length;
+      }
+    });
+    let maxHeight = 30 * maxLength + 50;
+    maxHeight = maxHeight > 300 ? 300 : maxHeight;
+    return `${maxHeight}px`;
   }
 }

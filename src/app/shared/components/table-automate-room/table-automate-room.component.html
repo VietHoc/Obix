@@ -1,29 +1,17 @@
-
-<mat-card class="card">
+<mat-card class="card mat-elevation-z2">
   <mat-card-header>
     <mat-card-title>{{automateDetail.locationIdentifier}}</mat-card-title>
-    <mat-card-subtitle>{{automateDetail.sensorsData[0]?.locationName || ''}}</mat-card-subtitle>
+    <span class="sub-title">{{automateDetail.sensorsData[0]?.locationName || ''}}</span>
   </mat-card-header>
-  <mat-card-content class="card-container mat-elevation-z8">
+  <mat-card-content class="card-container">
     <table mat-table [dataSource]="dataSource">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Sensor Name </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
       <!-- Value Column -->
       <ng-container matColumnDef="value">
-        <th mat-header-cell *matHeaderCellDef> Value </th>
-<!--        <td mat-cell *matCellDef="let element" [ngClass]="{'value-change': true, 'default': !element.isUpdate, 'changed': element.isUpdate}">-->
-<!--          <span *ngIf="element.sensorTypes == 'bool'">-->
-<!--            <mat-icon *ngIf="element.value == '1'" color="primary" class="toggle">toggle_on</mat-icon>-->
-<!--            <mat-icon *ngIf="element.value == '0'" >toggle_off</mat-icon>-->
-<!--          </span>-->
-<!--           <span *ngIf="element.sensorTypes != 'bool'">-->
-<!--            1234-->
-<!--          </span>-->
-<!--        </td>-->
         <td mat-cell *matCellDef="let element" [ngClass]="{'value-change': true, 'default': !element.isUpdate, 'changed': element.isUpdate}">
           <span *ngIf="element.sensortypeType == 'bool'">
             <mat-icon *ngIf="element.value == '1'" color="primary" class="toggle">toggle_on</mat-icon>
@@ -31,11 +19,11 @@
           </span>
            <span *ngIf="element.sensortypeType != 'bool'">
             {{element.value}}
+             123
           </span>
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </mat-card-content>
