@@ -1,9 +1,11 @@
-<div class="card card-container">
+<div class="card">
   <div class="card-body">
-    <h5 class="card-title">{{automateDetail.locationIdentifier}}</h5>
-<!--    <h5 class="card-title">{{automateDetail.sensorsData[0]?.locationName || ''}}</h5>-->
-    <div class="card-text">
-       <table mat-table [dataSource]="dataSource">
+    <div class="card-text card-container">
+      <div>
+        <div class="card-title">{{automateDetail.locationIdentifier}}</div>
+        <div>{{automateDetail.sensorsData[0]?.locationName || ''}}</div>
+      </div>
+      <table mat-table [dataSource]="dataSource">
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
