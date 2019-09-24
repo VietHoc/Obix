@@ -20,7 +20,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   automateDetails;
   automateDetailsSensorData: AutomateDetail[];
   sensorTypes: SensorType[];
-  currentSensorTypeId = 0;
+  currentSensorTypeIds = [];
   intervalUpdateDataSensor: Subscription;
 
   constructor(
@@ -62,7 +62,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
 
   private updateSensorsValue(automateId: number, valueDate: any) {
     this.sensorDataHttp.updateDetailAutomate(automateId, valueDate).subscribe(res => {
-      if (res.length > 0) {
+      if (res !== null && res.length > 0) {
         this.updateAutomateDetails(res);
       }
     });
@@ -88,10 +88,10 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     }, TIME_CSS_UPDATE_SENSORS_VALUE);
   }
 
-  filterSensorsByType(sensorTypeId: number) {
+  filterSensorsByType(sensorTypeIds: number[]) {
     let termAutomateDetail = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
     termAutomateDetail = termAutomateDetail.map(element => {
-      return Object.assign(element, {sensorsData: element.sensorsData.filter(res => res.sensortypeId === sensorTypeId)});
+      return Object.assign(element, {sensorsData: element.sensorsData.filter(res =>  sensorTypeIds.indexOf(res.sensortypeId) !== -1)});
     });
     this.automateDetailsSensorData = termAutomateDetail;
   }

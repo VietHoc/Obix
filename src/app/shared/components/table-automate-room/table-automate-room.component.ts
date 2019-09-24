@@ -9,7 +9,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   styleUrls: ['./table-automate-room.component.scss']
 })
 export class TableAutomateRoomComponent implements OnInit {
-  displayedColumns: string[] = ['index', 'name', 'value'];
+  displayedColumns: string[] = ['name', 'value'];
   dataSource = new MatTableDataSource();
   isOpen = true;
 
@@ -18,14 +18,5 @@ export class TableAutomateRoomComponent implements OnInit {
   constructor() { }
   ngOnInit() {
     this.dataSource.data = this.automateDetail.sensorsData;
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  toggle() {
-    this.isOpen = !this.isOpen;
-    console.log(this.isOpen);
   }
 }
