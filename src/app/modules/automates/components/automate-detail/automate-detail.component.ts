@@ -17,8 +17,7 @@ import {SensorData} from '../../../../shared/models/sensor-data';
 export class AutomateDetailComponent implements OnInit, OnDestroy {
   currentAutomateId: number;
   automateName: string;
-  automateDetails;
-  automateDetailsSensorData: AutomateDetail[];
+  automateDetails; automateDetailsSensorData: AutomateDetail[];
   sensorTypes: SensorType[];
   currentSensorTypeIds = [];
   intervalUpdateDataSensor: Subscription;
@@ -49,8 +48,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
 
   private getSensorListOfAutomate(automateId: number) {
     this.sensorDataHttp.detailAutomate(automateId).subscribe(res => {
-      this.automateDetails = res;
-      this.automateDetailsSensorData = res;
+      this.automateDetails = this.automateDetailsSensorData = res;
     });
   }
 
@@ -69,8 +67,8 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   }
 
   private updateAutomateDetails(newDetail: SensorData[]) {
-    this.automateDetails.map(room => {
-      room.sensorsData.map(sensorData => {
+    this.automateDetails.forEach(room => {
+      room.sensorsData.forEach(sensorData => {
         const termNewSensorData = newDetail.find(res => res.id === sensorData.id);
         if (termNewSensorData != null && sensorData.value !== termNewSensorData.value) {
           sensorData.value = termNewSensorData.value;
@@ -78,6 +76,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
         }
       });
     });
+
     this.automateDetailsSensorData = [...this.automateDetails];
     this.filterSensorsByType(this.currentSensorTypeIds);
     setTimeout(() => {
@@ -92,34 +91,14 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   filterSensorsByType(sensorTypeIds: number[]) {
     this.currentSensorTypeIds = sensorTypeIds;
     let termAutomateDetail = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
-    termAutomateDetail = termAutomateDetail.map(element => {
-      return Object.assign(element, {
-        sensorsData: element.sensorsData.filter(res =>  sensorTypeIds.indexOf(res.sensortypeId) !== -1)
-      });
+    termAutomateDetail.forEach(room => {
+       room.sensorsData = room.sensorsData.filter(sensorData =>  sensorTypeIds.indexOf(sensorData.sensortypeId) !== -1);
     });
+    termAutomateDetail = termAutomateDetail.filter(room => room.sensorsData.length > 0);
 
-    termAutomateDetail = termAutomateDetail.filter(room => {
-      return room.sensorsData.length > 0;
-    })
-
-    this.automateDetailsSensorData = termAutomateDetail;
+    this.automateDetailsSensorData = [...termAutomateDetail];
     if (sensorTypeIds.length === 0) {
-      this.automateDetailsSensorData = this.automateDetails;
+      this.automateDetailsSensorData = [...this.automateDetails];
     }
-  }
-
-  getHeightMax(): string {
-    let maxLength = 0;
-    if (this.automateDetailsSensorData === undefined ) {
-      return '300px';
-    }
-    this.automateDetailsSensorData.forEach(room => {
-      if (room.sensorsData.length > maxLength) {
-        maxLength = room.sensorsData.length;
-      }
-    });
-    let maxHeight = 30 * maxLength + 50;
-    maxHeight = maxHeight > 300 ? 300 : maxHeight;
-    return `${maxHeight}px`;
   }
 }
