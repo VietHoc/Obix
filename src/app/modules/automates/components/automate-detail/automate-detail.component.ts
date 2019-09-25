@@ -19,6 +19,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   automateName: string;
   automateDetails;
   automateDetailsSensorData: AutomateDetail[];
+  sensorsDetailGroup: AutomateDetail[][] = [];
   sensorTypes: SensorType[];
   currentSensorTypeIds = [];
   intervalUpdateDataSensor: Subscription;
@@ -51,6 +52,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     this.sensorDataHttp.detailAutomate(automateId).subscribe(res => {
       this.automateDetails = res;
       this.automateDetailsSensorData = res;
+      this.groupSensorDetail();
     });
   }
 
@@ -89,6 +91,34 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     }, TIME_CSS_UPDATE_SENSORS_VALUE);
   }
 
+  groupSensorDetail() {
+    this.sensorsDetailGroup = [];
+    const termAutomateDetail = JSON.parse(JSON.stringify(this.automateDetailsSensorData)) as AutomateDetail[];
+    termAutomateDetail.sort((a, b) => b.sensorsData.length - a.sensorsData.length);
+    const lengthSensorDetails = termAutomateDetail.length;
+    console.log(termAutomateDetail);
+    const maxElementColumn = lengthSensorDetails / 4;
+    console.log(maxElementColumn);
+    for (let i = 0; i < 4; i++) {
+      this.sensorsDetailGroup.push(termAutomateDetail.slice((i * maxElementColumn), (i + 1) * maxElementColumn));
+    }
+
+    // let heightMin = 0;
+    // this.sensorsDetailGroup[3].forEach(room => {
+    //   if (room.sensorsData.length < 6) {
+    //     heightMin += 1;
+    //   }
+    // });
+    // console.log(heightMin);
+    // if (heightMin > 2 && heightMin < 5) {
+    // for (let i = 0; i < 3; i++) {
+    //   this.sensorsDetailGroup[3].push(this.sensorsDetailGroup[i].slice(-1).pop());
+    //   this.sensorsDetailGroup[i].splice(-1, 1);
+    // }
+    // }
+    console.log(this.sensorsDetailGroup);
+  }
+
   filterSensorsByType(sensorTypeIds: number[]) {
     this.currentSensorTypeIds = sensorTypeIds;
     let termAutomateDetail = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
@@ -103,9 +133,12 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     })
 
     this.automateDetailsSensorData = termAutomateDetail;
+
     if (sensorTypeIds.length === 0) {
       this.automateDetailsSensorData = this.automateDetails;
     }
+
+    this.groupSensorDetail();
   }
 
   getHeightMax(): string {

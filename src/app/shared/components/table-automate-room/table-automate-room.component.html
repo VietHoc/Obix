@@ -1,7 +1,8 @@
 <mat-card class="card mat-elevation-z2">
   <mat-card-header>
-    <mat-card-title>{{automateDetail.locationIdentifier}}</mat-card-title>
+    <mat-card-title>{{automateDetail?.locationIdentifier}}</mat-card-title>
     <span class="sub-title">{{automateDetail.sensorsData[0]?.locationName || ''}}</span>
+    <br>
   </mat-card-header>
   <mat-card-content class="card-container">
     <table mat-table [dataSource]="dataSource">

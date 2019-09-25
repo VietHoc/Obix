@@ -58,7 +58,24 @@ tr.mat-footer-row, tr.mat-row {
   margin-bottom: 0px;
 }
 
-
 ::ng-deep .mat-card-header-text {
   margin: 0px !important;
+}
+
+.card-container::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.card-container::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.card-container::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+.card-container::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
 }

@@ -9,9 +9,27 @@
     </mat-select>
   </mat-form-field>
 </div>
-<mat-grid-list cols="4" [rowHeight]="getHeightMax()">
-  <mat-grid-tile
-    *ngFor="let element of automateDetailsSensorData">
-    <app-table-automate-room [automateDetail]="element" class="room"></app-table-automate-room>
+
+<!--<mat-grid-list cols="4" [rowHeight]="getHeightMax()">-->
+<!--  <mat-grid-tile-->
+<!--    *ngFor="let element of automateDetailsSensorData">-->
+<!--    <app-table-automate-room [automateDetail]="element" class="room"></app-table-automate-room>-->
+<!--  </mat-grid-tile>-->
+<!--</mat-grid-list>-->
+
+
+<!--<div class="container-card">-->
+<!--  <div class="item" *ngFor="let room of automateDetailsSensorData">-->
+<!--    <app-table-automate-room [automateDetail]="room"></app-table-automate-room>-->
+<!--  </div>-->
+<!--</div>-->
+
+<mat-grid-list cols="4" rowHeight="4000px">
+  <mat-grid-tile *ngFor="let groupRoom of sensorsDetailGroup">
+    <div class="groupRoom">
+      <div class="item" *ngFor="let room of groupRoom">
+        <app-table-automate-room [automateDetail]="room"></app-table-automate-room>
+      </div>
+    </div>
   </mat-grid-tile>
 </mat-grid-list>

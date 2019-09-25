@@ -3,7 +3,7 @@ import {ConfirmationDialogComponent} from '../../shared/components/comfirmation-
 import {STYLE} from '../../constant/style';
 
 export class ConfirmationDialog {
-  static show(dialog: MatDialog, message: string, title: string = 'Thông báo',
+  static show(dialog: MatDialog, message: string, title: string = '',
               width = STYLE.WIDTH_DIALOG_DELETE) {
     const dialogRef = dialog.open(ConfirmationDialogComponent, {
       data: {
