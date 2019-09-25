@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
+import {NgxMasonryModule} from 'ngx-masonry';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {CoreModule} from './core/core.module';
     AppRoutingModule,
     ReactiveFormsModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    NgxMasonryModule
   ],
   providers: [],
   entryComponents: [],

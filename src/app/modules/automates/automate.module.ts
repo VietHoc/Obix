@@ -6,6 +6,7 @@ import {AutomateRoutingModule} from './automate-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import {AutomateDetailComponent} from './components/automate-detail/automate-detail.component';
 import {MatGridListModule, MatSelectModule} from '@angular/material';
+import {NgxMasonryModule} from 'ngx-masonry';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {MatGridListModule, MatSelectModule} from '@angular/material';
     AutomateRoutingModule,
     SharedModule,
     MatGridListModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxMasonryModule
   ],
   entryComponents: [
     AutomateDialogComponent
