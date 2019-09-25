@@ -4,7 +4,7 @@ import {DialogData} from '../../models/dialog-data';
 
 
 @Component({
-  selector: 'app-comfirmation-dialog',
+  selector: 'app-confirmation-dialog',
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.scss']
 })

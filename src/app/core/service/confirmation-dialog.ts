@@ -1,5 +1,5 @@
 import { MatDialog } from '@angular/material/dialog';
-import {ConfirmationDialogComponent} from '../../shared/components/comfirmation-dialog/confirmation-dialog.component';
+import {ConfirmationDialogComponent} from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import {STYLE} from '../../constant/style';
 
 export class ConfirmationDialog {
