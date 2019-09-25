@@ -10,8 +10,8 @@
   </mat-form-field>
 </div>
 
-<ngx-masonry>
-  <div ngxMasonryItem class="masonry-item" *ngFor="let room of automateDetailsSensorData">
+<ngx-masonry [options]="{ transitionDuration: 0 }">
+  <div ngxMasonryItem class="masonry-item"  *ngFor="let room of automateDetailsSensorData">
      <app-table-automate-room [automateDetail]="room"></app-table-automate-room>
   </div>
 </ngx-masonry>
