@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "assets/scss/setting";
+@import "./assets/scss/variable.scss";
+
+html, body {
+  font-family: 'Roboto',"Helvetica Neue",sans-serif;
+}
 
 .icon-action {
   color: #000000;
@@ -16,4 +21,17 @@
 
 .green-snackbar {
     background: green;
+}
+
+.full-width {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
 }

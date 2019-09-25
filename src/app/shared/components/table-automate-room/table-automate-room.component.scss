@@ -1,0 +1,81 @@
+.card-container {
+  height: auto;
+  overflow: auto;
+  max-height: 235px;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell, td.mat-cell{
+  min-width: 10px;
+}
+
+.mat-cell:first-of-type {
+  padding-left: 0px;
+}
+
+.mat-cell:last-of-type {
+  margin-left: auto;
+  margin-right: 1px;
+  padding-right: 4px;
+}
+
+.card {
+  width: auto;
+  margin-right: 5px;
+}
+
+tr.mat-footer-row, tr.mat-row {
+    height: 30px;
+}
+
+.value-change {
+  border-radius: 4px;
+  &.default {
+    background-color: transparent;
+  }
+  &.changed {
+    background-color: greenyellow;
+  }
+  transition: all 1s ease-in-out;
+}
+
+.toggle{
+  font-size: 26px;
+}
+
+.sub-title {
+  font-size: 14px;
+  margin-left: auto;
+  padding-top: 5px;
+  word-break: break-all;
+}
+
+.mat-card-header .mat-card-title {
+  margin-bottom: 0px;
+}
+
+
+::ng-deep .mat-card-header-text {
+  margin: 0px !important;
+}
+
+.card-container::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.card-container::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.card-container::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+.card-container::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+}

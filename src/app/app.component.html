@@ -1,6 +1,8 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
   <mat-toolbar color="primary" class="toolbar">
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
     <h1 class="app-name">SMART BUILDING</h1>
   </mat-toolbar>
 
@@ -8,9 +10,9 @@
                          [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="true">
       <mat-nav-list *ngFor="let nav of fillerNav">
-        <a mat-list-item routerLink={{nav.link}} >
-          <mat-icon>{{nav.icon}}</mat-icon>
-          {{nav.name}}
+        <a mat-list-item routerLink={{nav.LINK}} routerLinkActive="active-list-item">
+          <mat-icon class="text">{{nav.ICON}}</mat-icon>
+          <div class="text">{{ nav.NAME }}</div>
         </a>
       </mat-nav-list>
     </mat-sidenav>

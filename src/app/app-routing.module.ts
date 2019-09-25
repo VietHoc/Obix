@@ -1,30 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AutomateComponent} from './modules/automate/automate.component';
-import {SensorComponent} from './modules/sensor/sensor.component';
-
 
 const routes: Routes = [
   {
     path: '',
-    component: AutomateComponent,
-    data: {title: 'Server List'}
+    redirectTo: '/automates',
+    pathMatch: 'full',
   },
   {
     path: 'automates',
-    component: AutomateComponent,
+    loadChildren: () => import('./modules/automates/automate.module').then(mod => mod.AutomateModule),
     data: { title: 'Server List' }
   },
   {
     path: 'sensors',
-    component: SensorComponent,
+    loadChildren: () => import('./modules/sensors/sensors.module').then(mod => mod.SensorsModule),
     data: { title: 'Sensor List' }
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)],
+    RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

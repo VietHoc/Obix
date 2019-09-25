@@ -58,3 +58,11 @@ main {
   }
 
 }
+
+.active-list-item {
+  background-color: #e5f6fe !important; /* Note: You could also use a custom theme */
+  .text {
+    color: #0795db;
+  }
+}
+
