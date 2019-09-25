@@ -66,10 +66,10 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  private updateAutomateDetails(newDetail: SensorData[]) {
+  private updateAutomateDetails(newSensorDetails: SensorData[]) {
     this.automateDetails.forEach(room => {
       room.sensorsData.forEach(sensorData => {
-        const termNewSensorData = newDetail.find(res => res.id === sensorData.id);
+        const termNewSensorData = newSensorDetails.find(newSensorDetail => newSensorDetail.id === sensorData.id);
         if (termNewSensorData != null && sensorData.value !== termNewSensorData.value) {
           sensorData.value = termNewSensorData.value;
           sensorData.isUpdate = true;
