@@ -71,18 +71,23 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   }
 
   private updateAutomateDetails(newSensorDetails: SensorData[]) {
+    // set sensor status update = false
     this.automateDetails.forEach(room => {
       room.sensorsData.forEach(sensorData => {
         const termNewSensorData = newSensorDetails.find(newSensorDetail => newSensorDetail.sensorId === sensorData.sensorId);
         if (termNewSensorData != null && sensorData.value !== termNewSensorData.value) {
           sensorData.value = termNewSensorData.value;
           sensorData.isUpdate = true;
+          setTimeout(() => {
+            sensorData.isUpdate = false;
+          }, TIME_CSS_UPDATE_SENSORS_VALUE);
         }
       });
     });
 
-    this.automateDetailsSensorData = [...this.automateDetails];
     this.filterSensorsByType(this.currentSensorTypeIds);
+
+    // set update = false after {{TIME_CSS_UPDATE_SENSORS_VALUE}}s
     setTimeout(() => {
       this.automateDetailsSensorData.map(room => {
         room.sensorsData.map(sensorData => {
