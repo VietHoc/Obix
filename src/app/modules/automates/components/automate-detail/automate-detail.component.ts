@@ -87,7 +87,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
 
     this.filterSensorsByType(this.currentSensorTypeIds);
 
-    // set update = false after {{TIME_CSS_UPDATE_SENSORS_VALUE}}s
+    // set update = false after {{TIME_CSS_UPDATE_SENSORS_VALUE}} seconds
     setTimeout(() => {
       this.automateDetailsFiltered.map(room => {
         room.sensorsData.map(sensorData => {
