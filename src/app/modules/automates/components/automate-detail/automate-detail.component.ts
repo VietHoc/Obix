@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AutomateDetail} from '../../../../shared/models/automate';
 import {interval, Subscription} from 'rxjs';
-import {TIME_CSS_UPDATE_SENSORS_VALUE, TIME_REQUEST_UPDATE_SENSORS_VALUE} from '../../../../constant/string';
+import {TIME_CSS_UPDATE_SENSORS_VALUE} from '../../../../constant/string';
 import {SensorDataService} from '../../../../core/http/sensor-data.service';
 import {SensorType} from '../../../../shared/models/sensor-type';
 import {SensorTypeService} from '../../../../core/http/sensor-type.service';
@@ -29,16 +29,11 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  secondsCounter = interval(TIME_REQUEST_UPDATE_SENSORS_VALUE * 1000);
-
   ngOnInit() {
     this.currentAutomateId = this.route.snapshot.params.automate_id;
     this.automateName = this.route.snapshot.queryParamMap.get('automateName');
     this.getSensorListOfAutomate(this.currentAutomateId);
-    this.intervalUpdateDataSensor = this.secondsCounter.subscribe(_ => {
-      const valueDate = moment().subtract(TIME_REQUEST_UPDATE_SENSORS_VALUE, 'seconds').format('DD/MM/YYYY HH:mm:ss');
-      this.updateSensorsValue(this.currentAutomateId, valueDate);
-    });
+    this.setupUpdateSensorData();
     this.getSensorTypes();
   }
 
@@ -52,14 +47,23 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  private setupUpdateSensorData() {
+    this.sensorDataHttp.getInterval().subscribe((res: number) => {
+      const secondsCounter = interval(res * 1000);
+      this.intervalUpdateDataSensor = secondsCounter.subscribe(_ => {
+      this.updateSensorsValue(this.currentAutomateId);
+    });
+    });
+  }
+
   private getSensorTypes() {
     this.sensorTypeHttp.getAllSensorType().subscribe(res => {
       this.sensorTypes = res;
     });
   }
 
-  private updateSensorsValue(automateId: number, valueDate: any) {
-    this.sensorDataHttp.updateDetailAutomate(automateId, valueDate).subscribe(res => {
+  private updateSensorsValue(automateId: number) {
+    this.sensorDataHttp.updateDetailAutomate(automateId).subscribe(res => {
       if (res !== null && res.length > 0) {
         this.updateAutomateDetails(res);
       }
@@ -69,7 +73,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   private updateAutomateDetails(newSensorDetails: SensorData[]) {
     this.automateDetails.forEach(room => {
       room.sensorsData.forEach(sensorData => {
-        const termNewSensorData = newSensorDetails.find(newSensorDetail => newSensorDetail.id === sensorData.id);
+        const termNewSensorData = newSensorDetails.find(newSensorDetail => newSensorDetail.sensorId === sensorData.sensorId);
         if (termNewSensorData != null && sensorData.value !== termNewSensorData.value) {
           sensorData.value = termNewSensorData.value;
           sensorData.isUpdate = true;

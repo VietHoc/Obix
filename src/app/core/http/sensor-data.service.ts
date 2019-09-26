@@ -10,13 +10,13 @@ import {SensorData} from '../../shared/models/sensor-data';
 })
 export class SensorDataService {
 
-  readonly uri = 'sensor-data/monitor';
+  readonly uri = 'sensor-data';
   constructor(
     private apiService: ApiService,
   ) {}
 
   detailAutomate(id: number): Observable<AutomateDetail[]> {
-    return this.apiService.getList<SensorData>(`${this.uri}?automateId=${id}`).pipe(
+    return this.apiService.getList<SensorData>(`${this.uri}/monitor?automateId=${id}`).pipe(
       map(
         res => {
           return this.transform(res, 'locationIdentifier');
@@ -25,8 +25,12 @@ export class SensorDataService {
     );
   }
 
-  updateDetailAutomate(id: number, valueDate: any): Observable<SensorData[]> {
-    return this.apiService.getList<SensorData>(`${this.uri}?automateId=${id}&valueDate=${valueDate}`);
+  getInterval() {
+    return this.apiService.get<number>(`${this.uri}/interval`);
+  }
+
+  updateDetailAutomate(id: number): Observable<SensorData[]> {
+    return this.apiService.getList<SensorData>(`${this.uri}/updated-monitor?automateId=${id}`);
   }
 
   private transform(collection: SensorData[], property: string): AutomateDetail[] {
