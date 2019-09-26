@@ -11,7 +11,7 @@
 </div>
 
 <ngx-masonry [options]="{ transitionDuration: 0 }">
-  <div ngxMasonryItem class="masonry-item"  *ngFor="let room of automateDetailsSensorData">
+  <div ngxMasonryItem class="masonry-item"  *ngFor="let room of automateDetailsFiltered">
      <app-table-automate-room [automateDetail]="room"></app-table-automate-room>
   </div>
 </ngx-masonry>

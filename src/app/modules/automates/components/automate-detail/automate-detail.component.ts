@@ -17,7 +17,7 @@ import {SensorData} from '../../../../shared/models/sensor-data';
 export class AutomateDetailComponent implements OnInit, OnDestroy {
   currentAutomateId: number;
   automateName: string;
-  automateDetails; automateDetailsSensorData: AutomateDetail[];
+  automateDetails; automateDetailsFiltered: AutomateDetail[];
   sensorTypes: SensorType[];
   currentSensorTypeIds = [];
   intervalUpdateDataSensor: Subscription;
@@ -43,7 +43,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
 
   private getSensorListOfAutomate(automateId: number) {
     this.sensorDataHttp.detailAutomate(automateId).subscribe(res => {
-      this.automateDetails = this.automateDetailsSensorData = res;
+      this.automateDetails = this.automateDetailsFiltered = res;
     });
   }
 
@@ -89,7 +89,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
 
     // set update = false after {{TIME_CSS_UPDATE_SENSORS_VALUE}}s
     setTimeout(() => {
-      this.automateDetailsSensorData.map(room => {
+      this.automateDetailsFiltered.map(room => {
         room.sensorsData.map(sensorData => {
           sensorData.isUpdate = false;
         });
@@ -99,15 +99,15 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
 
   filterSensorsByType(sensorTypeIds: number[]) {
     this.currentSensorTypeIds = sensorTypeIds;
-    let termAutomateDetail = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
-    termAutomateDetail.forEach(room => {
+    let automateDetailsCopied = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
+    automateDetailsCopied.forEach(room => {
        room.sensorsData = room.sensorsData.filter(sensorData =>  sensorTypeIds.indexOf(sensorData.sensortypeId) !== -1);
     });
-    termAutomateDetail = termAutomateDetail.filter(room => room.sensorsData.length > 0);
+    automateDetailsCopied = automateDetailsCopied.filter(room => room.sensorsData.length > 0);
 
-    this.automateDetailsSensorData = [...termAutomateDetail];
+    this.automateDetailsFiltered = [...automateDetailsCopied];
     if (sensorTypeIds.length === 0) {
-      this.automateDetailsSensorData = [...this.automateDetails];
+      this.automateDetailsFiltered = [...this.automateDetails];
     }
   }
 }
