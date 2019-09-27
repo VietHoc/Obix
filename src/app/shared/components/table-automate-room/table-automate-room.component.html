@@ -20,7 +20,7 @@
           <span *ngIf="element.sensortypeName == 'MOVEMENT'">
             <mat-icon *ngIf="element.value == 1" color="primary" class="toggle">people</mat-icon>
           </span>
-           <span *ngIf="element.sensortypeName != 'ONOFF' && element.sensortypeName != 'MOVEMENT' & element.sensortypeName != 'HVAC'">
+           <span *ngIf="element.sensortypeName != 'ONOFF' && element.sensortypeName != 'MOVEMENT' && element.sensortypeName != 'HVAC'">
             {{element.value}}
           </span>
         </td>
