@@ -4,18 +4,23 @@ import {SensorListComponent} from './pages/sensor-list.component';
 import {SensorDialogComponent} from './components/sensor-dialog/sensor-dialog.component';
 import {SensorsRoutingModule} from './sensors-routing.module';
 import {SharedModule} from '../../shared/shared.module';
-import {MatCardModule} from '@angular/material';
+import {MatCardModule, MatGridListModule} from '@angular/material';
+import { SensorChartComponent } from './components/sensor-chart/sensor-chart.component';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
     SensorListComponent,
-    SensorDialogComponent
+    SensorDialogComponent,
+    SensorChartComponent
   ],
   imports: [
     CommonModule,
     SensorsRoutingModule,
     SharedModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule,
+    NgxChartsModule
   ],
   entryComponents: [
     SensorDialogComponent
