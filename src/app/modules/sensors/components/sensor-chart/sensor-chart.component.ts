@@ -33,6 +33,25 @@ export class SensorChartComponent implements OnInit {
     domain: ['#5AA454']
   };
 
+  timeZoom = [
+    {
+      name: '1d',
+      value: 1
+    },
+     {
+      name: '7d',
+      value: 7
+    },
+     {
+      name: '1y',
+      value: 365
+    },
+     {
+      name: 'All',
+      value: 10000
+    }
+  ]
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -1119,5 +1138,15 @@ export class SensorChartComponent implements OnInit {
 
   formatPercent(val) {
     return moment(val).format('llll');
+  }
+
+  changeDateZoom(time) {
+    const end = moment();
+    const start = moment(end).subtract(time.value, 'days');
+    this.formDate.patchValue({
+      start,
+      end
+      });
+    this.dateZoomChange(null);
   }
 }
