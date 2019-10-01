@@ -4,8 +4,6 @@ import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/mat
 import {AutomateDialogComponent} from '../components/automate-dialog/automate-dialog.component';
 import {Automate} from '../../../shared/models/automate';
 import {remove, assign} from 'lodash-es';
-import {ConfirmationDialog} from '../../../core/service/confirmation-dialog';
-import {DIALOG} from '../../../constant/string';
 import {STYLE} from '../../../constant/style';
 import {ActivatedRoute, Router} from '@angular/router';
 

@@ -7,6 +7,7 @@ import {assign} from 'lodash-es';
 import {BehaviorSubject, merge, of as observableOf} from 'rxjs';
 import {catchError, debounceTime, map, startWith, switchMap} from 'rxjs/operators';
 import {STYLE} from '../../../constant/style';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -29,7 +30,9 @@ export class SensorListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private sensorHttp: SensorService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
   }
 
@@ -93,6 +96,11 @@ export class SensorListComponent implements OnInit, AfterViewInit {
     this.sensorHttp.updateSensor(sensor).subscribe(res => {
       assign(this.sensors.find(item => item.id === sensor.id), res);
       this.setDataTable();
+    });
+  }
+
+  redirectToSensorChart(sensor: Sensor) {
+    this.router.navigate([`${sensor.id}/charts`], {relativeTo: this.route, queryParams: {sensorName: sensor.name}}).then(_ => {
     });
   }
 

@@ -1,0 +1,43 @@
+<h2>{{sensorName}} Charts</h2>
+
+<mat-grid-list cols="2" rowHeight="100px">
+  <mat-grid-tile>
+    <div class="timeZoom">
+      <span>Zoom: </span>
+      <button *ngFor="let time of timeZoom" (click)="changeDateZoom(time)"
+              class="mouse-hover timeZoom-btn">{{time.name}}</button>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="start-day">
+      <app-input-field type="date" placeholder="Start day" [control]="formDate.get('start')"
+                       (onChanged)="dateZoomChange($event)"></app-input-field>
+    </div>
+
+    <div>
+      <app-input-field type="date" placeholder="End day" [control]="formDate.get('end')"
+                       (onChanged)="dateZoomChange($event)"></app-input-field>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-container class="chart">
+  <ngx-charts-line-chart
+    [scheme]="colorScheme"
+    [legendTitle]="legendTitle"
+    [results]="multi"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [autoScale]="autoScale"
+    [xAxisTickFormatting]='formatPercent'
+    [xScaleMin]="xScaleMin"
+    [roundDomains]="roundDomains"
+  >
+  </ngx-charts-line-chart>
+</ng-container>

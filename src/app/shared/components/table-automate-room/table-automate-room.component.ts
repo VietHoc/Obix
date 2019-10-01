@@ -15,7 +15,9 @@ export class TableAutomateRoomComponent implements OnInit {
 
   @Input() automateDetail: AutomateDetail;
 
-  constructor() { }
+  constructor() {
+  }
+
   ngOnInit() {
     this.dataSource.data = this.automateDetail.sensorsData;
   }

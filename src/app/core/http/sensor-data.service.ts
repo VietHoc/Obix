@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {AutomateDetail} from '../../shared/models/automate';
 import {map} from 'rxjs/operators';
 import {SensorData} from '../../shared/models/sensor-data';
+import {ValueLineChart} from '../../shared/models/value-line-chart';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,9 @@ export class SensorDataService {
         }, {});
 
     return Object.keys(groupedCollection).map(key => ({ locationIdentifier: key, sensorsData: groupedCollection[key] as SensorData[]}));
+  }
+
+  getHistoryOfSensorByTime(sensorId: number, time): Observable<ValueLineChart[]> {
+    return this.apiService.get(`${this.uri}/histories/${sensorId}`, time);
   }
 }
