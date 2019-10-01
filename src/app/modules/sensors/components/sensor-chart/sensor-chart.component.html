@@ -21,23 +21,28 @@
   </mat-grid-tile>
 </mat-grid-list>
 
-<ng-container class="chart">
-  <ngx-charts-line-chart
-    [scheme]="colorScheme"
-    [legendTitle]="legendTitle"
-    [results]="multi"
-    [gradient]="gradient"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    [autoScale]="autoScale"
-    [xAxisTickFormatting]='formatPercent'
-    [xScaleMin]="xScaleMin"
-    [roundDomains]="roundDomains"
-  >
-  </ngx-charts-line-chart>
-</ng-container>
+<mat-grid-list cols="1" rowHeight="500px">
+  <mat-grid-tile>
+    <ng-container class="chart">
+      <ngx-charts-line-chart
+        [scheme]="colorScheme"
+        [legendTitle]="legendTitle"
+        [results]="multi"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale"
+        [xAxisTickFormatting]='formatXAxis'
+        [roundDomains]="roundDomains"
+        [trimYAxisTicks]="true"
+        [maxXAxisTickLength]="50"
+      >
+      </ngx-charts-line-chart>
+    </ng-container>
+  </mat-grid-tile>
+</mat-grid-list>
