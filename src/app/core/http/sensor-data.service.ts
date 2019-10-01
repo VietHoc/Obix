@@ -5,6 +5,7 @@ import {AutomateDetail} from '../../shared/models/automate';
 import {map} from 'rxjs/operators';
 import {SensorData} from '../../shared/models/sensor-data';
 import {ValueLineChart} from '../../shared/models/value-line-chart';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class SensorDataService {
   readonly uri = 'sensor-data';
   constructor(
     private apiService: ApiService,
+    private http: HttpClient
   ) {}
 
   detailAutomate(id: number): Observable<AutomateDetail[]> {
@@ -52,6 +54,13 @@ export class SensorDataService {
   }
 
   getHistoryOfSensorByTime(sensorId: number, time): Observable<ValueLineChart[]> {
-    return this.apiService.get(`${this.uri}/histories/${sensorId}`, time);
+    // return this.apiService.get(`${this.uri}/histories/${sensorId}`, time);
+    const FAKE_URL_FORMAT = 'assets/mocks/';
+    return this.http.get(FAKE_URL_FORMAT + 'temperature-history.json').pipe(
+      map(res => {
+          return res as ValueLineChart[];
+        }
+      )
+    );
   }
 }
