@@ -3,6 +3,17 @@ import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import * as moment from 'moment';
 import {SensorDataService} from '../../../../core/http/sensor-data.service';
+import * as Highcharts from 'highcharts';
+
+declare var require: any;
+const Boost = require('highcharts/modules/boost');
+const noData = require('highcharts/modules/no-data-to-display');
+const More = require('highcharts/highcharts-more');
+
+Boost(Highcharts);
+noData(Highcharts);
+More(Highcharts);
+noData(Highcharts);
 
 @Component({
   selector: 'app-sensor-chart',
@@ -14,25 +25,6 @@ export class SensorChartComponent implements OnInit {
   sensorName: string;
   formDate: FormGroup;
   isLoadingResults = true;
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = true;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Time';
-  showYAxisLabel = true;
-  yAxisLabel = 'Number';
-  multi: any[];
-  autoScale = true;
-  legendTitle = 'Sensor Name';
-  roundDomains = true;
-
-  colorScheme = {
-    domain: ['#5AA454']
-  };
-
   timeZoom = [
     {
       name: '1d',
@@ -52,6 +44,31 @@ export class SensorChartComponent implements OnInit {
     }
   ];
 
+  public options: any = {
+    chart: {
+      zoomType: 'x'
+    },
+    title: {
+      text: 'History data chart'
+    },
+    // subtitle: {
+    //   text: 'Using the Boost module'
+    // },
+    tooltip: {
+      valueDecimals: 2
+    },
+    xAxis: {
+      type: 'datetime'
+    },
+    series: [
+      {
+        name: '',
+        turboThreshold: 0.5,
+        data: []
+      },
+    ]
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -61,7 +78,7 @@ export class SensorChartComponent implements OnInit {
 
   ngOnInit() {
     this.currentSensorId = this.route.snapshot.params.sensor_id;
-    this.sensorName = this.route.snapshot.queryParamMap.get('sensorName');
+    this.sensorName = this.options.series[0].name = this.route.snapshot.queryParamMap.get('sensorName');
     this.buildForm();
     // get timeZoom All
     this.changeDateZoom(this.timeZoom[this.timeZoom.length - 1]);
@@ -82,15 +99,18 @@ export class SensorChartComponent implements OnInit {
 
   private getHistoryOfSensorByTime(sensorId: number, time) {
     this.isLoadingResults = true;
-    this.sensorDataHttp.getHistoryOfSensorByTime(sensorId, time).subscribe(res => {
-      const data = [
-        {
-          name: this.sensorName,
-          series: res
-        }
-      ];
-      this.multi = [...data];
+    this.sensorDataHttp.getHistoryOfSensorByTime(sensorId, time).subscribe(data => {
+      const updatedNormalData = [];
+      data.forEach(res => {
+        const term = [
+          new Date(res.name).getTime(),
+          res.value
+        ];
+        updatedNormalData.push(term);
+      });
+      this.options.series[0].data = updatedNormalData;
       this.isLoadingResults = false;
+      Highcharts.chart('container', this.options);
     });
   }
 
