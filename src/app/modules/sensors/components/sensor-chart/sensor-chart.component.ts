@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import * as moment from 'moment';
+import {FormBuilder} from '@angular/forms';
 import {SensorDataService} from '../../../../core/http/sensor-data.service';
+import {StockChart} from 'angular-highcharts';
 
 @Component({
   selector: 'app-sensor-chart',
@@ -11,46 +11,9 @@ import {SensorDataService} from '../../../../core/http/sensor-data.service';
 })
 export class SensorChartComponent implements OnInit {
   currentSensorId: number;
-  sensorName: string;
-  formDate: FormGroup;
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = true;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Time';
-  showYAxisLabel = true;
-  yAxisLabel = 'Number';
-  multi: any[];
-  autoScale = true;
-  legendTitle = 'Sensor Name';
-  xScaleMin = 50;
-  roundDomains = true;
-
-  colorScheme = {
-    domain: ['#5AA454']
-  };
-
-  timeZoom = [
-    {
-      name: '1d',
-      value: 1
-    },
-     {
-      name: '7d',
-      value: 7
-    },
-     {
-      name: '1y',
-      value: 365
-    },
-     {
-      name: 'All',
-      value: 10000
-    }
-  ]
+  sensorName; sensorTypeName: string;
+  isLoadingResults = true;
+  stockChart: StockChart;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,46 +25,92 @@ export class SensorChartComponent implements OnInit {
   ngOnInit() {
     this.currentSensorId = this.route.snapshot.params.sensor_id;
     this.sensorName = this.route.snapshot.queryParamMap.get('sensorName');
-    this.buildForm();
-    this.dateZoomChange(null);
+    this.sensorTypeName = this.route.snapshot.queryParamMap.get('sensorTypeName');
+    this.getHistoryOfSensorByTime(this.currentSensorId);
   }
 
-  buildForm() {
-    this.formDate = this.formBuilder.group({
-      start: [''],
-      end: ['']
-    });
-  }
-
-  dateZoomChange($event) {
-    this.formDate.value.start = this.formDate.value.start !== '' ? this.formDate.value.start.format('DD/MM/YYYY HH:mm:ss') : '';
-    this.formDate.value.end = this.formDate.value.end !== '' ? this.formDate.value.end.format('DD/MM/YYYY HH:mm:ss') : '';
-    this.getHistoryOfSensorByTime(this.currentSensorId, this.formDate.value);
-  }
-
-  private getHistoryOfSensorByTime(sensorId: number, time) {
-    this.sensorDataHttp.getHistoryOfSensorByTime(sensorId, time).subscribe(res => {
-      const data = [
-        {
-          name: this.sensorName,
-          series: res
-        }
-      ];
-      this.multi = [...data];
-    });
-  }
-
-  formatPercent(val) {
-    return moment(val).format('llll');
-  }
-
-  changeDateZoom(time) {
-    const end = moment();
-    const start = moment(end).subtract(time.value, 'days');
-    this.formDate.patchValue({
-      start,
-      end
+  private getHistoryOfSensorByTime(sensorId: number) {
+    this.isLoadingResults = true;
+    this.sensorDataHttp.getHistoryOfSensorByTime(sensorId).subscribe(data => {
+      const fomartSensorHistoryData = [];
+      data.forEach(res => {
+        fomartSensorHistoryData.push([
+          new Date(res.name).getTime(),
+          res.value
+        ]);
       });
-    this.dateZoomChange(null);
+      let seriesName = '';
+      let seriesValueSuffix = '';
+      switch (this.sensorTypeName) {
+        case 'TEMPERATURE':
+          seriesName = 'Temperature',
+          seriesValueSuffix = '°C'
+          break;
+        case 'CO2':
+          seriesName = 'CO2',
+          seriesValueSuffix = 'ppm'
+          break;
+        case 'HUMIDITY':
+          seriesName = 'Humidity',
+          seriesValueSuffix = 'gm Water/gm ol Dry Air'
+          break;
+        default:
+          seriesName = 'Value',
+          seriesValueSuffix = ''
+          break;
+      }
+      this.stockChart = new StockChart({
+        chart: {
+          height: 600,
+          zoomType: 'x',
+          type: 'scatter',
+        },
+
+        rangeSelector: {
+          buttons: [{
+            type: 'day',
+            count: 3,
+            text: '3d'
+          }, {
+            type: 'week',
+            count: 1,
+            text: '1w'
+          }, {
+            type: 'month',
+            count: 1,
+            text: '1m'
+          }, {
+            type: 'month',
+            count: 3,
+            text: '3m'
+          }, {
+            type: 'year',
+            count: 1,
+            text: '1y'
+          }, {
+            type: 'all',
+            text: 'All'
+          }],
+          selected: 1
+        },
+
+        title: {
+          text: `Line chart of sensor ${this.sensorName}`
+        },
+
+        series: [
+          {
+            name: seriesName,
+            data: fomartSensorHistoryData,
+            type: 'spline',
+            tooltip: {
+              valueDecimals: 2,
+              valueSuffix: seriesValueSuffix
+            }
+          }
+        ]
+      });
+      this.isLoadingResults = false;
+    });
   }
 }

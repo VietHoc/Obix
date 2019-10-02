@@ -100,7 +100,7 @@ export class SensorListComponent implements OnInit, AfterViewInit {
   }
 
   redirectToSensorChart(sensor: Sensor) {
-    this.router.navigate([`${sensor.id}/charts`], {relativeTo: this.route, queryParams: {sensorName: sensor.name}}).then(_ => {
+    this.router.navigate([`${sensor.id}/charts`], {relativeTo: this.route, queryParams: {sensorName: sensor.name, sensorTypeName: sensor.sensorTypeName}}).then(_ => {
     });
   }
 

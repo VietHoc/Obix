@@ -6,7 +6,10 @@ import {SensorsRoutingModule} from './sensors-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import {MatCardModule, MatGridListModule} from '@angular/material';
 import { SensorChartComponent } from './components/sensor-chart/sensor-chart.component';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import more from 'highcharts/highcharts-more.src';
+import exporting from 'highcharts/modules/exporting.src';
+import stock from 'highcharts/modules/stock.src';
 
 @NgModule({
   declarations: [
@@ -20,11 +23,12 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
     SharedModule,
     MatCardModule,
     MatGridListModule,
-    NgxChartsModule
+    ChartModule
   ],
   entryComponents: [
     SensorDialogComponent
   ],
+  providers: [{ provide: HIGHCHARTS_MODULES, useFactory: () => [stock, more, exporting] }],
 })
 export class SensorsModule {
 }

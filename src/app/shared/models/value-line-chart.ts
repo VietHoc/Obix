@@ -1,4 +1,4 @@
 export class ValueLineChart {
   name: string;
-  value: number;
+  value: Date;
 }
