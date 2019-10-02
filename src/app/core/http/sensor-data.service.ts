@@ -53,7 +53,7 @@ export class SensorDataService {
     return Object.keys(groupedCollection).map(key => ({ locationIdentifier: key, sensorsData: groupedCollection[key] as SensorData[]}));
   }
 
-  getHistoryOfSensorByTime(sensorId: number, time): Observable<ValueLineChart[]> {
+  getHistoryOfSensorByTime(sensorId: number): Observable<ValueLineChart[]> {
     // return this.apiService.get(`${this.uri}/histories?sensorId=${sensorId}`, time);
     const FAKE_URL_FORMAT = 'assets/mocks/';
     return this.http.get(FAKE_URL_FORMAT + 'temperature-history.json').pipe(

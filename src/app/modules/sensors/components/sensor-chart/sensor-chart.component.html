@@ -1,27 +1,6 @@
 <h2>{{sensorName}} Chart </h2>
 
-<mat-grid-list cols="2" rowHeight="100px">
-  <mat-grid-tile>
-    <div class="timeZoom">
-      <span>Zoom: </span>
-      <button *ngFor="let time of timeZoom" (click)="changeDateZoom(time)"
-              class="mouse-hover timeZoom-btn">{{time.name}}</button>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <div class="start-day">
-      <app-input-field type="date" placeholder="Start day" [control]="formDate.get('start')"
-                       (onChanged)="dateZoomChange($event)"></app-input-field>
-    </div>
-
-    <div>
-      <app-input-field type="date" placeholder="End day" [control]="formDate.get('end')"
-                       (onChanged)="dateZoomChange($event)"></app-input-field>
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
-
-<div id="container" style="width:100%;">
+<div [chart]="stockChart">
   <div class="loading-shade">
     <mat-spinner *ngIf="isLoadingResults"
                  [diameter]="40">

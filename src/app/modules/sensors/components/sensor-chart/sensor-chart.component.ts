@@ -1,19 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import * as moment from 'moment';
+import {FormBuilder} from '@angular/forms';
 import {SensorDataService} from '../../../../core/http/sensor-data.service';
-import * as Highcharts from 'highcharts';
-
-declare var require: any;
-const Boost = require('highcharts/modules/boost');
-const noData = require('highcharts/modules/no-data-to-display');
-const More = require('highcharts/highcharts-more');
-
-Boost(Highcharts);
-noData(Highcharts);
-More(Highcharts);
-noData(Highcharts);
+import {StockChart} from 'angular-highcharts';
 
 @Component({
   selector: 'app-sensor-chart',
@@ -22,52 +11,9 @@ noData(Highcharts);
 })
 export class SensorChartComponent implements OnInit {
   currentSensorId: number;
-  sensorName: string;
-  formDate: FormGroup;
+  sensorName; sensorTypeName: string;
   isLoadingResults = true;
-  timeZoom = [
-    {
-      name: '1d',
-      value: 1
-    },
-    {
-      name: '7d',
-      value: 7
-    },
-    {
-      name: '1y',
-      value: 365
-    },
-    {
-      name: 'All',
-      value: 10000
-    }
-  ];
-
-  public options: any = {
-    chart: {
-      zoomType: 'x'
-    },
-    title: {
-      text: 'History data chart'
-    },
-    // subtitle: {
-    //   text: 'Using the Boost module'
-    // },
-    tooltip: {
-      valueDecimals: 2
-    },
-    xAxis: {
-      type: 'datetime'
-    },
-    series: [
-      {
-        name: '',
-        lineWidth: 0.5,
-        data: []
-      },
-    ]
-  };
+  stockChart: StockChart;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -78,28 +24,14 @@ export class SensorChartComponent implements OnInit {
 
   ngOnInit() {
     this.currentSensorId = this.route.snapshot.params.sensor_id;
-    this.sensorName = this.options.series[0].name = this.route.snapshot.queryParamMap.get('sensorName');
-    this.buildForm();
-    // get timeZoom All
-    this.changeDateZoom(this.timeZoom[this.timeZoom.length - 1]);
+    this.sensorName = this.route.snapshot.queryParamMap.get('sensorName');
+    this.sensorTypeName = this.route.snapshot.queryParamMap.get('sensorTypeName');
+    this.getHistoryOfSensorByTime(this.currentSensorId);
   }
 
-  buildForm() {
-    this.formDate = this.formBuilder.group({
-      start: [''],
-      end: ['']
-    });
-  }
-
-  dateZoomChange($event) {
-    this.formDate.value.start = this.formDate.value.start !== '' ? this.formDate.value.start.format('DD/MM/YYYY HH:mm:ss') : '';
-    this.formDate.value.end = this.formDate.value.end !== '' ? this.formDate.value.end.format('DD/MM/YYYY HH:mm:ss') : '';
-    this.getHistoryOfSensorByTime(this.currentSensorId, this.formDate.value);
-  }
-
-  private getHistoryOfSensorByTime(sensorId: number, time) {
+  private getHistoryOfSensorByTime(sensorId: number) {
     this.isLoadingResults = true;
-    this.sensorDataHttp.getHistoryOfSensorByTime(sensorId, time).subscribe(data => {
+    this.sensorDataHttp.getHistoryOfSensorByTime(sensorId).subscribe(data => {
       const fomartSensorHistoryData = [];
       data.forEach(res => {
         fomartSensorHistoryData.push([
@@ -107,23 +39,78 @@ export class SensorChartComponent implements OnInit {
           res.value
         ]);
       });
-      this.options.series[0].data = fomartSensorHistoryData;
+      let seriesName = '';
+      let seriesValueSuffix = '';
+      switch (this.sensorTypeName) {
+        case 'TEMPERATURE':
+          seriesName = 'Temperature',
+          seriesValueSuffix = '°C'
+          break;
+        case 'CO2':
+          seriesName = 'CO2',
+          seriesValueSuffix = 'ppm'
+          break;
+        case 'HUMIDITY':
+          seriesName = 'Humidity',
+          seriesValueSuffix = 'gm Water/gm ol Dry Air'
+          break;
+        default:
+          seriesName = 'Value',
+          seriesValueSuffix = ''
+          break;
+      }
+      this.stockChart = new StockChart({
+        chart: {
+          height: 600,
+          zoomType: 'x',
+          type: 'scatter',
+        },
+
+        rangeSelector: {
+          buttons: [{
+            type: 'day',
+            count: 3,
+            text: '3d'
+          }, {
+            type: 'week',
+            count: 1,
+            text: '1w'
+          }, {
+            type: 'month',
+            count: 1,
+            text: '1m'
+          }, {
+            type: 'month',
+            count: 3,
+            text: '3m'
+          }, {
+            type: 'year',
+            count: 1,
+            text: '1y'
+          }, {
+            type: 'all',
+            text: 'All'
+          }],
+          selected: 1
+        },
+
+        title: {
+          text: `Line chart of sensor ${this.sensorName}`
+        },
+
+        series: [
+          {
+            name: seriesName,
+            data: fomartSensorHistoryData,
+            type: 'spline',
+            tooltip: {
+              valueDecimals: 2,
+              valueSuffix: seriesValueSuffix
+            }
+          }
+        ]
+      });
       this.isLoadingResults = false;
-      Highcharts.chart('container', this.options);
     });
-  }
-
-  formatXAxis(val) {
-    return moment(val).format('llll');
-  }
-
-  changeDateZoom(time) {
-    const end = moment();
-    const start = moment(end).subtract(time.value, 'days');
-    this.formDate.patchValue({
-      start,
-      end
-    });
-    this.dateZoomChange(null);
   }
 }
