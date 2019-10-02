@@ -54,13 +54,13 @@ export class SensorDataService {
   }
 
   getHistoryOfSensorByTime(sensorId: number, time): Observable<ValueLineChart[]> {
-    return this.apiService.get(`${this.uri}/histories?sensorId=${sensorId}`, time);
-    // const FAKE_URL_FORMAT = 'assets/mocks/';
-    // return this.http.get(FAKE_URL_FORMAT + 'temperature-history.json').pipe(
-    //   map(res => {
-    //       return res as ValueLineChart[];
-    //     }
-    //   )
-    // );
+    // return this.apiService.get(`${this.uri}/histories?sensorId=${sensorId}`, time);
+    const FAKE_URL_FORMAT = 'assets/mocks/';
+    return this.http.get(FAKE_URL_FORMAT + 'temperature-history.json').pipe(
+      map(res => {
+          return res as ValueLineChart[];
+        }
+      )
+    );
   }
 }

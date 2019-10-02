@@ -63,7 +63,7 @@ export class SensorChartComponent implements OnInit {
     series: [
       {
         name: '',
-        turboThreshold: 0.5,
+        lineWidth: 0.5,
         data: []
       },
     ]

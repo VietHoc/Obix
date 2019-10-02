@@ -21,4 +21,8 @@
   </mat-grid-tile>
 </mat-grid-list>
 
+<div class="loading-shade">
+  <mat-spinner *ngIf="isLoadingResults"
+               [diameter]="40"></mat-spinner>
+</div>
 <div id="container" style="width:100%;"></div>
