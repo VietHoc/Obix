@@ -101,7 +101,7 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     this.currentSensorTypeIds = sensorTypeIds;
     let automateDetailsCopied = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
     automateDetailsCopied.forEach(room => {
-       room.sensorsData = room.sensorsData.filter(sensorData =>  sensorTypeIds.indexOf(sensorData.sensortypeId) !== -1);
+       room.sensorsData = room.sensorsData.filter(sensorData =>  sensorTypeIds.indexOf(sensorData.sensorTypeId) !== -1);
     });
     automateDetailsCopied = automateDetailsCopied.filter(room => room.sensorsData.length > 0);
 
