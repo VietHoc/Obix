@@ -21,8 +21,10 @@
   </mat-grid-tile>
 </mat-grid-list>
 
-<div class="loading-shade">
-  <mat-spinner *ngIf="isLoadingResults"
-               [diameter]="40"></mat-spinner>
+<div id="container" style="width:100%;">
+  <div class="loading-shade">
+    <mat-spinner *ngIf="isLoadingResults"
+                 [diameter]="40">
+    </mat-spinner>
+  </div>
 </div>
-<div id="container" style="width:100%;"></div>

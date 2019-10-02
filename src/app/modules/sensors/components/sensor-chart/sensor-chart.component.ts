@@ -100,15 +100,14 @@ export class SensorChartComponent implements OnInit {
   private getHistoryOfSensorByTime(sensorId: number, time) {
     this.isLoadingResults = true;
     this.sensorDataHttp.getHistoryOfSensorByTime(sensorId, time).subscribe(data => {
-      const updatedNormalData = [];
+      const fomartSensorHistoryData = [];
       data.forEach(res => {
-        const term = [
+        fomartSensorHistoryData.push([
           new Date(res.name).getTime(),
           res.value
-        ];
-        updatedNormalData.push(term);
+        ]);
       });
-      this.options.series[0].data = updatedNormalData;
+      this.options.series[0].data = fomartSensorHistoryData;
       this.isLoadingResults = false;
       Highcharts.chart('container', this.options);
     });
