@@ -11,7 +11,8 @@ import {StockChart} from 'angular-highcharts';
 })
 export class SensorChartComponent implements OnInit {
   currentSensorId: number;
-  sensorName; sensorTypeName: string;
+  sensorName;
+  sensorTypeName: string;
   isLoadingResults = true;
   stockChart: StockChart;
 
@@ -44,19 +45,19 @@ export class SensorChartComponent implements OnInit {
       switch (this.sensorTypeName) {
         case 'TEMPERATURE':
           seriesName = 'Temperature',
-          seriesValueSuffix = '°C'
+            seriesValueSuffix = '°C';
           break;
         case 'CO2':
           seriesName = 'CO2',
-          seriesValueSuffix = 'ppm'
+            seriesValueSuffix = 'ppm';
           break;
         case 'HUMIDITY':
           seriesName = 'Humidity',
-          seriesValueSuffix = 'gm Water/gm ol Dry Air'
+            seriesValueSuffix = 'gm Water/gm ol Dry Air';
           break;
         default:
           seriesName = 'Value',
-          seriesValueSuffix = ''
+            seriesValueSuffix = '';
           break;
       }
       this.stockChart = new StockChart({
@@ -96,6 +97,10 @@ export class SensorChartComponent implements OnInit {
 
         title: {
           text: `Line chart of sensor ${this.sensorName}`
+        },
+
+        credits: {
+          enabled: false
         },
 
         series: [
