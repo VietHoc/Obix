@@ -17,7 +17,6 @@ export class SensorChartComponent implements OnInit {
   stockChart: StockChart;
 
   constructor(
-    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private sensorDataHttp: SensorDataService,
   ) {
@@ -33,88 +32,90 @@ export class SensorChartComponent implements OnInit {
   private getHistoryOfSensorByTime(sensorId: number) {
     this.isLoadingResults = true;
     this.sensorDataHttp.getHistoryOfSensorByTime(sensorId).subscribe(data => {
-      const fomartSensorHistoryData = [];
-      data.forEach(res => {
-        fomartSensorHistoryData.push([
-          new Date(res.name).getTime(),
-          res.value
-        ]);
-      });
-      let seriesName = '';
-      let seriesValueSuffix = '';
-      switch (this.sensorTypeName) {
-        case 'TEMPERATURE':
-          seriesName = 'Temperature',
-            seriesValueSuffix = '°C';
-          break;
-        case 'CO2':
-          seriesName = 'CO2',
-            seriesValueSuffix = 'ppm';
-          break;
-        case 'HUMIDITY':
-          seriesName = 'Humidity',
-            seriesValueSuffix = 'gm Water/gm ol Dry Air';
-          break;
-        default:
-          seriesName = 'Value',
-            seriesValueSuffix = '';
-          break;
-      }
-      this.stockChart = new StockChart({
-        chart: {
-          height: 600,
-          zoomType: 'x',
-          type: 'scatter',
-        },
-
-        rangeSelector: {
-          buttons: [{
-            type: 'day',
-            count: 3,
-            text: '3d'
-          }, {
-            type: 'week',
-            count: 1,
-            text: '1w'
-          }, {
-            type: 'month',
-            count: 1,
-            text: '1m'
-          }, {
-            type: 'month',
-            count: 3,
-            text: '3m'
-          }, {
-            type: 'year',
-            count: 1,
-            text: '1y'
-          }, {
-            type: 'all',
-            text: 'All'
-          }],
-          selected: 1
-        },
-
-        title: {
-          text: `Line chart of sensor ${this.sensorName}`
-        },
-
-        credits: {
-          enabled: false
-        },
-
-        series: [
-          {
-            name: seriesName,
-            data: fomartSensorHistoryData,
-            type: 'spline',
-            tooltip: {
-              valueDecimals: 2,
-              valueSuffix: seriesValueSuffix
+      if (data.length > 0) {
+        const fomartSensorHistoryData = [];
+        data.forEach(res => {
+          fomartSensorHistoryData.push([
+            new Date(res.name).getTime(),
+            res.value
+          ]);
+        });
+        let seriesName = '';
+        let seriesValueSuffix = '';
+        switch (this.sensorTypeName) {
+          case 'TEMPERATURE':
+            seriesName = 'Temperature',
+              seriesValueSuffix = '°C';
+            break;
+          case 'CO2':
+            seriesName = 'CO2',
+              seriesValueSuffix = 'ppm';
+            break;
+          case 'HUMIDITY':
+            seriesName = 'Humidity',
+              seriesValueSuffix = 'gm Water/gm ol Dry Air';
+            break;
+          default:
+            seriesName = 'Value',
+              seriesValueSuffix = '';
+            break;
+        }
+        this.stockChart = new StockChart({
+          chart: {
+            height: 600,
+            zoomType: 'x',
+            type: 'scatter',
+          },
+  
+          rangeSelector: {
+            buttons: [{
+              type: 'day',
+              count: 3,
+              text: '3d'
+            }, {
+              type: 'week',
+              count: 1,
+              text: '1w'
+            }, {
+              type: 'month',
+              count: 1,
+              text: '1m'
+            }, {
+              type: 'month',
+              count: 3,
+              text: '3m'
+            }, {
+              type: 'year',
+              count: 1,
+              text: '1y'
+            }, {
+              type: 'all',
+              text: 'All'
+            }],
+            selected: 6
+          },
+  
+          title: {
+            text: `Line chart of sensor ${this.sensorName}`
+          },
+  
+          credits: {
+            enabled: false
+          },
+  
+          series: [
+            {
+              name: seriesName,
+              data: fomartSensorHistoryData,
+              type: 'spline',
+              tooltip: {
+                valueDecimals: 2,
+                valueSuffix: seriesValueSuffix
+              }
             }
-          }
-        ]
-      });
+          ]
+        });
+      }
       this.isLoadingResults = false;
     });
   }
