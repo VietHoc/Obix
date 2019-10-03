@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {FormBuilder} from '@angular/forms';
-import {SensorDataService} from '../../../../core/http/sensor-data.service';
-import {StockChart} from 'angular-highcharts';
+import { ValueLineChart } from './../../../../shared/models/value-line-chart';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
+import { SensorDataService } from '../../../../core/http/sensor-data.service';
+import { StockChart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-sensor-chart',
@@ -32,91 +33,107 @@ export class SensorChartComponent implements OnInit {
   private getHistoryOfSensorByTime(sensorId: number) {
     this.isLoadingResults = true;
     this.sensorDataHttp.getHistoryOfSensorByTime(sensorId).subscribe(data => {
-      if (data.length > 0) {
-        const fomartSensorHistoryData = [];
-        data.forEach(res => {
-          fomartSensorHistoryData.push([
-            new Date(res.name).getTime(),
-            res.value
-          ]);
-        });
-        let seriesName = '';
-        let seriesValueSuffix = '';
-        switch (this.sensorTypeName) {
-          case 'TEMPERATURE':
-            seriesName = 'Temperature',
-              seriesValueSuffix = '°C';
-            break;
-          case 'CO2':
-            seriesName = 'CO2',
-              seriesValueSuffix = 'ppm';
-            break;
-          case 'HUMIDITY':
-            seriesName = 'Humidity',
-              seriesValueSuffix = 'gm Water/gm ol Dry Air';
-            break;
-          default:
-            seriesName = 'Value',
-              seriesValueSuffix = '';
-            break;
-        }
-        this.stockChart = new StockChart({
-          chart: {
-            height: 600,
-            zoomType: 'x',
-            type: 'scatter',
-          },
-  
-          rangeSelector: {
-            buttons: [{
-              type: 'day',
-              count: 3,
-              text: '3d'
-            }, {
-              type: 'week',
-              count: 1,
-              text: '1w'
-            }, {
-              type: 'month',
-              count: 1,
-              text: '1m'
-            }, {
-              type: 'month',
-              count: 3,
-              text: '3m'
-            }, {
-              type: 'year',
-              count: 1,
-              text: '1y'
-            }, {
-              type: 'all',
-              text: 'All'
-            }],
-            selected: 6
-          },
-  
-          title: {
-            text: `Line chart of sensor ${this.sensorName}`
-          },
-  
-          credits: {
-            enabled: false
-          },
-  
-          series: [
-            {
-              name: seriesName,
-              data: fomartSensorHistoryData,
-              type: 'spline',
-              tooltip: {
-                valueDecimals: 2,
-                valueSuffix: seriesValueSuffix
-              }
-            }
-          ]
-        });
-      }
       this.isLoadingResults = false;
+      if (data.length > 0) {
+        this.handleDataToRenderChart(data);
+      }
     });
   }
+
+  handleDataToRenderChart(data: ValueLineChart[]) {
+    const fomartSensorHistoryData = [];
+    data.forEach(res => {
+      fomartSensorHistoryData.push([
+        new Date(res.name).getTime(),
+        res.value
+      ]);
+    });
+    
+    this.renderDataToStockChart(fomartSensorHistoryData, this.setSeriesNameAndSeriesValueSuffix());
+  }
+
+  setSeriesNameAndSeriesValueSuffix() {
+    let seriesName = '';
+    let seriesValueSuffix = '';
+    switch (this.sensorTypeName) {
+      case 'TEMPERATURE':
+        seriesName = 'Temperature',
+          seriesValueSuffix = '°C';
+        break;
+      case 'CO2':
+        seriesName = 'CO2',
+          seriesValueSuffix = 'ppm';
+        break;
+      case 'HUMIDITY':
+        seriesName = 'Humidity',
+          seriesValueSuffix = 'gm Water/gm ol Dry Air';
+        break;
+      default:
+        seriesName = 'Value',
+          seriesValueSuffix = '';
+        break;
+    }
+    return {
+      seriesName,
+      seriesValueSuffix
+    };
+  }
+  renderDataToStockChart(fomartSensorHistoryData, {seriesName, seriesValueSuffix}) {
+    this.stockChart = new StockChart({
+      chart: {
+        height: 600,
+        zoomType: 'x',
+        type: 'scatter',
+      },
+
+      rangeSelector: {
+        buttons: [{
+          type: 'day',
+          count: 3,
+          text: '3d'
+        }, {
+          type: 'week',
+          count: 1,
+          text: '1w'
+        }, {
+          type: 'month',
+          count: 1,
+          text: '1m'
+        }, {
+          type: 'month',
+          count: 3,
+          text: '3m'
+        }, {
+          type: 'year',
+          count: 1,
+          text: '1y'
+        }, {
+          type: 'all',
+          text: 'All'
+        }],
+        selected: 6
+      },
+
+      title: {
+        text: `Line chart of sensor ${this.sensorName}`
+      },
+
+      credits: {
+        enabled: false
+      },
+
+      series: [
+        {
+          name: seriesName,
+          data: fomartSensorHistoryData,
+          type: 'spline',
+          tooltip: {
+            valueDecimals: 2,
+            valueSuffix: seriesValueSuffix
+          }
+        }
+      ]
+    });
+  }
+
 }
