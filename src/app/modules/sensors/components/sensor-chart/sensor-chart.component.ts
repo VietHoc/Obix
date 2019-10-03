@@ -48,7 +48,7 @@ export class SensorChartComponent implements OnInit {
         res.value
       ]);
     });
-    
+
     this.renderDataToStockChart(fomartSensorHistoryData, this.setSeriesNameAndSeriesValueSuffix());
   }
 
@@ -78,7 +78,7 @@ export class SensorChartComponent implements OnInit {
       seriesValueSuffix
     };
   }
-  renderDataToStockChart(fomartSensorHistoryData, {seriesName, seriesValueSuffix}) {
+  renderDataToStockChart(fomartSensorHistoryData, { seriesName, seriesValueSuffix }) {
     this.stockChart = new StockChart({
       chart: {
         height: 600,
