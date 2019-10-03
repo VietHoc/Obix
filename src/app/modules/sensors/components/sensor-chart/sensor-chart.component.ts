@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 import {SensorDataService} from '../../../../core/http/sensor-data.service';
 import {StockChart} from 'angular-highcharts';
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'app-sensor-chart',
@@ -64,7 +65,18 @@ export class SensorChartComponent implements OnInit {
         chart: {
           height: 600,
           zoomType: 'x',
-          type: 'scatter',
+          type: 'candlestick',
+        },
+
+         navigator: {
+            adaptToUpdatedData: false,
+            series: {
+                data: fomartSensorHistoryData
+            }
+        },
+
+        scrollbar: {
+            liveRedraw: false
         },
 
         rangeSelector: {
@@ -92,7 +104,7 @@ export class SensorChartComponent implements OnInit {
             type: 'all',
             text: 'All'
           }],
-          selected: 1
+          selected: 6
         },
 
         title: {
@@ -103,6 +115,17 @@ export class SensorChartComponent implements OnInit {
           enabled: false
         },
 
+        xAxis: {
+            events: {
+                afterSetExtremes: this.afterSetExtremes
+            },
+            minRange: 3600 * 1000 // one hour
+        },
+
+        yAxis: {
+            floor: 0
+        },
+
         series: [
           {
             name: seriesName,
@@ -111,11 +134,20 @@ export class SensorChartComponent implements OnInit {
             tooltip: {
               valueDecimals: 2,
               valueSuffix: seriesValueSuffix
-            }
+            },
+            // dataGrouping: {
+            //     enabled: false
+            // }
           }
         ]
       });
       this.isLoadingResults = false;
     });
+  }
+
+  afterSetExtremes(e) {
+    const chart = Highcharts.charts[0];
+    chart.showLoading('Loading data from server...');
+    console.log(e);
   }
 }
