@@ -1,9 +1,5 @@
 <h2>{{sensorName}} Chart </h2>
 
-<div [chart]="stockChart">
-  <div class="loading-shade">
-    <mat-spinner *ngIf="isLoadingResults"
-                 [diameter]="40">
-    </mat-spinner>
-  </div>
-</div>
+<chart type="StockChart" [options]="options">
+  <xAxis (afterSetExtremes)="onAfterSetExtremesX($event)"></xAxis>
+</chart>

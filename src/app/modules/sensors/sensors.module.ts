@@ -6,10 +6,13 @@ import {SensorsRoutingModule} from './sensors-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import {MatCardModule, MatGridListModule} from '@angular/material';
 import { SensorChartComponent } from './components/sensor-chart/sensor-chart.component';
-import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
-import more from 'highcharts/highcharts-more.src';
-import exporting from 'highcharts/modules/exporting.src';
-import stock from 'highcharts/modules/stock.src';
+import {ChartModule} from 'angular2-highcharts';
+import {HighchartsStatic} from 'angular2-highcharts/dist/HighchartsService';
+
+declare var require: any;
+export function highchartsFactory() {
+  return require('highcharts/highstock');
+}
 
 @NgModule({
   declarations: [
@@ -23,12 +26,17 @@ import stock from 'highcharts/modules/stock.src';
     SharedModule,
     MatCardModule,
     MatGridListModule,
-    ChartModule
+    ChartModule,
+  ],
+  providers: [
+    {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    },
   ],
   entryComponents: [
-    SensorDialogComponent
-  ],
-  providers: [{ provide: HIGHCHARTS_MODULES, useFactory: () => [stock, more, exporting] }],
+    SensorDialogComponent,
+  ]
 })
 export class SensorsModule {
 }

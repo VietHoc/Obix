@@ -21,7 +21,6 @@ export const APP_DATE_FORMATS = {
   },
 };
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -35,7 +34,7 @@ export const APP_DATE_FORMATS = {
     CoreModule,
     SharedModule,
     NgxMasonryModule,
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
