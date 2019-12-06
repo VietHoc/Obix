@@ -1,7 +1,6 @@
 import { ValueLineChart } from './../../../../shared/models/value-line-chart';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
 import { SensorDataService } from '../../../../core/http/sensor-data.service';
 import { StockChart } from 'angular-highcharts';
 
@@ -44,7 +43,7 @@ export class SensorChartComponent implements OnInit {
     const fomartSensorHistoryData = [];
     data.forEach(res => {
       fomartSensorHistoryData.push([
-        new Date(res.name).getTime(),
+        new Date(res.valueDate).getTime(),
         res.value
       ]);
     });

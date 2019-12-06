@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./automate-list.component.scss']
 })
 export class AutomateListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'ip', 'uri', 'floor', 'active', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'ip', 'uri', 'floor', 'sensorsCount', 'active', 'action'];
   dataSource = new MatTableDataSource<Automate>();
   automates: Automate[];
 

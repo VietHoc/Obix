@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import {AutomateDetail} from '../../models/automate';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Sensor } from '../../models/sensor';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SensorData } from '../../models/sensor-data';
 
 @Component({
   selector: 'app-table-automate-room',
@@ -27,8 +27,9 @@ export class TableAutomateRoomComponent implements OnInit {
     this.dataSource.data = this.automateDetail.sensorsData;
   }
 
-  redirectToSensorChart(sensor: Sensor) {
-    this.router.navigate([`/sensors/${sensor.id}/charts`], {relativeTo: this.route, queryParams: {sensorName: sensor.name, sensorTypeName: sensor.sensorTypeName}}).then(_ => {
+  redirectToSensorChart(sensor: SensorData) {
+    // tslint:disable-next-line: max-line-length
+    this.router.navigate([`/sensors/${sensor.sensorId}/charts`], {relativeTo: this.route, queryParams: {sensorName: sensor.name, sensorTypeName: sensor.sensorTypeName}}).then(_ => {
     });
   }
 }
