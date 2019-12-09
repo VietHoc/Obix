@@ -9,6 +9,7 @@ import {MatCardModule, MatDatepickerModule} from '@angular/material';
 import {InputFieldComponent} from './components/input-field/input-field.component';
 import {ErrorLabelComponent} from './components/error-label/error-label.component';
 import {ErrorMessagesPipe} from './pipes/error-messages.pipe';
+import { ShowStringMaxLenPipe } from './pipes/show-string-max-len.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {ErrorMessagesPipe} from './pipes/error-messages.pipe';
     InputFieldComponent,
     ErrorLabelComponent,
     ErrorMessagesPipe,
+    ShowStringMaxLenPipe,
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import {ErrorMessagesPipe} from './pipes/error-messages.pipe';
     MaterialModule,
     ReactiveFormsModule,
     TableAutomateRoomComponent,
-    InputFieldComponent
+    InputFieldComponent,
+    ShowStringMaxLenPipe,
   ],
   entryComponents: [
     SnackBarComponent,

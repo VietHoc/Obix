@@ -15,6 +15,7 @@ export class SensorChartComponent implements OnInit {
   sensorTypeName: string;
   isLoadingResults = true;
   stockChart: StockChart;
+  formatSensorHistoryData = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -40,15 +41,14 @@ export class SensorChartComponent implements OnInit {
   }
 
   handleDataToRenderChart(data: ValueLineChart[]) {
-    const fomartSensorHistoryData = [];
     data.forEach(res => {
-      fomartSensorHistoryData.push([
+      this.formatSensorHistoryData.push([
         new Date(res.valueDate).getTime(),
         res.value
       ]);
     });
 
-    this.renderDataToStockChart(fomartSensorHistoryData, this.setSeriesNameAndSeriesValueSuffix());
+    this.renderDataToStockChart(this.formatSensorHistoryData, this.setSeriesNameAndSeriesValueSuffix());
   }
 
   setSeriesNameAndSeriesValueSuffix() {
