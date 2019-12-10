@@ -1,17 +1,22 @@
-<div>
-  <h3>List sensors of server: {{automateName}}</h3>
-  <mat-form-field class="sensor-type">
-    <mat-label>Sensor Type</mat-label>
-    <mat-select [(value)]="currentSensorTypeIds" (valueChange)="filterSensorsByType(currentSensorTypeIds)" multiple>
-      <mat-option *ngFor="let type of sensorTypes" [value]="type.id">
-        {{type.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
-<ngx-masonry [options]="{ transitionDuration: 0 }">
-  <div ngxMasonryItem class="masonry-item"  *ngFor="let room of automateDetailsFiltered">
-     <app-table-automate-room [automateDetail]="room"></app-table-automate-room>
+<div *ngIf="automateDetails.length > 0">
+  <div>
+    <h3>List sensors of server: {{automateName}}</h3>
+    <mat-form-field class="sensor-type">
+      <mat-label>Sensor Type</mat-label>
+      <mat-select [(value)]="currentSensorTypeIds" (valueChange)="filterSensorsByType(currentSensorTypeIds)" multiple>
+        <mat-option *ngFor="let type of sensorTypes" [value]="type.id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-</ngx-masonry>
+
+  <ngx-masonry [options]="{ transitionDuration: 0 }">
+    <div ngxMasonryItem class="masonry-item" *ngFor="let room of automateDetailsFiltered">
+      <app-table-automate-room [automateDetail]="room"></app-table-automate-room>
+    </div>
+  </ngx-masonry>
+</div>
+<div *ngIf="automateDetails.length == 0">
+  <h3>No data sensors.</h3>
+</div>
