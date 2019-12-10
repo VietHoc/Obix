@@ -10,6 +10,7 @@ import {InputFieldComponent} from './components/input-field/input-field.componen
 import {ErrorLabelComponent} from './components/error-label/error-label.component';
 import {ErrorMessagesPipe} from './pipes/error-messages.pipe';
 import { ShowStringMaxLenPipe } from './pipes/show-string-max-len.pipe';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ShowStringMaxLenPipe } from './pipes/show-string-max-len.pipe';
     ErrorLabelComponent,
     ErrorMessagesPipe,
     ShowStringMaxLenPipe,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { ShowStringMaxLenPipe } from './pipes/show-string-max-len.pipe';
     TableAutomateRoomComponent,
     InputFieldComponent,
     ShowStringMaxLenPipe,
+    LoadingComponent
   ],
   entryComponents: [
     SnackBarComponent,

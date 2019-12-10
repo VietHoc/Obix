@@ -13,7 +13,7 @@ export class SensorChartComponent implements OnInit {
   currentSensorId: number;
   sensorName;
   sensorTypeName: string;
-  isLoadingResults = true;
+  isLoadingResults = false;
   stockChart: StockChart;
   formatSensorHistoryData = [];
 
