@@ -1,3 +1,7 @@
 .detail {
   color: blue;
 }
+
+::ng-deep text.highcharts-credits {
+  display: none !important;
+}

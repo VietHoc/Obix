@@ -1,11 +1,11 @@
 export class SensorData {
   id: number;
   sensorId: number;
-  sensortypeId: number;
-  sensortypeName: string;
-  sensortypeType: string;
+  sensorTypeId: number;
+  sensorTypeName: string;
+  sensorTypeType: string;
   name: string;
-  value: string;
+  value: number;
   locationName: string;
   locationIdentifier: string;
   isUpdate = false;

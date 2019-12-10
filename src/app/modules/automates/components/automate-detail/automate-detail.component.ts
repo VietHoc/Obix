@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AutomateDetail} from '../../../../shared/models/automate';
 import {interval, Subscription} from 'rxjs';
-import {TIME_CSS_UPDATE_SENSORS_VALUE, TIME_REQUEST_UPDATE_SENSORS_VALUE} from '../../../../constant/string';
+import {TIME_CSS_UPDATE_SENSORS_VALUE} from '../../../../constant/string';
 import {SensorDataService} from '../../../../core/http/sensor-data.service';
 import {SensorType} from '../../../../shared/models/sensor-type';
 import {SensorTypeService} from '../../../../core/http/sensor-type.service';
@@ -17,8 +17,7 @@ import {SensorData} from '../../../../shared/models/sensor-data';
 export class AutomateDetailComponent implements OnInit, OnDestroy {
   currentAutomateId: number;
   automateName: string;
-  automateDetails;
-  automateDetailsSensorData: AutomateDetail[];
+  automateDetails; automateDetailsFiltered: AutomateDetail[];
   sensorTypes: SensorType[];
   currentSensorTypeIds = [];
   intervalUpdateDataSensor: Subscription;
@@ -30,16 +29,11 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  secondsCounter = interval(TIME_REQUEST_UPDATE_SENSORS_VALUE * 1000);
-
   ngOnInit() {
     this.currentAutomateId = this.route.snapshot.params.automate_id;
     this.automateName = this.route.snapshot.queryParamMap.get('automateName');
     this.getSensorListOfAutomate(this.currentAutomateId);
-    this.intervalUpdateDataSensor = this.secondsCounter.subscribe(_ => {
-      const valueDate = moment().subtract(TIME_REQUEST_UPDATE_SENSORS_VALUE, 'seconds').format('DD/MM/YYYY HH:mm:ss');
-      this.updateSensorsValue(this.currentAutomateId, valueDate);
-    });
+    this.setupUpdateSensorData();
     this.getSensorTypes();
   }
 
@@ -49,8 +43,16 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
 
   private getSensorListOfAutomate(automateId: number) {
     this.sensorDataHttp.detailAutomate(automateId).subscribe(res => {
-      this.automateDetails = res;
-      this.automateDetailsSensorData = res;
+      this.automateDetails = this.automateDetailsFiltered = res;
+    });
+  }
+
+  private setupUpdateSensorData() {
+    this.sensorDataHttp.getInterval().subscribe((res: number) => {
+      const secondsCounter = interval(res * 1000);
+      this.intervalUpdateDataSensor = secondsCounter.subscribe(_ => {
+      this.updateSensorsValue(this.currentAutomateId);
+    });
     });
   }
 
@@ -60,28 +62,34 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  private updateSensorsValue(automateId: number, valueDate: any) {
-    this.sensorDataHttp.updateDetailAutomate(automateId, valueDate).subscribe(res => {
+  private updateSensorsValue(automateId: number) {
+    this.sensorDataHttp.updateDetailAutomate(automateId).subscribe(res => {
       if (res !== null && res.length > 0) {
         this.updateAutomateDetails(res);
       }
     });
   }
 
-  private updateAutomateDetails(newDetail: SensorData[]) {
-    this.automateDetails.map(room => {
-      room.sensorsData.map(sensorData => {
-        const termNewSensorData = newDetail.find(res => res.id === sensorData.id);
-        if (termNewSensorData != null) {
+  private updateAutomateDetails(newSensorDetails: SensorData[]) {
+    // set sensor status update = false
+    this.automateDetails.forEach(room => {
+      room.sensorsData.forEach(sensorData => {
+        const termNewSensorData = newSensorDetails.find(newSensorDetail => newSensorDetail.sensorId === sensorData.sensorId);
+        if (termNewSensorData != null && sensorData.value !== termNewSensorData.value) {
           sensorData.value = termNewSensorData.value;
           sensorData.isUpdate = true;
+          setTimeout(() => {
+            sensorData.isUpdate = false;
+          }, TIME_CSS_UPDATE_SENSORS_VALUE);
         }
       });
     });
-    this.automateDetailsSensorData = [...this.automateDetails];
+
     this.filterSensorsByType(this.currentSensorTypeIds);
+
+    // set update = false after {{TIME_CSS_UPDATE_SENSORS_VALUE}} seconds
     setTimeout(() => {
-      this.automateDetailsSensorData.map(room => {
+      this.automateDetailsFiltered.map(room => {
         room.sensorsData.map(sensorData => {
           sensorData.isUpdate = false;
         });
@@ -91,35 +99,15 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
 
   filterSensorsByType(sensorTypeIds: number[]) {
     this.currentSensorTypeIds = sensorTypeIds;
-    let termAutomateDetail = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
-    termAutomateDetail = termAutomateDetail.map(element => {
-      return Object.assign(element, {
-        sensorsData: element.sensorsData.filter(res =>  sensorTypeIds.indexOf(res.sensortypeId) !== -1)
-      });
+    let automateDetailsCopied = JSON.parse(JSON.stringify(this.automateDetails)) as AutomateDetail[];
+    automateDetailsCopied.forEach(room => {
+       room.sensorsData = room.sensorsData.filter(sensorData =>  sensorTypeIds.indexOf(sensorData.sensorTypeId) !== -1);
     });
+    automateDetailsCopied = automateDetailsCopied.filter(room => room.sensorsData.length > 0);
 
-    termAutomateDetail = termAutomateDetail.filter(room => {
-      return room.sensorsData.length > 0;
-    })
-
-    this.automateDetailsSensorData = termAutomateDetail;
+    this.automateDetailsFiltered = [...automateDetailsCopied];
     if (sensorTypeIds.length === 0) {
-      this.automateDetailsSensorData = this.automateDetails;
+      this.automateDetailsFiltered = [...this.automateDetails];
     }
-  }
-
-  getHeightMax(): string {
-    let maxLength = 0;
-    if (this.automateDetailsSensorData === undefined ) {
-      return '300px';
-    }
-    this.automateDetailsSensorData.forEach(room => {
-      if (room.sensorsData.length > maxLength) {
-        maxLength = room.sensorsData.length;
-      }
-    });
-    let maxHeight = 30 * maxLength + 50;
-    maxHeight = maxHeight > 300 ? 300 : maxHeight;
-    return `${maxHeight}px`;
   }
 }

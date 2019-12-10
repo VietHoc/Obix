@@ -27,7 +27,7 @@ export class SensorDialogComponent implements OnInit {
     this.formSensor = this.formBuilder.group({
       id: [this.sensor.id],
       automateId: [this.sensor.automateId],
-      sensortypeId: [this.sensor.sensortypeId],
+      sensorTypeId: [this.sensor.sensorTypeId],
       uri: [this.sensor.uri],
       name: [this.sensor.name],
       locationName: [this.sensor.locationName],

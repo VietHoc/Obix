@@ -3,9 +3,10 @@ import {Time} from '@angular/common';
 export class Sensor {
   id: number;
   automateId: string;
-  sensortypeId: string;
+  sensorTypeId: string;
   automateName: string;
   sensorTypeName: string;
+  sensorTypeType: string;
   uri: string;
   name: string;
   locationName: string;

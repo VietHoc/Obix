@@ -4,8 +4,6 @@ import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/mat
 import {AutomateDialogComponent} from '../components/automate-dialog/automate-dialog.component';
 import {Automate} from '../../../shared/models/automate';
 import {remove, assign} from 'lodash-es';
-import {ConfirmationDialog} from '../../../core/service/confirmation-dialog';
-import {DIALOG} from '../../../constant/string';
 import {STYLE} from '../../../constant/style';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -15,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./automate-list.component.scss']
 })
 export class AutomateListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'ip', 'uri', 'floor', 'active', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'ip', 'uri', 'floor', 'sensorsCount', 'active', 'action'];
   dataSource = new MatTableDataSource<Automate>();
   automates: Automate[];
 

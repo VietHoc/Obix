@@ -15,9 +15,7 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     private customSnackbarService: CustomSnackbarService
-  ) {
-
-  }
+  ) {}
 
   getList<T>(path: string, params: HttpParams = new HttpParams(), headers?: HttpHeaders): Observable<T[]> {
     return this.http

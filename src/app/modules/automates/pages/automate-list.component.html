@@ -33,13 +33,19 @@
       <!-- Uri Column -->
       <ng-container matColumnDef="uri">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Uri</th>
-        <td mat-cell *matCellDef="let element"> {{element.uri}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.uri | showStringMaxLen}}</td>
       </ng-container>
 
       <!-- Floor Column -->
       <ng-container matColumnDef="floor">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Floor</th>
         <td mat-cell *matCellDef="let element"> {{element.floor}} </td>
+      </ng-container>
+
+       <!-- sensorsCount Column -->
+      <ng-container matColumnDef="sensorsCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sensors</th>
+        <td mat-cell *matCellDef="let element"> {{element.sensorsCount}} </td>
       </ng-container>
 
       <!-- Active Column -->

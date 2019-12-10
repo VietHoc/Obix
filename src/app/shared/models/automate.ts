@@ -7,6 +7,7 @@ export class Automate {
   ip: string;
   uri: string;
   floor: number;
+  sensorsCount?: number;
   active: boolean;
   constructor(init?: Partial<Automate>) {
     Object.assign(this, init);
