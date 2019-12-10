@@ -17,7 +17,7 @@ import {SensorData} from '../../../../shared/models/sensor-data';
 export class AutomateDetailComponent implements OnInit, OnDestroy {
   currentAutomateId: number;
   automateName: string;
-  automateDetails; automateDetailsFiltered: AutomateDetail[];
+  automateDetails; automateDetailsFiltered: AutomateDetail[] = [];
   sensorTypes: SensorType[];
   currentSensorTypeIds = [];
   intervalUpdateDataSensor: Subscription;

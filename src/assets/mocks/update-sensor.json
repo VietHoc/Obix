@@ -1,0 +1,16 @@
+{
+    "id":7520.0,
+    "automateId":1.0,
+    "sensorTypeId":6.0,
+    "uri":"http://10.55.61.194/obix/config/Drivers/KnxNetwork/KNX/points/Ligne_1/BR$20401_Print$20service$20desk/CD_OnOff_CALA1/",
+    "name":"CD_OnOff_CALA1",
+    "locationName":"BR$20401_Print$20service$20desk",
+    "locationIdentifier":"BR$20401-0 Print$20service$20desk",
+    "status":1,
+    "isActive":true,
+    "creationDate":"2019-12-03T06:28:42.03",
+    "modificationDate":"2019-12-03T06:28:41.793",
+    "automateName":"TMCR900",
+    "sensorTypeName":"ONOFF",
+    "sensorTypeType":null
+ }

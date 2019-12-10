@@ -1,4 +1,4 @@
-<div *ngIf="automateDetails.length > 0">
+<div *ngIf="!!automateDetails">
   <div>
     <h3>List sensors of server: {{automateName}}</h3>
     <mat-form-field class="sensor-type">
@@ -17,6 +17,6 @@
     </div>
   </ngx-masonry>
 </div>
-<div *ngIf="automateDetails.length == 0">
+<div *ngIf="!automateDetails">
   <h3>No data sensors.</h3>
 </div>
