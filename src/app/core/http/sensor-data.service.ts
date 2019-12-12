@@ -53,7 +53,7 @@ export class SensorDataService {
     return Object.keys(groupedCollection).map(key => ({ locationIdentifier: key, sensorsData: groupedCollection[key] as SensorData[]}));
   }
 
-  getHistoryOfSensorByTime(sensorId: number, start, end): Observable<ValueLineChart[]> {
+  getHistoryOfSensorByTime(sensorId: number, start?, end?): Observable<ValueLineChart[]> {
     return this.apiService.get(`${this.uri}/histories?sensorId=${sensorId}&start=${start}&end=${end}`);
   }
 }
