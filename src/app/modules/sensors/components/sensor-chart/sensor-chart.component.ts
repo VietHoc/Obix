@@ -14,6 +14,8 @@ export class SensorChartComponent implements OnInit {
   sensorName;
   sensorTypeName: string;
   options: any;
+  formatSensorHistoryData = [];
+  isLoadingResults = false;
 
   constructor(
     private ngZone: NgZone,
@@ -63,16 +65,17 @@ export class SensorChartComponent implements OnInit {
 
   getHistoryOfSensorByTime(start, end) {
     console.log(moment(start).format('DD/MM/YYYY HH:mm:ss'));
+    this.isLoadingResults = true;
     this.ngZone.run(() => {
       this.sensorDataHttp.getHistoryOfSensorByTime(this.currentSensorId, start, end).subscribe(data => {
-        const fomartSensorHistoryData = [];
+        this.isLoadingResults = false;
         data.forEach(res => {
-          fomartSensorHistoryData.push([
-            new Date(res.name).getTime(),
+          this.formatSensorHistoryData.push([
+            new Date(res.valueDate).getTime(),
             res.value
           ]);
         });
-        this.setupOptionChart(fomartSensorHistoryData, this.setupOptionSeriesNameAndSeriesValueSuffix());
+        this.setupOptionChart(this.formatSensorHistoryData, this.setupOptionSeriesNameAndSeriesValueSuffix());
       });
     });
   }
@@ -149,4 +152,5 @@ export class SensorChartComponent implements OnInit {
     ]
   };
   }
+
 }

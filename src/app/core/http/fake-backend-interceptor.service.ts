@@ -20,7 +20,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (request.method === 'POST') {
         console.log('  AND Data:: ' + request.body);
       }
-      console.log(request.url);
+      
       if (request.url.match(/\/automates$/) && request.method === 'GET') {
         return this.getFakeData('automates');
       }

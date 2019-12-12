@@ -1,5 +1,13 @@
-<h2>{{sensorName}} Chart </h2>
+<app-loading *ngIf="isLoadingResults"></app-loading>
+<div *ngIf="!isLoadingResults">
+  <div *ngIf="formatSensorHistoryData.length > 0">
+    <h2>{{sensorName}} Chart </h2>
 
-<chart type="StockChart" [options]="options">
-  <xAxis (afterSetExtremes)="onAfterSetExtremesX($event)"></xAxis>
-</chart>
+    <chart type="StockChart" [options]="options">
+      <xAxis (afterSetExtremes)="onAfterSetExtremesX($event)"></xAxis>
+    </chart>
+  </div>
+  <div *ngIf="formatSensorHistoryData.length == 0">
+    <h3>No history data.</h3>
+  </div>
+</div>

@@ -13,6 +13,7 @@ import { FakeBackendProvider } from './http/fake-backend-interceptor.service';
     HttpClientModule
   ],
   providers: [
+    FakeBackendProvider,
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     FakeBackendProvider,
   ]
