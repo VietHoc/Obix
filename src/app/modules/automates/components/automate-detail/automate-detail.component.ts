@@ -17,10 +17,11 @@ import {SensorData} from '../../../../shared/models/sensor-data';
 export class AutomateDetailComponent implements OnInit, OnDestroy {
   currentAutomateId: number;
   automateName: string;
-  automateDetails; automateDetailsFiltered: AutomateDetail[];
+  automateDetails; automateDetailsFiltered: AutomateDetail[] = [];
   sensorTypes: SensorType[];
   currentSensorTypeIds = [];
   intervalUpdateDataSensor: Subscription;
+  loading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,9 +43,11 @@ export class AutomateDetailComponent implements OnInit, OnDestroy {
   }
 
   private getSensorListOfAutomate(automateId: number) {
+    this.loading = true;
     this.sensorDataHttp.detailAutomate(automateId).subscribe(res => {
       this.automateDetails = this.automateDetailsFiltered = res;
     });
+    this.loading = false;
   }
 
   private setupUpdateSensorData() {

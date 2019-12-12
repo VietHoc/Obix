@@ -1,0 +1,569 @@
+[
+  {
+    "id": 1.0,
+    "name": "TMCR900",
+    "ip": "10.55.61.194",
+    "uri": "http://10.55.61.194/obix/",
+    "active": false,
+    "floor": "R",
+    "sensorsCount": 354
+  },
+  {
+    "id": 2.0,
+    "name": "TMCR910",
+    "ip": "10.55.61.191",
+    "uri": "http://10.55.61.191/obix/",
+    "active": true,
+    "floor": "1",
+    "sensorsCount": 289
+  },
+  {
+    "id": 3.0,
+    "name": "TMCR920",
+    "ip": "10.55.61.188",
+    "uri": "http://10.55.61.188/obix/",
+    "active": true,
+    "floor": "2",
+    "sensorsCount": 289
+  },
+  {
+    "id": 4.0,
+    "name": "TMCR930",
+    "ip": "10.55.61.185",
+    "uri": "http://10.55.61.185/obix/",
+    "active": true,
+    "floor": "3",
+    "sensorsCount": 581
+  },
+  {
+    "id": 5.0,
+    "name": "TMCR940",
+    "ip": "10.55.61.182",
+    "uri": "http://10.55.61.182/obix/",
+    "active": true,
+    "floor": "4",
+    "sensorsCount": 273
+  },
+  {
+    "id": 6.0,
+    "name": "TMCR950",
+    "ip": "10.55.61.179",
+    "uri": "http://10.55.61.179/obix/",
+    "active": true,
+    "floor": "5",
+    "sensorsCount": 177
+  },
+  {
+    "id": 7.0,
+    "name": "TMCR960",
+    "ip": "10.55.61.144",
+    "uri": "http://10.55.61.144/obix/",
+    "active": true,
+    "floor": "6",
+    "sensorsCount": 0
+  },
+  {
+    "id": 8.0,
+    "name": "TMCR952",
+    "ip": "10.55.61.136",
+    "uri": "http://10.55.61.136/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  },
+  {
+    "id": 9.0,
+    "name": "TMCR953",
+    "ip": "10.55.61.137",
+    "uri": "http://10.55.61.137/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  },
+  {
+    "id": 10.0,
+    "name": "TMCR954",
+    "ip": "10.55.61.138",
+    "uri": "http://10.55.61.138/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  },
+  {
+    "id": 11.0,
+    "name": "TMCR955",
+    "ip": "10.55.61.139",
+    "uri": "http://10.55.61.139/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  },
+  {
+    "id": 12.0,
+    "name": "TMCR956",
+    "ip": "10.55.61.140",
+    "uri": "http://10.55.61.140/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  },
+  {
+    "id": 13.0,
+    "name": "TMCR957",
+    "ip": "10.55.61.141",
+    "uri": "http://10.55.61.141/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  },
+  {
+    "id": 14.0,
+    "name": "TMCR958",
+    "ip": "10.55.61.142",
+    "uri": "http://10.55.61.142/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  },
+  {
+    "id": 15.0,
+    "name": "TMCR959",
+    "ip": "10.55.61.143",
+    "uri": "http://10.55.61.143/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  },
+  {
+    "id": 96.0,
+    "name": "TMCR901-162N1",
+    "ip": "10.55.61.96",
+    "uri": "http://10.55.61.96/obix/config/Programme/",
+    "active": false,
+    "floor": "0",
+    "sensorsCount": 0
+  },
+  {
+    "id": 97.0,
+    "name": "TMCR902-162N1",
+    "ip": "10.55.61.97",
+    "uri": "http://10.55.61.97/obix/config/Programme/",
+    "active": false,
+    "floor": "0",
+    "sensorsCount": 0
+  },
+  {
+    "id": 98.0,
+    "name": "TMCR903-162N1",
+    "ip": "10.55.61.98",
+    "uri": "http://10.55.61.98/obix/config/Programme/",
+    "active": false,
+    "floor": "0",
+    "sensorsCount": 0
+  },
+  {
+    "id": 99.0,
+    "name": "TMCR904-162N1",
+    "ip": "10.55.61.99",
+    "uri": "http://10.55.61.99/obix/config/Programme/",
+    "active": false,
+    "floor": "0",
+    "sensorsCount": 0
+  },
+  {
+    "id": 100.0,
+    "name": "TMCR905-162N1",
+    "ip": "10.55.61.100",
+    "uri": "http://10.55.61.100/obix/config/Programme/",
+    "active": false,
+    "floor": "0",
+    "sensorsCount": 0
+  },
+  {
+    "id": 101.0,
+    "name": "TMCR906-162N1",
+    "ip": "10.55.61.101",
+    "uri": "http://10.55.61.101/obix/config/Programme/",
+    "active": false,
+    "floor": "0",
+    "sensorsCount": 0
+  },
+  {
+    "id": 102.0,
+    "name": "TMCR907-162N1",
+    "ip": "10.55.61.102",
+    "uri": "http://10.55.61.102/obix/config/Programme/",
+    "active": false,
+    "floor": "0",
+    "sensorsCount": 0
+  },
+  {
+    "id": 103.0,
+    "name": "TMCR908-162N1",
+    "ip": "10.55.61.103",
+    "uri": "http://10.55.61.103/obix/config/Programme/",
+    "active": false,
+    "floor": "0",
+    "sensorsCount": 0
+  },
+  {
+    "id": 104.0,
+    "name": "TMCR911-162N1",
+    "ip": "10.55.61.104",
+    "uri": "http://10.55.61.104/obix/config/Programme/",
+    "active": false,
+    "floor": "1",
+    "sensorsCount": 0
+  },
+  {
+    "id": 105.0,
+    "name": "TMCR912-162N1",
+    "ip": "10.55.61.105",
+    "uri": "http://10.55.61.105/obix/config/Programme/",
+    "active": false,
+    "floor": "1",
+    "sensorsCount": 0
+  },
+  {
+    "id": 106.0,
+    "name": "TMCR913-162N1",
+    "ip": "10.55.61.106",
+    "uri": "http://10.55.61.106/obix/config/Programme/",
+    "active": false,
+    "floor": "1",
+    "sensorsCount": 69
+  },
+  {
+    "id": 107.0,
+    "name": "TMCR914-162N1",
+    "ip": "10.55.61.107",
+    "uri": "http://10.55.61.107/obix/config/Programme/",
+    "active": false,
+    "floor": "1",
+    "sensorsCount": 119
+  },
+  {
+    "id": 108.0,
+    "name": "TMCR915-162N1",
+    "ip": "10.55.61.108",
+    "uri": "http://10.55.61.108/obix/config/Programme/",
+    "active": false,
+    "floor": "1",
+    "sensorsCount": 22
+  },
+  {
+    "id": 109.0,
+    "name": "TMCR916-162N1",
+    "ip": "10.55.61.109",
+    "uri": "http://10.55.61.109/obix/config/Programme/",
+    "active": false,
+    "floor": "1",
+    "sensorsCount": 101
+  },
+  {
+    "id": 110.0,
+    "name": "TMCR917-162N1",
+    "ip": "10.55.61.110",
+    "uri": "http://10.55.61.110/obix/config/Programme/",
+    "active": false,
+    "floor": "1",
+    "sensorsCount": 77
+  },
+  {
+    "id": 111.0,
+    "name": "TMCR918-162N1",
+    "ip": "10.55.61.111",
+    "uri": "http://10.55.61.111/obix/config/Programme/",
+    "active": false,
+    "floor": "1",
+    "sensorsCount": 0
+  },
+  {
+    "id": 112.0,
+    "name": "TMCR921-162N1",
+    "ip": "10.55.61.112",
+    "uri": "http://10.55.61.112/obix/config/Programme/",
+    "active": false,
+    "floor": "2",
+    "sensorsCount": 0
+  },
+  {
+    "id": 113.0,
+    "name": "TMCR922-162N1",
+    "ip": "10.55.61.113",
+    "uri": "http://10.55.61.113/obix/config/Programme/",
+    "active": false,
+    "floor": "2",
+    "sensorsCount": 0
+  },
+  {
+    "id": 114.0,
+    "name": "TMCR923-162N1",
+    "ip": "10.55.61.114",
+    "uri": "http://10.55.61.114/obix/config/Programme/",
+    "active": false,
+    "floor": "2",
+    "sensorsCount": 69
+  },
+  {
+    "id": 115.0,
+    "name": "TMCR924-162N1",
+    "ip": "10.55.61.115",
+    "uri": "http://10.55.61.115/obix/config/Programme/",
+    "active": false,
+    "floor": "2",
+    "sensorsCount": 119
+  },
+  {
+    "id": 116.0,
+    "name": "TMCR925-162N1",
+    "ip": "10.55.61.116",
+    "uri": "http://10.55.61.116/obix/config/Programme/",
+    "active": false,
+    "floor": "2",
+    "sensorsCount": 22
+  },
+  {
+    "id": 117.0,
+    "name": "TMCR926-162N1",
+    "ip": "10.55.61.117",
+    "uri": "http://10.55.61.117/obix/config/Programme/",
+    "active": false,
+    "floor": "2",
+    "sensorsCount": 101
+  },
+  {
+    "id": 118.0,
+    "name": "TMCR927-162N1",
+    "ip": "10.55.61.118",
+    "uri": "http://10.55.61.118/obix/config/Programme/",
+    "active": false,
+    "floor": "2",
+    "sensorsCount": 77
+  },
+  {
+    "id": 119.0,
+    "name": "TMCR928-162N1",
+    "ip": "10.55.61.119",
+    "uri": "http://10.55.61.119/obix/config/Programme/",
+    "active": false,
+    "floor": "2",
+    "sensorsCount": 0
+  },
+  {
+    "id": 120.0,
+    "name": "TMCR931-162N1",
+    "ip": "10.55.61.120",
+    "uri": "http://10.55.61.120/obix/config/Programme/",
+    "active": false,
+    "floor": "3",
+    "sensorsCount": 0
+  },
+  {
+    "id": 121.0,
+    "name": "TMCR932-162N1",
+    "ip": "10.55.61.121",
+    "uri": "http://10.55.61.121/obix/config/Programme/",
+    "active": false,
+    "floor": "3",
+    "sensorsCount": 0
+  },
+  {
+    "id": 122.0,
+    "name": "TMCR933-162N1",
+    "ip": "10.55.61.122",
+    "uri": "http://10.55.61.122/obix/config/Programme/",
+    "active": false,
+    "floor": "3",
+    "sensorsCount": 69
+  },
+  {
+    "id": 123.0,
+    "name": "TMCR934-162N1",
+    "ip": "10.55.61.123",
+    "uri": "http://10.55.61.123/obix/config/Programme/",
+    "active": false,
+    "floor": "3",
+    "sensorsCount": 119
+  },
+  {
+    "id": 124.0,
+    "name": "TMCR935-162N1",
+    "ip": "10.55.61.124",
+    "uri": "http://10.55.61.124/obix/config/Programme/",
+    "active": false,
+    "floor": "3",
+    "sensorsCount": 22
+  },
+  {
+    "id": 125.0,
+    "name": "TMCR936-162N1",
+    "ip": "10.55.61.125",
+    "uri": "http://10.55.61.125/obix/config/Programme/",
+    "active": false,
+    "floor": "3",
+    "sensorsCount": 101
+  },
+  {
+    "id": 126.0,
+    "name": "TMCR937-162N1",
+    "ip": "10.55.61.126",
+    "uri": "http://10.55.61.126/obix/config/Programme/",
+    "active": false,
+    "floor": "3",
+    "sensorsCount": 77
+  },
+  {
+    "id": 127.0,
+    "name": "TMCR938-162N1",
+    "ip": "10.55.61.127",
+    "uri": "http://10.55.61.127/obix/config/Programme/",
+    "active": false,
+    "floor": "3",
+    "sensorsCount": 0
+  },
+  {
+    "id": 128.0,
+    "name": "TMCR941-162N1",
+    "ip": "10.55.61.128",
+    "uri": "http://10.55.61.128/obix/config/Programme/",
+    "active": false,
+    "floor": "4",
+    "sensorsCount": 0
+  },
+  {
+    "id": 129.0,
+    "name": "TMCR942-162N1",
+    "ip": "10.55.61.129",
+    "uri": "http://10.55.61.129/obix/config/Programme/",
+    "active": false,
+    "floor": "4",
+    "sensorsCount": 0
+  },
+  {
+    "id": 130.0,
+    "name": "TMCR943-162N1",
+    "ip": "10.55.61.130",
+    "uri": "http://10.55.61.130/obix/config/Programme/",
+    "active": false,
+    "floor": "4",
+    "sensorsCount": 69
+  },
+  {
+    "id": 131.0,
+    "name": "TMCR944-162N1",
+    "ip": "10.55.61.131",
+    "uri": "http://10.55.61.131/obix/config/Programme/",
+    "active": false,
+    "floor": "4",
+    "sensorsCount": 119
+  },
+  {
+    "id": 132.0,
+    "name": "TMCR945-162N1",
+    "ip": "10.55.61.132",
+    "uri": "http://10.55.61.132/obix/config/Programme/",
+    "active": false,
+    "floor": "4",
+    "sensorsCount": 22
+  },
+  {
+    "id": 133.0,
+    "name": "TMCR946-162N1",
+    "ip": "10.55.61.133",
+    "uri": "http://10.55.61.133/obix/config/Programme/",
+    "active": false,
+    "floor": "4",
+    "sensorsCount": 101
+  },
+  {
+    "id": 134.0,
+    "name": "TMCR947-162N1",
+    "ip": "10.55.61.134",
+    "uri": "http://10.55.61.134/obix/config/Programme/",
+    "active": false,
+    "floor": "4",
+    "sensorsCount": 77
+  },
+  {
+    "id": 135.0,
+    "name": "TMCR948-162N1",
+    "ip": "10.55.61.135",
+    "uri": "http://10.55.61.135/obix/config/Programme/",
+    "active": false,
+    "floor": "4",
+    "sensorsCount": 0
+  },
+  {
+    "id": 136.0,
+    "name": "TMCR951-162N1",
+    "ip": "10.55.61.136",
+    "uri": "http://10.55.61.136/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  },
+  {
+    "id": 137.0,
+    "name": "TMCR952-162N1",
+    "ip": "10.55.61.137",
+    "uri": "http://10.55.61.137/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  },
+  {
+    "id": 138.0,
+    "name": "TMCR953-162N1",
+    "ip": "10.55.61.138",
+    "uri": "http://10.55.61.138/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 128
+  },
+  {
+    "id": 139.0,
+    "name": "TMCR954-162N1",
+    "ip": "10.55.61.139",
+    "uri": "http://10.55.61.139/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 128
+  },
+  {
+    "id": 140.0,
+    "name": "TMCR955-162N1",
+    "ip": "10.55.61.140",
+    "uri": "http://10.55.61.140/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 117
+  },
+  {
+    "id": 141.0,
+    "name": "TMCR956-162N1",
+    "ip": "10.55.61.141",
+    "uri": "http://10.55.61.141/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 109
+  },
+  {
+    "id": 142.0,
+    "name": "TMCR957-162N1",
+    "ip": "10.55.61.142",
+    "uri": "http://10.55.61.142/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": true,
+    "floor": "5",
+    "sensorsCount": 128
+  },
+  {
+    "id": 143.0,
+    "name": "TMCR958-162N1",
+    "ip": "10.55.61.143",
+    "uri": "http://10.55.61.143/obix/config/Drivers/BacnetNetwork/Zumtobel_master_5eme_SUD/points/",
+    "active": false,
+    "floor": "5",
+    "sensorsCount": 0
+  }
+]
