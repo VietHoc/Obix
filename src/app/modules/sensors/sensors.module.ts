@@ -4,7 +4,7 @@ import {SensorListComponent} from './pages/sensor-list.component';
 import {SensorDialogComponent} from './components/sensor-dialog/sensor-dialog.component';
 import {SensorsRoutingModule} from './sensors-routing.module';
 import {SharedModule} from '../../shared/shared.module';
-import {MatCardModule, MatGridListModule} from '@angular/material';
+import { MatCardModule, MatGridListModule, MatDatepickerModule } from '@angular/material';
 import { SensorChartComponent } from './components/sensor-chart/sensor-chart.component';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import more from 'highcharts/highcharts-more.src';
@@ -23,7 +23,8 @@ import stock from 'highcharts/modules/stock.src';
     SharedModule,
     MatCardModule,
     MatGridListModule,
-    ChartModule
+    ChartModule,
+    MatDatepickerModule
   ],
   entryComponents: [
     SensorDialogComponent
