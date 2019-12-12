@@ -52,7 +52,7 @@ export class SensorChartComponent implements OnInit {
   private getHistoryOfSensorByTime(sensorId: number, startDate?: string, endDate?: string) {
     this.isLoadingResults = true;
     // tslint:disable-next-line: max-line-length
-    this.sensorDataHttp.getHistoryOfSensorByTime(sensorId, moment(startDate).format('DD/MM/YYYY HH:mm:ss'), moment(endDate).format('DD/MM/YYYY HH:mm:ss')).subscribe(data => {
+    this.sensorDataHttp.getHistoryOfSensorByTime(sensorId, startDate ? moment(startDate).format('DD/MM/YYYY HH:mm:ss') : '', endDate ? moment(endDate).format('DD/MM/YYYY HH:mm:ss') : '').subscribe(data => {
       this.isLoadingResults = false;
       if (data.length > 0) {
         this.handleDataToRenderChart(data);

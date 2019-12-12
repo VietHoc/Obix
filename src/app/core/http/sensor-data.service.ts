@@ -54,6 +54,7 @@ export class SensorDataService {
   }
 
   getHistoryOfSensorByTime(sensorId: number, start?, end?): Observable<ValueLineChart[]> {
+    console.log(start);
     return this.apiService.get(`${this.uri}/histories?sensorId=${sensorId}&start=${start}&end=${end}`);
   }
 }
