@@ -60,7 +60,7 @@ export class SensorChartComponent implements OnInit {
   }
 
   onAfterSetExtremesX(e) {
-    this.getHistoryOfSensorByTime(moment(e.min).format('DD/MM/YYYY HH:mm:ss'), moment(e.max).format('DD/MM/YYYY HH:mm:ss'));
+    this.getHistoryOfSensorByTime(moment(e.context.min).format('DD/MM/YYYY HH:mm:ss'), moment(e.context.max).format('DD/MM/YYYY HH:mm:ss'));
   }
 
   getHistoryOfSensorByTime(start, end) {
